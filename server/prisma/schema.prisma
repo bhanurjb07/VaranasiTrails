@@ -1,0 +1,238 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Prisma 7: the connection URL lives in prisma.config.ts (CLI) and in the
+// libSQL driver adapter (runtime, src/lib/prisma.ts), not in this file.
+datasource db {
+  provider = "sqlite"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum OtpPurpose {
+  EMAIL_VERIFY
+  PASSWORD_RESET
+}
+
+enum Difficulty {
+  EASY
+  MODERATE
+  HARD
+}
+
+model User {
+  id              String    @id @default(uuid())
+  name            String
+  email           String    @unique
+  phone           String    @unique
+  passwordHash    String
+  role            Role      @default(USER)
+  emailVerifiedAt DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  otps          Otp[]
+  refreshTokens RefreshToken[]
+  wishlistItems WishlistItem[]
+  reviews       Review[]
+
+  @@map("users")
+}
+
+model Otp {
+  id        String     @id @default(uuid())
+  userId    String
+  email     String
+  purpose   OtpPurpose
+  // HMAC-SHA256(code), keyed with OTP_SECRET. The code itself is never stored.
+  codeHash  String
+  expiresAt DateTime
+  attempts  Int        @default(0)
+  usedAt    DateTime?
+  verifiedAt DateTime?
+  // PASSWORD_RESET only: HMAC of the single-use token handed out once the
+  // OTP is verified. The token is bound to this record.
+  resetTokenHash      String?
+  resetTokenExpiresAt DateTime?
+  createdAt DateTime   @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, purpose, createdAt])
+  @@index([email])
+  @@map("otps")
+}
+
+model RefreshToken {
+  id        String    @id @default(uuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  // Set when the token is rotated; presenting a rotated token again is reuse.
+  rotatedAt DateTime?
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+  userAgent String?
+  ip        String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("refresh_tokens")
+}
+
+model Category {
+  id        String   @id @default(uuid())
+  slug      String   @unique
+  name      String
+  createdAt DateTime @default(now())
+
+  destinations Destination[]
+
+  @@map("categories")
+}
+
+model Destination {
+  id               String     @id @default(uuid())
+  slug             String     @unique
+  title            String
+  tagline          String
+  overview         String
+  city             String
+  state            String
+  country          String     @default("India")
+  categoryId       String
+  priceInr         Int
+  originalPriceInr Int?
+  durationDays     Int
+  durationNights   Int
+  maxGroupSize     Int
+  difficulty       Difficulty @default(EASY)
+  bestTimeToVisit  String
+  meetingPoint     String?
+  // A YouTube embed URL (http/https) or an R2 object key.
+  videoUrl         String?
+  isPublished      Boolean    @default(false)
+  isFeatured       Boolean    @default(false)
+  ratingAvg        Float      @default(0)
+  ratingCount      Int        @default(0)
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  category   Category                @relation(fields: [categoryId], references: [id])
+  images     DestinationImage[]
+  highlights DestinationHighlight[]
+  inclusions DestinationInclusion[]
+  itinerary  ItineraryDay[]
+  reviews    Review[]
+  wishlisted WishlistItem[]
+  enquiries  Enquiry[]
+
+  @@index([categoryId])
+  @@index([priceInr])
+  @@index([city])
+  @@index([isPublished, isFeatured])
+  @@map("destinations")
+}
+
+model DestinationImage {
+  id            String  @id @default(uuid())
+  destinationId String
+  // R2 object key, e.g. destinations/<slug>/01.webp
+  key           String
+  alt           String
+  sortOrder     Int     @default(0)
+  isCover       Boolean @default(false)
+
+  destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+
+  @@index([destinationId, sortOrder])
+  @@map("destination_images")
+}
+
+model ItineraryDay {
+  id            String @id @default(uuid())
+  destinationId String
+  dayNumber     Int
+  title         String
+  description   String
+
+  destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+
+  @@unique([destinationId, dayNumber])
+  @@map("itinerary_days")
+}
+
+model DestinationHighlight {
+  id            String @id @default(uuid())
+  destinationId String
+  text          String
+  sortOrder     Int    @default(0)
+
+  destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+
+  @@index([destinationId])
+  @@map("destination_highlights")
+}
+
+// One table for both lists: isIncluded=true is an inclusion, false an exclusion.
+model DestinationInclusion {
+  id            String  @id @default(uuid())
+  destinationId String
+  text          String
+  isIncluded    Boolean @default(true)
+  sortOrder     Int     @default(0)
+
+  destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+
+  @@index([destinationId])
+  @@map("destination_inclusions")
+}
+
+model Review {
+  id            String   @id @default(uuid())
+  userId        String
+  destinationId String
+  rating        Int
+  title         String
+  comment       String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, destinationId])
+  @@index([destinationId, createdAt])
+  @@map("reviews")
+}
+
+model WishlistItem {
+  userId        String
+  destinationId String
+  createdAt     DateTime @default(now())
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+
+  @@id([userId, destinationId])
+  @@map("wishlist_items")
+}
+
+model Enquiry {
+  id            String   @id @default(uuid())
+  name          String
+  email         String
+  phone         String
+  destinationId String?
+  message       String
+  createdAt     DateTime @default(now())
+
+  destination Destination? @relation(fields: [destinationId], references: [id], onDelete: SetNull)
+
+  @@map("enquiries")
+}

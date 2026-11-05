@@ -1,0 +1,8 @@
+
+# Local env backups / variants (keep .env.example)
+.env.*
+!.env.example
+
+# Local SQLite databases
+*.db
+*.db-journal
