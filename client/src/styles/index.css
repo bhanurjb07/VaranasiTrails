@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+/* Design tokens. Components use these utilities (bg-saffron, text-indigo, ...),
+   never raw hex values. */
+@theme {
+  --color-saffron: #e8751a;
+  --color-saffron-dark: #b8590f; /* AA on white and cream: use for text/links */
+  --color-saffron-soft: #fdebd9;
+  --color-indigo: #1f2a44;
+  --color-indigo-soft: #2c3a5c;
+  --color-cream: #faf5ec;
+  --color-cream-deep: #f2e9d8;
+  --color-gold: #c9962b;
+  --color-maroon: #7a2e2e;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-dark: #1da851;
+  --color-ink: #2b2b2b;
+  --color-muted: #6b6459;
+  --color-line: #e4dac6;
+  --color-surface: #ffffff;
+  --color-danger: #b42318;
+  --color-success: #1d7a46;
+
+  --font-heading: "Playfair Display Variable", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --radius-card: 1rem;
+  --radius-control: 0.75rem;
+
+  --shadow-card: 0 1px 2px rgb(31 42 68 / 0.06), 0 8px 24px -12px rgb(31 42 68 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(31 42 68 / 0.08), 0 20px 40px -16px rgb(31 42 68 / 0.28);
+
+  --breakpoint-xs: 30rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+    color: var(--color-indigo);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-indigo);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--color-saffron);
+    color: var(--color-indigo);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
