@@ -4,7 +4,7 @@ import { cn } from '@/lib/cn'
 
 /** Styled table primitives. The wrapper scrolls sideways on small screens. */
 export const Table = ({ className, ...props }: HTMLAttributes<HTMLTableElement>) => (
-  <div className="overflow-x-auto rounded-card border border-line bg-surface shadow-card">
+  <div className="relative overflow-x-auto rounded-card border border-line bg-surface shadow-card">
     <table className={cn('w-full border-collapse text-left text-sm', className)} {...props} />
   </div>
 )

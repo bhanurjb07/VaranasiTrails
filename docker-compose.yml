@@ -1,0 +1,66 @@
+# Runs the whole project locally:
+#   public site  http://localhost:8080
+#   admin panel  http://localhost:8081
+#   API          http://localhost:5001
+#
+#   cp .env.docker.example .env      (optional: set ADMIN_EMAIL / ADMIN_PASSWORD)
+#   docker compose up --build
+#
+# The site and the admin panel proxy /api to the API, so everything is same-origin
+# and the login cookie works over plain http.
+
+services:
+  server:
+    build: ./server
+    restart: unless-stopped
+    environment:
+      # "development" prints OTP emails to the logs (docker compose logs -f server)
+      # instead of sending them, so sign-up works without an email provider.
+      NODE_ENV: development
+      PORT: 5001
+      DATABASE_URL: file:/data/varanasitrails.db
+      TRUST_PROXY_HOPS: 1
+      CORS_ORIGIN: http://localhost:8080,http://localhost:8081
+      # Local-only secrets (32+ characters). Never reuse these anywhere real.
+      JWT_SECRET: ${JWT_SECRET:-local-docker-jwt-secret-change-me-0123456789}
+      OTP_SECRET: ${OTP_SECRET:-local-docker-otp-secret-change-me-0123456789}
+      # Photo uploads need a real Cloudflare R2 bucket; these placeholders let the API start.
+      R2_ACCOUNT_ID: ${R2_ACCOUNT_ID:-local}
+      R2_ACCESS_KEY_ID: ${R2_ACCESS_KEY_ID:-local}
+      R2_SECRET_ACCESS_KEY: ${R2_SECRET_ACCESS_KEY:-local}
+      R2_BUCKET: ${R2_BUCKET:-local}
+      R2_PUBLIC_BASE_URL: ${R2_PUBLIC_BASE_URL:-https://media.example.com}
+      # Optional: with both set, this admin is created on start (and updated if you change them).
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      ADMIN_NAME: ${ADMIN_NAME:-Site Admin}
+      # Load the sample trips on start (safe to repeat).
+      SEED_ON_START: ${SEED_ON_START:-true}
+    volumes:
+      - varanasitrails-data:/data
+    ports:
+      - "${API_PORT:-5001}:5001"
+
+  client:
+    build: ./client
+    restart: unless-stopped
+    depends_on:
+      server:
+        condition: service_healthy
+    ports:
+      - "${SITE_PORT:-8080}:80"
+
+  admin:
+    build:
+      context: ./admin
+      args:
+        VITE_PUBLIC_SITE_URL: http://localhost:${SITE_PORT:-8080}
+    restart: unless-stopped
+    depends_on:
+      server:
+        condition: service_healthy
+    ports:
+      - "${ADMIN_PORT:-8081}:80"
+
+volumes:
+  varanasitrails-data:
