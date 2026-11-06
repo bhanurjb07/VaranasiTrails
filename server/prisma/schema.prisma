@@ -18,6 +18,12 @@ enum OtpPurpose {
   PASSWORD_RESET
 }
 
+enum EnquiryStatus {
+  NEW
+  CONTACTED
+  CLOSED
+}
+
 enum Difficulty {
   EASY
   MODERATE
@@ -32,6 +38,8 @@ model User {
   passwordHash    String
   role            Role      @default(USER)
   emailVerifiedAt DateTime?
+  isBlocked       Boolean   @default(false)
+  lastLoginAt     DateTime?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
 
@@ -39,6 +47,7 @@ model User {
   refreshTokens RefreshToken[]
   wishlistItems WishlistItem[]
   reviews       Review[]
+  auditLogs     AuditLog[]
 
   @@map("users")
 }
@@ -87,9 +96,13 @@ model RefreshToken {
 
 model Category {
   id        String   @id @default(uuid())
-  slug      String   @unique
-  name      String
-  createdAt DateTime @default(now())
+  slug        String   @unique
+  name        String
+  description String?
+  imageKey    String?
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
 
   destinations Destination[]
 
@@ -120,6 +133,11 @@ model Destination {
   isFeatured       Boolean    @default(false)
   ratingAvg        Float      @default(0)
   ratingCount      Int        @default(0)
+  metaTitle        String?
+  metaDescription  String?
+  publishedAt      DateTime?
+  // Soft delete (archive). Archived destinations never appear publicly.
+  deletedAt        DateTime?
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
 
@@ -136,6 +154,7 @@ model Destination {
   @@index([priceInr])
   @@index([city])
   @@index([isPublished, isFeatured])
+  @@index([deletedAt])
   @@map("destinations")
 }
 
@@ -147,6 +166,8 @@ model DestinationImage {
   alt           String
   sortOrder     Int     @default(0)
   isCover       Boolean @default(false)
+  contentType   String  @default("image/webp")
+  sizeBytes     Int     @default(0)
 
   destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
 
@@ -200,6 +221,7 @@ model Review {
   rating        Int
   title         String
   comment       String
+  isHidden      Boolean  @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
@@ -230,9 +252,30 @@ model Enquiry {
   phone         String
   destinationId String?
   message       String
-  createdAt     DateTime @default(now())
+  status        EnquiryStatus @default(NEW)
+  adminNotes    String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @default(now()) @updatedAt
 
   destination Destination? @relation(fields: [destinationId], references: [id], onDelete: SetNull)
 
+  @@index([status, createdAt])
   @@map("enquiries")
+}
+
+// One row per mutating admin action. The summary is short text and never holds secrets.
+model AuditLog {
+  id         String   @id @default(uuid())
+  adminId    String
+  action     String
+  entityType String
+  entityId   String?
+  summary    String
+  createdAt  DateTime @default(now())
+
+  admin User @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@index([createdAt])
+  @@index([entityType, entityId])
+  @@map("audit_logs")
 }

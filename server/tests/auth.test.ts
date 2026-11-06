@@ -79,8 +79,8 @@ describe("signup -> verify email -> login", () => {
   });
 
   it("validates input and rejects duplicate email or phone", async () => {
-    const user = uniqueUser();
-    await signup(user).expect(201);
+    // Only a VERIFIED account blocks a new signup (pending ones are replaced).
+    const { user } = await signupAndVerify();
 
     await signup({ ...uniqueUser(), email: user.email }).expect(409);
     await signup({ ...uniqueUser(), phone: user.phone }).expect(409);

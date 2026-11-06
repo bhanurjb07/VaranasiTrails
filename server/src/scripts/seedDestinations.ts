@@ -31,12 +31,18 @@ interface SeedDestination {
   excluded: string[];
 }
 
+// The first four slugs are used by the trips below (and by the public site's links).
 const categories = [
-  { slug: "spiritual", name: "Spiritual & Pilgrimage" },
-  { slug: "heritage", name: "Heritage & Culture" },
-  { slug: "food", name: "Food & Culinary" },
-  { slug: "crafts", name: "Crafts & Experiences" },
-];
+  { slug: "spiritual", name: "Pilgrimage", description: "Temples, ghats and sacred journeys." },
+  { slug: "heritage", name: "Heritage & Culture", description: "Forts, museums, old lanes and living traditions." },
+  { slug: "food", name: "Food & Culinary", description: "Street food walks and local tastings." },
+  { slug: "crafts", name: "Crafts & Experiences", description: "Meet the weavers and artisans of Varanasi." },
+  { slug: "honeymoon", name: "Honeymoon", description: "Romantic, unhurried trips for two." },
+  { slug: "family-tour", name: "Family Tour", description: "Comfortable plans that work for every age." },
+  { slug: "adventure", name: "Adventure", description: "Treks, river trips and off-the-beaten-path days." },
+  { slug: "solo-and-group", name: "Solo & Group", description: "Small-group departures where you meet fellow travellers." },
+  { slug: "day-trips", name: "Day Trips", description: "Half-day and full-day escapes from Varanasi." },
+].map((category, sortOrder) => ({ ...category, sortOrder }));
 
 const standardExcluded = ["Personal expenses", "Travel insurance", "Tips and gratuities"];
 
@@ -155,7 +161,6 @@ const destinations: SeedDestination[] = [
     bestTimeToVisit: "October to March",
     meetingPoint: "Varanasi Junction railway station",
     isFeatured: true,
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     images: 5,
     highlights: [
       "Kashi Vishwanath darshan and Ganga aarti",
@@ -273,7 +278,7 @@ const seed = async () => {
     const row = await prisma.category.upsert({
       where: { slug: category.slug },
       create: category,
-      update: { name: category.name },
+      update: { name: category.name, description: category.description, sortOrder: category.sortOrder },
     });
     categoryIds.set(category.slug, row.id);
   }
@@ -287,7 +292,7 @@ const seed = async () => {
       const destination = await tx.destination.upsert({
         where: { slug: item.slug },
         create: { ...fields, categoryId, isPublished: true },
-        update: { ...fields, categoryId, isPublished: true },
+        update: { ...fields, videoUrl: null, categoryId, isPublished: true, deletedAt: null },
       });
 
       await tx.destinationImage.deleteMany({ where: { destinationId: destination.id } });

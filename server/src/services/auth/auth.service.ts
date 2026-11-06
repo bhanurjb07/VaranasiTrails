@@ -1,7 +1,7 @@
 import type { OtpPurpose, User } from "@prisma/client";
 
 import { prisma } from "../../lib/prisma.js";
-import { badRequest, conflict, forbidden, unauthorized } from "../../utils/errors.js";
+import { badRequest, conflict, forbidden, tooManyRequests, unauthorized } from "../../utils/errors.js";
 import { fakeVerifyPassword, hashPassword, verifyPassword } from "../../utils/password.js";
 import type {
   ForgotPasswordInput,
@@ -29,30 +29,58 @@ export const publicUser =(user: User) => ({
 });
 
 const sessionFor = async (user: User, meta: SessionMeta) => {
+  if (user.isBlocked) {
+    throw forbidden("This account has been blocked. Please contact support.", "ACCOUNT_BLOCKED");
+  }
+  await prisma.user.update({ where: { id: user.id }, data: { lastLoginAt: new Date() } });
   const { accessToken, refreshToken } = await issueSession(user, meta);
   return { user: publicUser(user), accessToken, refreshToken };
 };
 
 export const signup = async (input: SignupInput) => {
-  const existing = await prisma.user.findFirst({
+  const matches = await prisma.user.findMany({
     where: { OR: [{ email: input.email }, { phone: input.phone }] },
-    select: { id: true },
   });
-  if (existing) {
+
+  // A verified account owns its email and phone. Nothing can replace it.
+  if (matches.some((account) => account.emailVerifiedAt !== null)) {
     throw conflict("An account with this email or phone number already exists", "ACCOUNT_EXISTS");
   }
 
-  // Always a plain USER. Admins are created with `npm run seed:admin`.
-  const user = await prisma.user.create({
-    data: {
-      name: input.name,
-      email: input.email,
-      phone: input.phone,
-      passwordHash: await hashPassword(input.password),
-    },
-  });
+  const passwordHash = await hashPassword(input.password);
+  let user: User;
 
-  await sendOtp(user, "EMAIL_VERIFY");
+  if (matches.length === 0) {
+    // Always a plain USER. The admin account comes from ADMIN_EMAIL / ADMIN_PASSWORD.
+    user = await prisma.user.create({
+      data: { name: input.name, email: input.email, phone: input.phone, passwordHash },
+    });
+  } else {
+    // Only unverified (pending) accounts match, and nobody has proven they own that
+    // email or phone. The newest submission replaces the pending account, so a stranger
+    // cannot squat on an address and the real owner can always sign up.
+    const keep = matches.find((account) => account.email === input.email) ?? matches[0]!;
+    const others = matches.filter((account) => account.id !== keep.id);
+
+    user = await prisma.$transaction(async (tx) => {
+      if (others.length > 0) {
+        await tx.user.deleteMany({ where: { id: { in: others.map((account) => account.id) } } });
+      }
+      await tx.otp.updateMany({ where: { userId: keep.id, usedAt: null }, data: { usedAt: new Date() } });
+      await revokeAllForUser(keep.id, tx);
+      return tx.user.update({
+        where: { id: keep.id },
+        data: { name: input.name, email: input.email, phone: input.phone, passwordHash },
+      });
+    });
+  }
+
+  // If the email fails to send, the OTP is rolled back and the same request can simply
+  // be retried: it finds this pending account again and succeeds.
+  const sent = await sendOtp(user, "EMAIL_VERIFY", { ignoreCooldown: true });
+  if (sent === "limit") {
+    throw tooManyRequests("Too many verification emails requested. Please try again later.", "OTP_SEND_LIMIT", 3600);
+  }
 };
 
 export const verifyEmail = async (input: VerifyEmailInput, meta: SessionMeta) => {

@@ -3,7 +3,7 @@ import type { Prisma, User } from "@prisma/client";
 import { config } from "../../config/env.js";
 import { prisma } from "../../lib/prisma.js";
 import { randomToken, sha256 } from "../../utils/crypto.js";
-import { unauthorized } from "../../utils/errors.js";
+import { forbidden, unauthorized } from "../../utils/errors.js";
 import { signAccessToken } from "../../utils/jwt.js";
 
 export interface SessionMeta {
@@ -58,6 +58,11 @@ export const rotateSession = async (rawToken: string, meta: SessionMeta) => {
   if (record.rotatedAt) {
     await revokeAllForUser(record.userId);
     throw unauthorized("Refresh token reuse detected, please log in again", "REFRESH_REUSED");
+  }
+
+  if (record.user.isBlocked) {
+    await revokeAllForUser(record.userId);
+    throw forbidden("This account has been blocked.", "ACCOUNT_BLOCKED");
   }
 
   if (record.revokedAt || record.expiresAt.getTime() <= Date.now()) {

@@ -1,11 +1,11 @@
 import request from "supertest";
 import { expect, vi } from "vitest";
 
-import { app } from "../src/app.js";
+import { httpServer } from "./httpServer.js";
 import { sendEmail } from "../src/lib/mailer.js";
 import { prisma } from "../src/lib/prisma.js";
 
-export const api = () => request(app);
+export const api = () => request(httpServer);
 
 export const PASSWORD = "Passw0rdOK";
 
@@ -25,6 +25,7 @@ export const resetDatabase = async () => {
   await prisma.review.deleteMany();
   await prisma.wishlistItem.deleteMany();
   await prisma.enquiry.deleteMany();
+  await prisma.auditLog.deleteMany();
   await prisma.otp.deleteMany();
   await prisma.refreshToken.deleteMany();
   await prisma.user.deleteMany();
@@ -106,3 +107,77 @@ export const createDestination = async (
     } as Parameters<typeof prisma.destination.create>[0]["data"],
   });
   
+
+// ---------------------------------------------------------------------------
+// Admin helpers
+// ---------------------------------------------------------------------------
+import { vi as viAdmin } from "vitest";
+import { createUploadUrl, deleteObject, headObject } from "../src/lib/r2.js";
+import { ensureAdmin } from "../src/services/admin/adminAccount.service.js";
+
+export const ADMIN = {
+  name: "Site Admin",
+  email: "admin@example.com",
+  phone: "+919000000001",
+  password: "AdminPassw0rd",
+};
+
+export const createAdminSession = async () => {
+  await ensureAdmin(ADMIN);
+  const res = await api().post("/api/auth/login").send({ email: ADMIN.email, password: ADMIN.password }).expect(200);
+
+  return { token: res.body.accessToken as string, userId: res.body.user.id as string };
+};
+
+export const resetR2Mocks = () => {
+  viAdmin.mocked(createUploadUrl).mockClear();
+  viAdmin.mocked(headObject).mockReset().mockResolvedValue(null);
+  viAdmin.mocked(deleteObject).mockReset().mockResolvedValue(undefined);
+};
+
+/** Tells the R2 mock that an object exists with this type and size. */
+export const fakeUploadedObject = (contentType = "image/webp", contentLength = 120_000) =>
+  viAdmin.mocked(headObject).mockResolvedValue({ contentType, contentLength });
+
+export const admin = (token: string) => ({
+  get: (path: string) => api().get(`/api/admin${path}`).set(bearer(token)),
+  post: (path: string) => api().post(`/api/admin${path}`).set(bearer(token)),
+  patch: (path: string) => api().patch(`/api/admin${path}`).set(bearer(token)),
+  put: (path: string) => api().put(`/api/admin${path}`).set(bearer(token)),
+  delete: (path: string) => api().delete(`/api/admin${path}`).set(bearer(token)),
+});
+
+export const readyBody = (categoryId: string, overrides: Record<string, unknown> = {}) => ({
+  title: "Sunrise Boat Ride",
+  categoryId,
+  tagline: "Watch the sun rise over the ghats",
+  overview: "A slow boat ride along the ghats of Varanasi at dawn, with a guide who explains every temple and ritual you pass.",
+  city: "Varanasi",
+  priceInr: 1500,
+  originalPriceInr: 2000,
+  durationDays: 1,
+  highlights: ["Sunrise from the river"],
+  itinerary: [{ title: "Dawn cruise", description: "Meet at the ghat and cruise for two hours." }],
+  inclusions: ["Boat", "Guide"],
+  exclusions: ["Meals"],
+  ...overrides,
+});
+
+/** Creates a draft through the API and attaches one uploaded cover image. */
+export const createReadyDestination = async (token: string, categoryId: string, overrides: Record<string, unknown> = {}) => {
+  const created = await admin(token).post("/destinations").send(readyBody(categoryId, overrides)).expect(201);
+  const id = created.body.destination.id as string;
+
+  const presign = await admin(token)
+    .post("/uploads/presign")
+    .send({ destinationId: id, filename: "cover.webp", contentType: "image/webp", sizeBytes: 120_000 })
+    .expect(200);
+
+  fakeUploadedObject();
+  const withImage = await admin(token)
+    .post(`/destinations/${id}/images`)
+    .send({ key: presign.body.key, alt: "Boats at sunrise" })
+    .expect(201);
+
+  return withImage.body.destination as { id: string; slug: string; images: { id: string; key: string; isCover: boolean }[] };
+};

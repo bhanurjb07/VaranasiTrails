@@ -27,4 +27,5 @@ export const passwordResetLimiter = limiter(
   10,
   "Too many password reset attempts, try again later",
 );
-export const enquiryLimiter = limiter(60 * MINUTE, 5, "Too many enquiries, try again later");
+export const adminLimiter = limiter(15 * MINUTE, 600, "Too many admin requests, please slow down");
+export const enquiryLimiter =limiter(60 * MINUTE, 5, "Too many enquiries, try again later");

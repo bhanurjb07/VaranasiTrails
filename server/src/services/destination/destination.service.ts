@@ -52,6 +52,7 @@ const orderBy = (sort: ListDestinationsQuery["sort"]): Prisma.DestinationOrderBy
 export const listDestinations = async (query: ListDestinationsQuery) => {
   const where: Prisma.DestinationWhereInput = {
     isPublished: true,
+    deletedAt: null,
     ...(query.q ? { OR: [{ title: { contains: query.q } }, { city: { contains: query.q } }] } : {}),
     ...(query.category ? { category: { slug: query.category } } : {}),
     ...(query.minPrice !== undefined || query.maxPrice !== undefined
@@ -80,7 +81,7 @@ export const listDestinations = async (query: ListDestinationsQuery) => {
 
 export const getDestinationBySlug = async (slug: string) => {
   const destination = await prisma.destination.findFirst({
-    where: { slug, isPublished: true },
+    where: { slug, isPublished: true, deletedAt: null },
     include: {
       category: true,
       images: { orderBy: { sortOrder: "asc" } },
@@ -94,11 +95,11 @@ export const getDestinationBySlug = async (slug: string) => {
   const [ratingGroups, latestReviews, related] = await Promise.all([
     prisma.review.groupBy({
       by: ["rating"],
-      where: { destinationId: destination.id },
+      where: { destinationId: destination.id, isHidden: false },
       _count: { _all: true },
     }),
     prisma.review.findMany({
-      where: { destinationId: destination.id },
+      where: { destinationId: destination.id, isHidden: false },
       include: reviewInclude,
       orderBy: [{ createdAt: "desc" }, { id: "asc" }],
       take: 5,
@@ -106,6 +107,7 @@ export const getDestinationBySlug = async (slug: string) => {
     prisma.destination.findMany({
       where: {
         isPublished: true,
+        deletedAt: null,
         id: { not: destination.id },
         OR: [{ categoryId: destination.categoryId }, { city: destination.city }],
       },
@@ -174,8 +176,10 @@ export const getDestinationBySlug = async (slug: string) => {
 };
 
 export const listCategories = async () => {
+  // Inactive categories are hidden from the public filter list (trips stay visible).
   const categories = await prisma.category.findMany({
-    orderBy: { name: "asc" },
+    where: { isActive: true },
+    orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
     select: { id: true, slug: true, name: true },
   });
   return { data: categories };

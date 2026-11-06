@@ -27,7 +27,7 @@ export const toReviewDto = (review: ReviewWithUser) => ({
 
 const findPublishedDestination = async (slug: string) => {
   const destination = await prisma.destination.findFirst({
-    where: { slug, isPublished: true },
+    where: { slug, isPublished: true, deletedAt: null },
     select: { id: true },
   });
   if (!destination) throw notFound("Destination not found");
@@ -35,9 +35,9 @@ const findPublishedDestination = async (slug: string) => {
 };
 
 /** Recomputes the denormalised rating inside the caller's transaction. */
-const recomputeRating = async (tx: Prisma.TransactionClient, destinationId: string) => {
+export const recomputeRating = async (tx: Prisma.TransactionClient, destinationId: string) => {
   const { _avg, _count } = await tx.review.aggregate({
-    where: { destinationId },
+    where: { destinationId, isHidden: false },
     _avg: { rating: true },
     _count: { _all: true },
   });
@@ -53,7 +53,7 @@ const recomputeRating = async (tx: Prisma.TransactionClient, destinationId: stri
 
 export const listReviews = async (slug: string, query: ListReviewsQuery) => {
   const destination = await findPublishedDestination(slug);
-  const where = { destinationId: destination.id };
+  const where = { destinationId: destination.id, isHidden: false };
 
   const [total, reviews] = await Promise.all([
     prisma.review.count({ where }),

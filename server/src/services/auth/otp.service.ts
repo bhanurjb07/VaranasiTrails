@@ -28,6 +28,7 @@ export type SendOtpResult = "sent" | "cooldown" | "limit";
 export const sendOtp = async (
   user: { id: string; email: string; name: string },
   purpose: OtpPurpose,
+  options: { ignoreCooldown?: boolean } = {},
 ): Promise<SendOtpResult> => {
   const now = Date.now();
 
@@ -36,7 +37,7 @@ export const sendOtp = async (
     orderBy: { createdAt: "desc" },
     select: { createdAt: true },
   });
-  if (latest && now - latest.createdAt.getTime() < OTP_RESEND_COOLDOWN_SECONDS * 1000) {
+  if (!options.ignoreCooldown && latest && now - latest.createdAt.getTime() < OTP_RESEND_COOLDOWN_SECONDS * 1000) {
     return "cooldown";
   }
 
@@ -67,7 +68,14 @@ export const sendOtp = async (
     }),
   ]);
 
-  await sendEmail(otpEmail(user.email, user.name, code, purpose, OTP_TTL_MINUTES));
+  try {
+    await sendEmail(otpEmail(user.email, user.name, code, purpose, OTP_TTL_MINUTES));
+  } catch (error) {
+    // The code never reached the user: drop it so it does not count toward the
+    // cooldown or hourly cap, and a retry can send a fresh one straight away.
+    await prisma.otp.delete({ where: { id } }).catch(() => undefined);
+    throw error;
+  }
   return "sent";
 };
 

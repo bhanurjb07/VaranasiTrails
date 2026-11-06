@@ -4,7 +4,7 @@ import { cardInclude, toCard } from "../destination/destination.service.js";
 
 export const listWishlist = async (userId: string) => {
   const items = await prisma.wishlistItem.findMany({
-    where: { userId, destination: { isPublished: true } },
+    where: { userId, destination: { isPublished: true, deletedAt: null } },
     include: { destination: { include: cardInclude } },
     orderBy: { createdAt: "desc" },
   });
@@ -14,7 +14,7 @@ export const listWishlist = async (userId: string) => {
 
 export const addToWishlist = async (userId: string, destinationId: string) => {
   const destination = await prisma.destination.findFirst({
-    where: { id: destinationId, isPublished: true },
+    where: { id: destinationId, isPublished: true, deletedAt: null },
     select: { id: true },
   });
   if (!destination) throw notFound("Destination not found");

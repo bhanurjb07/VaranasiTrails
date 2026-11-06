@@ -10,8 +10,9 @@ import { apiRouter } from "./routes/index.js";
 
 export const app = express();
 
-// Free Node hosts sit behind a reverse proxy; needed for correct client IPs.
-app.set("trust proxy", 1);
+// Hosts sit behind reverse proxies; the hop count (TRUST_PROXY_HOPS) is needed for
+// correct client IPs and rate limiting.
+app.set("trust proxy", config.trustProxyHops);
 
 app.use(helmet());
 app.use(cors({ origin: config.corsOrigins, credentials: true }));
