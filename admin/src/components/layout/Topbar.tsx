@@ -58,7 +58,7 @@ export const Topbar = ({ onOpenMenu }: { onOpenMenu: () => void }) => {
             aria-haspopup="menu"
             aria-expanded={open}
             onClick={() => setOpen((value) => !value)}
-            className="flex items-center gap-2 rounded-full py-1 pr-2 pl-1 hover:bg-cream-deep"
+            className="flex items-center gap-2 rounded-control py-1 pr-2 pl-1 hover:bg-cream-deep"
           >
             <span className="flex size-8 items-center justify-center rounded-full bg-indigo text-sm font-semibold text-white">
               {user?.name.charAt(0).toUpperCase()}

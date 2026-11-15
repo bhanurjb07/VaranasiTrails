@@ -19,7 +19,7 @@ export const PasswordInput = ({ invalid, className, ...props }: PasswordInputPro
         onClick={() => setVisible((value) => !value)}
         aria-label={visible ? 'Hide password' : 'Show password'}
         aria-pressed={visible}
-        className="absolute top-1/2 right-2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full text-muted hover:text-indigo"
+        className="absolute top-1/2 right-2 flex size-8 -translate-y-1/2 items-center justify-center rounded-control text-muted hover:text-indigo"
       >
         {visible ? <EyeOff className="size-5" aria-hidden="true" /> : <Eye className="size-5" aria-hidden="true" />}
       </button>

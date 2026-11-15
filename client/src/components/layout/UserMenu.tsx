@@ -42,7 +42,7 @@ export const UserMenu = ({ onDark }: UserMenuProps) => {
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
         className={cn(
-          'flex items-center gap-2 rounded-full py-1 pr-2 pl-1 transition-colors',
+          'flex items-center gap-2 rounded-control py-1 pr-2 pl-1 transition-colors',
           onDark ? 'text-white hover:bg-white/15' : 'text-indigo hover:bg-indigo/5',
         )}
       >

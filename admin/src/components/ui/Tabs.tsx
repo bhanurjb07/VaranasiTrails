@@ -45,7 +45,7 @@ export const Tabs = <T extends string>({ options, value, onChange, label, classN
         >
           {option.label}
           {option.count !== undefined && (
-            <span className={cn('rounded-full px-1.5 text-xs', selected ? 'bg-saffron-soft text-saffron-dark' : 'bg-line/60')}>
+            <span className={cn('rounded-md px-1.5 text-xs', selected ? 'bg-saffron-soft text-saffron-dark' : 'bg-line/60')}>
               {option.count}
             </span>
           )}

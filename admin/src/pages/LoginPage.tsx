@@ -16,15 +16,11 @@ export const LoginPage = () => {
   return (
     <div className="grid min-h-screen lg:grid-cols-[1.1fr_1fr]">
       <div className="relative hidden flex-col justify-between overflow-hidden bg-indigo p-12 text-white lg:flex">
-        <div
-          aria-hidden="true"
-          className="absolute -right-24 -bottom-24 size-[28rem] rounded-full bg-saffron/15 blur-3xl"
-        />
         <Brand />
         <div className="relative max-w-md">
-          <h2 className="text-balance text-4xl leading-tight text-white">Run VaranasiTrails from one calm place.</h2>
+          <h2 className="text-balance text-4xl leading-tight text-white">Site administration</h2>
           <p className="mt-4 text-white/70">
-            Add trips and photos, answer enquiries, moderate reviews and keep an eye on what is happening on the site.
+            Manage trips and photos, enquiries, reviews and users.
           </p>
         </div>
         <p className="relative flex items-center gap-2 text-sm text-white/50">

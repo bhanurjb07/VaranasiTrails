@@ -4,7 +4,7 @@ import { Accordion } from '@/components/ui/Accordion'
 import { faq } from '@/data/home'
 
 export const Faq = () => (
-  <section className="bg-cream-deep/60 py-20 sm:py-28" aria-labelledby="faq-title">
+  <section className="bg-cream-deep/60 py-8 sm:py-20 md:py-28" aria-labelledby="faq-title">
     <Container narrow>
       <SectionHeading align="center" eyebrow="FAQ" title={faq.title} />
       <h2 id="faq-title" className="sr-only">

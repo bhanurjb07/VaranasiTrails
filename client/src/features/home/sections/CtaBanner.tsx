@@ -11,9 +11,9 @@ export const CtaBanner = () => {
   const image = placeholderImages.gangaAarti
 
   return (
-    <section className="py-20 sm:py-28">
+    <section className="py-8 sm:py-20 md:py-28">
       <Container>
-        <div className="relative isolate overflow-hidden rounded-[2rem] bg-indigo px-6 py-16 text-center sm:px-16 sm:py-20">
+        <div className="relative isolate overflow-hidden rounded-card bg-indigo px-6 py-16 text-center sm:px-16 sm:py-20">
           <ImageWithFallback
             src={image.url}
             alt=""

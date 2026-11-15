@@ -20,7 +20,7 @@ export const DestinationGrid = ({
   skeletonCount = 6,
   columns = 3,
 }: DestinationGridProps) => (
-  <div className={`grid gap-6 ${columnClass[columns]}`}>
+  <div className={`grid gap-3 sm:gap-6 ${columnClass[columns]}`}>
     {loading
       ? Array.from({ length: skeletonCount }, (_, index) => <DestinationCardSkeleton key={index} />)
       : destinations?.map((destination, index) => (

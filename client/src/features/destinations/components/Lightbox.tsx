@@ -45,7 +45,7 @@ export const Lightbox = ({ images, index, open, onClose, onIndexChange }: Lightb
             type="button"
             onClick={onClose}
             aria-label="Close viewer"
-            className="absolute top-4 right-4 z-10 flex size-11 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/30"
+            className="absolute top-4 right-4 z-10 flex size-11 items-center justify-center rounded-control bg-white/15 text-white hover:bg-white/30"
           >
             <X className="size-6" aria-hidden="true" />
           </button>
@@ -67,7 +67,7 @@ export const Lightbox = ({ images, index, open, onClose, onIndexChange }: Lightb
                 type="button"
                 onClick={() => go(-1)}
                 aria-label="Previous photo"
-                className="absolute top-1/2 left-3 flex size-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/30 sm:left-6"
+                className="absolute top-1/2 left-3 flex size-12 -translate-y-1/2 items-center justify-center rounded-control bg-white/15 text-white hover:bg-white/30 sm:left-6"
               >
                 <ChevronLeft className="size-7" aria-hidden="true" />
               </button>
@@ -75,7 +75,7 @@ export const Lightbox = ({ images, index, open, onClose, onIndexChange }: Lightb
                 type="button"
                 onClick={() => go(1)}
                 aria-label="Next photo"
-                className="absolute top-1/2 right-3 flex size-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/30 sm:right-6"
+                className="absolute top-1/2 right-3 flex size-12 -translate-y-1/2 items-center justify-center rounded-control bg-white/15 text-white hover:bg-white/30 sm:right-6"
               >
                 <ChevronRight className="size-7" aria-hidden="true" />
               </button>

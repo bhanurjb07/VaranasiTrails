@@ -14,38 +14,39 @@ interface DestinationCardProps {
   priority?: boolean
 }
 
+/** A list row (photo left, details right) on phones; a vertical card from sm up. */
 export const DestinationCard = ({ destination, className, priority = false }: DestinationCardProps) => (
   <article
     className={cn(
-      'group relative flex h-full flex-col overflow-hidden rounded-card border border-line/70 bg-surface shadow-card',
-      'transition-all duration-300 hover:-translate-y-1 hover:shadow-lift',
+      'group relative flex h-full overflow-hidden rounded-card border border-line/70 bg-surface shadow-card sm:flex-col',
+      'transition-shadow duration-300 sm:hover:shadow-lift',
       className,
     )}
   >
-    <div className="relative aspect-[4/3] overflow-hidden bg-cream-deep">
+    <div className="relative w-[38%] shrink-0 overflow-hidden bg-cream-deep max-sm:min-h-36 sm:aspect-[4/3] sm:w-auto">
       <ImageWithFallback
         src={destination.coverImage}
         alt={`${destination.title}, ${destination.city}`}
         width={800}
         height={600}
         priority={priority}
-        sizes="(min-width: 1280px) 25vw, (min-width: 640px) 45vw, 92vw"
-        className="size-full transition-transform duration-500 group-hover:scale-105"
+        sizes="(min-width: 1280px) 25vw, (min-width: 640px) 45vw, 38vw"
+        className="size-full"
       />
       {destination.discountPercent > 0 && (
-        <Badge variant="maroon" className="absolute top-3 left-3 bg-maroon text-white">
+        <Badge variant="maroon" className="absolute top-2 left-2 bg-maroon text-white sm:top-3 sm:left-3">
           {destination.discountPercent}% off
         </Badge>
       )}
-      <WishlistButton destination={destination} className="absolute top-3 right-3 z-10" />
+      <WishlistButton destination={destination} className="absolute top-2 right-2 z-10 sm:top-3 sm:right-3" />
     </div>
 
-    <div className="flex flex-1 flex-col p-5">
-      <p className="flex items-center gap-1.5 text-xs font-semibold tracking-wide text-saffron-dark uppercase">
+    <div className="flex min-w-0 flex-1 flex-col p-3 sm:p-5">
+      <p className="flex items-center gap-1 text-[0.7rem] font-semibold tracking-wide text-saffron-dark uppercase sm:gap-1.5 sm:text-xs">
         <MapPin className="size-3.5" aria-hidden="true" />
         {destination.city}
       </p>
-      <h3 className="mt-1.5 text-xl leading-snug">
+      <h3 className="mt-1 line-clamp-2 text-base leading-snug sm:mt-1.5 sm:text-xl">
         {/* The stretched link makes the whole card clickable without nesting interactive elements. */}
         <Link
           to={`/destinations/${destination.slug}`}
@@ -54,25 +55,27 @@ export const DestinationCard = ({ destination, className, priority = false }: De
           {destination.title}
         </Link>
       </h3>
-      <p className="mt-2 line-clamp-2 text-sm text-muted">{destination.tagline}</p>
+      <p className="mt-2 line-clamp-2 text-sm text-muted max-sm:hidden">{destination.tagline}</p>
 
-      <div className="mt-4 flex items-center gap-4 text-sm text-muted">
-        <span className="flex items-center gap-1.5">
-          <Clock className="size-4" aria-hidden="true" />
+      <div className="mt-1.5 flex items-center gap-3 text-xs text-muted sm:mt-4 sm:gap-4 sm:text-sm">
+        <span className="flex items-center gap-1 sm:gap-1.5">
+          <Clock className="size-3.5 sm:size-4" aria-hidden="true" />
           {formatDurationShort(destination.duration)}
         </span>
-        <span className="flex items-center gap-1.5">
-          <Star className="size-4 fill-gold text-gold" aria-hidden="true" />
+        <span className="flex items-center gap-1 sm:gap-1.5">
+          <Star className="size-3.5 fill-gold text-gold sm:size-4" aria-hidden="true" />
           <span className="font-semibold text-indigo">{formatRating(destination.ratingAvg)}</span>
           {destination.ratingCount > 0 && <span>({destination.ratingCount})</span>}
         </span>
       </div>
 
-      <div className="mt-auto flex items-baseline gap-2 border-t border-line/70 pt-4">
+      <div className="mt-auto flex flex-wrap items-baseline gap-x-2 pt-2 sm:border-t sm:border-line/70 sm:pt-4">
         <span className="text-xs text-muted">From</span>
-        <span className="font-heading text-2xl font-semibold text-indigo">{formatPrice(destination.priceInr)}</span>
+        <span className="font-heading text-xl font-semibold text-indigo sm:text-2xl">
+          {formatPrice(destination.priceInr)}
+        </span>
         {destination.originalPriceInr && destination.originalPriceInr > destination.priceInr && (
-          <span className="text-sm text-muted line-through">{formatPrice(destination.originalPriceInr)}</span>
+          <span className="text-xs text-muted line-through sm:text-sm">{formatPrice(destination.originalPriceInr)}</span>
         )}
       </div>
     </div>

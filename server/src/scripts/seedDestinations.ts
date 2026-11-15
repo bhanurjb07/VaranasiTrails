@@ -52,7 +52,7 @@ const destinations: SeedDestination[] = [
     title: "Ganga Aarti & Evening Boat Ride",
     tagline: "Watch the legendary Dashashwamedh Ghat aarti from the river itself",
     overview:
-      "Glide across the Ganga at dusk as the ghats light up with thousands of diyas. Your guide explains the rituals while you drift past Manikarnika and Assi, then settle in for the grand Ganga Aarti from the water - the most memorable view in Varanasi.",
+      "Glide across the Ganga at dusk as the ghats light up with thousands of diyas. Your guide explains the rituals while you drift past Manikarnika and Assi, then settle in for the grand Ganga Aarti from the water, the most memorable view in Varanasi.",
     category: "spiritual",
     city: "Varanasi",
     priceInr: 1499,
@@ -146,7 +146,7 @@ const destinations: SeedDestination[] = [
   },
   {
     slug: "varanasi-ayodhya-prayagraj-pilgrimage",
-    title: "Varanasi - Ayodhya - Prayagraj Pilgrimage",
+    title: "Varanasi, Ayodhya and Prayagraj Pilgrimage",
     tagline: "Three of India's holiest cities in one five-day journey",
     overview:
       "A comfortable pilgrimage circuit connecting Kashi, Ayodhya and Prayagraj. Begin with the ghats and temples of Varanasi, travel to Ayodhya for Ram Janmabhoomi and Hanuman Garhi, then bathe at the Triveni Sangam in Prayagraj before returning to Varanasi.",
@@ -181,7 +181,7 @@ const destinations: SeedDestination[] = [
   {
     slug: "banarasi-food-trail",
     title: "Banarasi Food Trail",
-    tagline: "Kachori, malaiyo, tamatar chaat and paan - one lane at a time",
+    tagline: "Kachori, malaiyo, tamatar chaat and paan, one lane at a time",
     overview:
       "Eat your way through Varanasi's most loved lanes with a local food guide. Taste hot kachori-sabzi, tamatar chaat, lassi from clay cups, seasonal malaiyo and finish with a legendary Banarasi paan.",
     category: "food",

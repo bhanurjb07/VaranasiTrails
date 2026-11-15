@@ -9,7 +9,7 @@ export const Itinerary = ({ days }: { days: readonly ItineraryDay[] }) => (
       id: String(day.dayNumber),
       title: (
         <span className="flex items-center gap-3">
-          <span className="inline-flex shrink-0 items-center rounded-full bg-saffron-soft px-3 py-1 text-xs font-bold tracking-wide text-saffron-dark uppercase">
+          <span className="inline-flex shrink-0 items-center rounded-md bg-saffron-soft px-3 py-1 text-xs font-bold tracking-wide text-saffron-dark uppercase">
             Day {day.dayNumber}
           </span>
           {day.title}

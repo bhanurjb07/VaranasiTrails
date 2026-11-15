@@ -22,7 +22,7 @@ const pagesToShow = (page: number, total: number): (number | 'gap')[] => {
 }
 
 const itemStyles =
-  'inline-flex size-10 items-center justify-center rounded-full text-sm font-semibold transition-colors'
+  'inline-flex size-10 items-center justify-center rounded-control text-sm font-semibold transition-colors'
 
 export const Pagination = ({ page, totalPages, onChange, className }: PaginationProps) => {
   if (totalPages <= 1) return null

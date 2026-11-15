@@ -1,4 +1,3 @@
-import { motion, useReducedMotion } from 'framer-motion'
 import { Search } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router'
@@ -11,7 +10,6 @@ import { placeholderImages } from '@/data/placeholderMedia'
 
 export const Hero = () => {
   const navigate = useNavigate()
-  const reduce = useReducedMotion()
   const [query, setQuery] = useState('')
   const image = placeholderImages.ghatSunrise
 
@@ -21,17 +19,8 @@ export const Hero = () => {
     navigate(text ? `/destinations?q=${encodeURIComponent(text)}` : '/destinations')
   }
 
-  const rise = (delay: number) =>
-    reduce
-      ? {}
-      : {
-          initial: { opacity: 0, y: 28 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as const },
-        }
-
   return (
-    <section className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-indigo pb-16 sm:items-center sm:pb-0">
+    <section className="relative isolate flex min-h-[17rem] items-end overflow-hidden bg-indigo pb-6 md:min-h-[100svh] md:items-center md:pb-0">
       <ImageWithFallback
         src={image.url}
         alt={image.alt}
@@ -41,28 +30,19 @@ export const Hero = () => {
         height={1080}
         className="absolute inset-0 -z-20 size-full"
       />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-indigo via-indigo/55 to-indigo/30 sm:bg-gradient-to-r sm:from-indigo/90 sm:via-indigo/55 sm:to-indigo/10" />
+      {/* Plain dark overlay so the headline stays readable on the photo. */}
+      <div className="absolute inset-0 -z-10 bg-indigo/60" />
 
-      <Container className="pt-32 sm:pt-24">
+      <Container className="pt-10 md:pt-24">
         <div className="max-w-2xl">
-          <motion.p
-            {...rise(0.05)}
-            className="mb-4 text-xs font-semibold tracking-[0.22em] text-gold uppercase sm:text-sm"
-          >
-            {hero.eyebrow}
-          </motion.p>
-          <motion.h1 {...rise(0.15)} className="text-balance text-5xl leading-[1.05] text-white sm:text-6xl lg:text-7xl">
-            {hero.title}
-          </motion.h1>
-          <motion.p {...rise(0.25)} className="mt-6 max-w-xl text-lg text-white/85 sm:text-xl">
-            {hero.subtitle}
-          </motion.p>
+          <p className="mb-2 text-xs font-semibold tracking-[0.22em] text-gold uppercase sm:mb-4 sm:text-sm">{hero.eyebrow}</p>
+          <h1 className="text-balance text-3xl leading-[1.1] text-white sm:text-5xl md:text-6xl lg:text-7xl">{hero.title}</h1>
+          <p className="mt-3 max-w-xl text-base text-white/90 sm:mt-6 sm:text-lg md:text-xl">{hero.subtitle}</p>
 
-          <motion.form
-            {...rise(0.35)}
+          <form
             onSubmit={onSubmit}
             role="search"
-            className="mt-9 flex w-full max-w-xl flex-col gap-3 rounded-[1.75rem] bg-white p-2 shadow-lift sm:flex-row sm:items-center sm:rounded-full"
+            className="mt-9 hidden w-full max-w-xl flex-col gap-3 rounded-control bg-white p-2 shadow-lift md:flex md:flex-row md:items-center"
           >
             <label htmlFor="hero-search" className="sr-only">
               Search trips
@@ -75,30 +55,30 @@ export const Hero = () => {
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder={hero.searchPlaceholder}
-                className="h-12 w-full rounded-full bg-transparent pr-4 pl-12 text-ink placeholder:text-muted/80 focus:outline-none"
+                className="h-12 w-full rounded-control bg-transparent pr-4 pl-12 text-ink placeholder:text-muted/80 focus:outline-none"
               />
             </div>
             <Button type="submit" size="md" className="sm:px-8">
               {hero.primaryCta}
             </Button>
-          </motion.form>
+          </form>
 
-          <motion.ul {...rise(0.45)} className="mt-6 flex flex-wrap gap-2" aria-label="Popular searches">
+          <ul className="mt-4 flex flex-wrap gap-2 md:mt-6" aria-label="Popular searches">
             {hero.quickLinks.map((link) => (
               <li key={link.to}>
                 <Link
                   to={link.to}
-                  className="inline-block rounded-full border border-white/35 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur transition-colors hover:bg-white/25"
+                  className="inline-block rounded-md border border-white/40 bg-white/10 px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-white/25"
                 >
                   {link.label}
                 </Link>
               </li>
             ))}
-          </motion.ul>
+          </ul>
         </div>
       </Container>
 
-      <p className="absolute right-4 bottom-3 hidden text-[0.7rem] text-white/50 sm:block">Photo: {image.credit}</p>
+      <p className="absolute right-4 bottom-3 hidden text-[0.7rem] text-white/70 sm:block">Photo: {image.credit}</p>
     </section>
   )
 }

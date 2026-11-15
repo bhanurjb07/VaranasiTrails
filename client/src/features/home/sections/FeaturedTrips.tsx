@@ -1,7 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 
 import { ErrorState } from '@/components/common/ErrorState'
-import { Reveal } from '@/components/common/Reveal'
 import { SectionHeading } from '@/components/common/SectionHeading'
 import { Container } from '@/components/layout/Container'
 import { ButtonLink } from '@/components/ui/ButtonLink'
@@ -17,14 +16,14 @@ export const FeaturedTrips = () => {
   const active = needsFallback ? popular : featured
 
   return (
-    <section className="py-20 sm:py-28" aria-labelledby="featured-title">
+    <section className="py-8 sm:py-20 md:py-28" aria-labelledby="featured-title">
       <Container>
         <SectionHeading
-          eyebrow="Handpicked"
+          eyebrow="Featured"
           title="Featured trips"
-          subtitle="Our most loved ways to spend a day, or a week, in and around Varanasi."
+          subtitle="A few trips to start with."
           action={
-            <ButtonLink to="/destinations" variant="outline" className="self-start sm:self-end">
+            <ButtonLink to="/destinations" variant="outline" size="sm" className="shrink-0 max-sm:border-transparent max-sm:bg-transparent max-sm:px-0 max-sm:text-saffron-dark">
               View all trips <ArrowRight className="size-4" aria-hidden="true" />
             </ButtonLink>
           }
@@ -36,9 +35,7 @@ export const FeaturedTrips = () => {
         {active.isError ? (
           <ErrorState error={active.error} title="Could not load trips" onRetry={() => void active.refetch()} />
         ) : (
-          <Reveal>
-            <DestinationGrid destinations={active.data?.data} loading={active.isPending || (needsFallback && popular.isPending)} skeletonCount={3} />
-          </Reveal>
+          <DestinationGrid destinations={active.data?.data} loading={active.isPending || (needsFallback && popular.isPending)} skeletonCount={3} />
         )}
       </Container>
     </section>

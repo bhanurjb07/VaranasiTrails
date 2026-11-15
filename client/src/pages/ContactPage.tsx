@@ -15,7 +15,7 @@ import { useGeneralWhatsAppUrl } from '@/features/enquiry/hooks/useWhatsAppUrl'
 
 const Row = ({ icon, label, children }: { icon: ReactNode; label: string; children: ReactNode }) => (
   <li className="flex gap-4">
-    <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-saffron-soft text-saffron-dark">
+    <span className="flex size-11 shrink-0 items-center justify-center rounded-control bg-saffron-soft text-saffron-dark">
       {icon}
     </span>
     <div>
@@ -32,7 +32,7 @@ export const ContactPage = () => {
     <>
       <SeoHead
         title="Contact us"
-        description="Talk to the VaranasiTrails team on WhatsApp, phone or email, or send us an enquiry and we will reply within hours."
+        description="Talk to the VaranasiTrails team on WhatsApp, phone or email, or send us an enquiry."
         path="/contact"
       />
       <PageHeader
@@ -74,6 +74,7 @@ export const ContactPage = () => {
             </Row>
           </ul>
 
+          {activeSocialLinks.length > 0 && (
           <div>
             <h2 className="mb-3 font-sans text-sm font-semibold tracking-wide text-muted uppercase">Follow us</h2>
             <ul className="flex gap-3">
@@ -84,7 +85,7 @@ export const ContactPage = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${link.label}: ${link.handle}`}
-                    className="flex size-11 items-center justify-center rounded-full bg-indigo text-white transition-colors hover:bg-saffron hover:text-indigo"
+                    className="flex size-11 items-center justify-center rounded-control bg-indigo text-white transition-colors hover:bg-saffron hover:text-indigo"
                   >
                     <SocialIcon platform={link.platform} className="size-5" />
                   </a>
@@ -92,11 +93,12 @@ export const ContactPage = () => {
               ))}
             </ul>
           </div>
+          )}
         </div>
 
         <Card className="p-6 sm:p-8">
           <h2 className="text-2xl">Send us an enquiry</h2>
-          <p className="mt-1 mb-6 text-muted">Tell us your dates and who is travelling. We reply within a few hours.</p>
+          <p className="mt-1 mb-6 text-muted">Tell us your dates and who is travelling. We reply by phone or email.</p>
           <EnquiryForm />
         </Card>
       </Container>

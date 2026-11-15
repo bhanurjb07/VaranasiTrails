@@ -19,7 +19,7 @@ export const DetailSkeleton = () => (
         <Skeleton className="h-10 w-3/4" />
         <Skeleton className="h-12 w-48" />
         <Skeleton className="h-48 w-full" />
-        <Skeleton className="h-14 w-full rounded-full" />
+        <Skeleton className="h-14 w-full rounded-control" />
       </div>
     </div>
   </Container>

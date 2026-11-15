@@ -35,7 +35,7 @@ export const PreviewTab = ({ control, destination, categoryName }: PreviewTabPro
         <span className="size-2.5 rounded-full bg-danger/60" />
         <span className="size-2.5 rounded-full bg-gold/70" />
         <span className="size-2.5 rounded-full bg-success/60" />
-        <span className="ml-3 truncate rounded-full bg-cream px-3 py-1 text-xs text-muted">/destinations/{v.slug || 'your-trip'}</span>
+        <span className="ml-3 truncate rounded-md bg-cream px-3 py-1 text-xs text-muted">/destinations/{v.slug || 'your-trip'}</span>
         <Badge variant="info" className="ml-auto">Preview</Badge>
       </div>
 
@@ -84,8 +84,8 @@ export const PreviewTab = ({ control, destination, categoryName }: PreviewTabPro
             </ul>
 
             <div className="mt-6 space-y-2">
-              <div className="rounded-full bg-[#25d366] py-3 text-center text-sm font-semibold text-indigo">Book on WhatsApp</div>
-              <div className="rounded-full border border-line py-3 text-center text-sm font-semibold text-indigo">Send an enquiry</div>
+              <div className="rounded-control bg-[#25d366] py-3 text-center text-sm font-semibold text-indigo">Book on WhatsApp</div>
+              <div className="rounded-control border border-line py-3 text-center text-sm font-semibold text-indigo">Send an enquiry</div>
             </div>
           </div>
         </div>
@@ -116,7 +116,7 @@ export const PreviewTab = ({ control, destination, categoryName }: PreviewTabPro
             <ol className="space-y-3">
               {v.itinerary.map((day, index) => (
                 <li key={index} className="rounded-card border border-line bg-surface p-4">
-                  <p className="font-semibold text-indigo"><span className="mr-2 rounded-full bg-saffron-soft px-2.5 py-0.5 text-xs font-bold text-saffron-dark uppercase">Day {index + 1}</span>{day.title}</p>
+                  <p className="font-semibold text-indigo"><span className="mr-2 rounded-md bg-saffron-soft px-2.5 py-0.5 text-xs font-bold text-saffron-dark uppercase">Day {index + 1}</span>{day.title}</p>
                   <p className="mt-2 text-sm whitespace-pre-line text-muted">{day.description}</p>
                 </li>
               ))}

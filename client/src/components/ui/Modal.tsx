@@ -51,7 +51,7 @@ export const Modal = ({ open, onClose, title, description, children, className }
               type="button"
               onClick={onClose}
               aria-label="Close dialog"
-              className="rounded-full p-2 text-muted transition-colors hover:bg-cream-deep hover:text-indigo"
+              className="rounded-control p-2 text-muted transition-colors hover:bg-cream-deep hover:text-indigo"
             >
               <X className="size-5" aria-hidden="true" />
             </button>

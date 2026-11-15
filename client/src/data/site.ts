@@ -5,9 +5,9 @@ export const site = {
   /** Text logo, shown in the header and footer. */
   logoText: 'Varanasi',
   logoAccent: 'Trails',
-  tagline: 'Guided journeys through the oldest living city',
+  tagline: 'Guided trips in Varanasi and Uttar Pradesh',
   description:
-    'Hand-planned boat rides, heritage walks, food trails and pilgrimages in Varanasi, Sarnath and Uttar Pradesh, led by local guides who grew up on the ghats.',
+    'Boat rides, heritage walks, food trails and pilgrimages in Varanasi, Sarnath and Uttar Pradesh. Book through WhatsApp.',
   // TODO(business): replace with the real production URL.
   siteUrl: 'https://www.varanasitrails.example',
   contactEmail: 'hello@varanasitrails.example',
@@ -20,8 +20,7 @@ export const site = {
     titleTemplate: '%s | VaranasiTrails',
     defaultTitle: 'VaranasiTrails | Guided trips in Varanasi and Uttar Pradesh',
     defaultDescription:
-      'Plan a Varanasi trip with local guides: Ganga aarti boat rides, Kashi heritage walks, Sarnath day tours, food trails and pilgrimages. Chat with us on WhatsApp to book.',
+      'Guided trips in Varanasi: Ganga aarti boat rides, Kashi heritage walks, Sarnath day tours, food trails and pilgrimages. Chat with us on WhatsApp to book.',
     ogImageAlt: 'Boats on the Ganges at sunrise in Varanasi',
   },
-  foundedYear: 2016,
 } as const

@@ -57,7 +57,7 @@ export const EnquiryForm = ({ destination, onSent }: EnquiryFormProps) => {
       <div className="flex flex-col items-center py-8 text-center" role="status">
         <CircleCheck className="mb-3 size-12 text-success" aria-hidden="true" />
         <h3 className="text-2xl">Enquiry sent</h3>
-        <p className="mt-2 text-muted">We usually reply within a few hours. Keep an eye on your phone and email.</p>
+        <p className="mt-2 text-muted">We will contact you on the phone number or email you gave.</p>
       </div>
     )
   }

@@ -43,10 +43,10 @@ export const DestinationsPage = () => {
       <PageHeader
         eyebrow="All trips"
         title="Find your Varanasi trip"
-        subtitle="Boat rides, heritage walks, food trails and pilgrimages, all led by local guides."
+        subtitle="Boat rides, heritage walks, food trails and pilgrimages."
       />
 
-      <Container className="grid gap-10 py-10 lg:grid-cols-[18rem_1fr]">
+      <Container className="grid gap-10 py-4 sm:py-10 lg:grid-cols-[18rem_1fr]">
         <aside className="hidden lg:block" aria-label="Filters">
           <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-card border border-line/70 bg-surface p-6 shadow-card">
             {panel}
@@ -54,7 +54,7 @@ export const DestinationsPage = () => {
         </aside>
 
         <section aria-label="Results" aria-busy={isPlaceholderData} className="min-w-0">
-          <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+          <div className="sticky top-[7.25rem] z-20 -mx-5 mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-line/70 bg-cream px-5 py-2 sm:static sm:mx-0 sm:mb-6 sm:gap-3 sm:border-0 sm:bg-transparent sm:p-0">
             <p className="text-muted" aria-live="polite">
               {data ? (
                 <>
@@ -65,12 +65,12 @@ export const DestinationsPage = () => {
               )}
             </p>
 
-            <div className="flex items-center gap-3">
+            <div className="flex w-full items-center gap-2 sm:w-auto sm:gap-3">
               <Button variant="outline" size="sm" className="lg:hidden" onClick={() => setDrawer(true)}>
                 <SlidersHorizontal className="size-4" aria-hidden="true" />
                 Filters{activeCount > 0 ? ` (${activeCount})` : ''}
               </Button>
-              <div className="w-48">
+              <div className="min-w-0 flex-1 sm:w-48 sm:flex-none">
                 <Select
                   aria-label="Sort trips"
                   value={filters.sort}

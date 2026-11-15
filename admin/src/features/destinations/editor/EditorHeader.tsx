@@ -59,7 +59,7 @@ export const EditorHeader = ({
           <h1 className="max-w-[18rem] truncate font-sans text-lg font-semibold sm:max-w-md">{title || (isNew ? 'New destination' : 'Untitled')}</h1>
           {status && <StatusBadge status={status} />}
           {dirty && (
-            <span className="rounded-full bg-saffron-soft px-2.5 py-0.5 text-xs font-semibold text-saffron-dark" role="status">
+            <span className="rounded-md bg-saffron-soft px-2.5 py-0.5 text-xs font-semibold text-saffron-dark" role="status">
               Unsaved changes
             </span>
           )}

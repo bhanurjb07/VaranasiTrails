@@ -1,26 +1,27 @@
-import { Reveal } from '@/components/common/Reveal'
 import { SectionHeading } from '@/components/common/SectionHeading'
 import { Container } from '@/components/layout/Container'
 import { whyUs } from '@/data/home'
 import { homeIcons } from '../homeIcons'
 
 export const WhyUs = () => (
-  <section className="bg-cream-deep/60 py-20 sm:py-28">
+  <section className="bg-cream-deep/60 py-8 sm:py-20 md:py-28">
     <Container>
-      <SectionHeading eyebrow="Why VaranasiTrails" title={whyUs.title} subtitle={whyUs.subtitle} />
+      <SectionHeading eyebrow="Trip details" title={whyUs.title} />
 
-      <ul className="grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-        {whyUs.items.map((item, index) => {
+      <ul className="grid gap-y-6 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-12 lg:grid-cols-4">
+        {whyUs.items.map((item) => {
           const Icon = homeIcons[item.icon]
           return (
             <li key={item.title}>
-              <Reveal delay={(index % 3) * 0.08}>
-                <span className="flex size-12 items-center justify-center rounded-control bg-saffron-soft text-saffron-dark">
+              <div className="flex items-start gap-4 sm:block">
+                <span className="flex size-12 shrink-0 items-center justify-center rounded-control bg-saffron-soft text-saffron-dark">
                   {Icon && <Icon className="size-6" aria-hidden="true" />}
                 </span>
-                <h3 className="mt-5 text-xl">{item.title}</h3>
-                <p className="mt-2 text-muted">{item.text}</p>
-              </Reveal>
+                <div>
+                  <h3 className="text-lg sm:mt-5 sm:text-xl">{item.title}</h3>
+                  <p className="mt-1 text-muted sm:mt-2">{item.text}</p>
+                </div>
+              </div>
             </li>
           )
         })}

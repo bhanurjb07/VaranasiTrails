@@ -51,10 +51,10 @@ export const MobileMenu = ({ open, onClose }: MobileMenuProps) => {
             onClick={onClose}
           />
           <motion.aside
-            className="absolute inset-y-0 right-0 flex w-[min(22rem,90vw)] flex-col bg-cream p-5 shadow-lift"
-            initial={{ x: '100%' }}
+            className="absolute inset-y-0 left-0 flex w-[min(22rem,90vw)] flex-col bg-cream p-5 shadow-lift"
+            initial={{ x: '-100%' }}
             animate={{ x: 0 }}
-            exit={{ x: '100%' }}
+            exit={{ x: '-100%' }}
             transition={{ type: 'tween', duration: 0.28 }}
           >
             <div className="mb-6 flex items-center justify-between">
@@ -107,7 +107,7 @@ export const MobileMenu = ({ open, onClose }: MobileMenuProps) => {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${link.label}: ${link.handle}`}
-                      className="flex size-11 items-center justify-center rounded-full bg-indigo text-white transition-colors hover:bg-saffron hover:text-indigo"
+                      className="flex size-11 items-center justify-center rounded-control bg-indigo text-white transition-colors hover:bg-saffron hover:text-indigo"
                     >
                       <SocialIcon platform={link.platform} className="size-5" />
                     </a>

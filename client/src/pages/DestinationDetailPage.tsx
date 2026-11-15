@@ -27,7 +27,7 @@ import { buildWhatsAppUrl } from '@/lib/whatsapp'
 import { NotFoundPage } from './NotFoundPage'
 
 const Section = ({ id, title, children }: { id: string; title: string; children: React.ReactNode }) => (
-  <section id={id} aria-labelledby={`${id}-title`} className="scroll-mt-32 py-10">
+  <section id={id} aria-labelledby={`${id}-title`} className="scroll-mt-44 py-6 md:scroll-mt-32 md:py-10">
     <h2 id={`${id}-title`} className="mb-6 text-3xl">
       {title}
     </h2>

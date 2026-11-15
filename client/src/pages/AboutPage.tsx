@@ -14,10 +14,10 @@ export const AboutPage = () => {
     <>
       <SeoHead
         title="About us"
-        description={`${site.name} is a team of local guides planning small-group trips in Varanasi and Uttar Pradesh since ${site.foundedYear}.`}
+        description={`${site.name} plans guided trips in Varanasi, Sarnath and Uttar Pradesh.`}
         path="/about"
       />
-      <PageHeader eyebrow={`Since ${site.foundedYear}`} title={aboutContent.title} subtitle={aboutContent.intro} />
+      <PageHeader eyebrow="About us" title={aboutContent.title} subtitle={aboutContent.intro} />
 
       <Container className="grid gap-12 py-14 lg:grid-cols-2 lg:items-center">
         <figure>

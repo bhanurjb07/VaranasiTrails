@@ -36,8 +36,14 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
+    scroll-padding-top: 11rem;
     -webkit-text-size-adjust: 100%;
+  }
+
+  @media (min-width: 48rem) {
+    html {
+      scroll-padding-top: 6rem;
+    }
   }
 
   body {

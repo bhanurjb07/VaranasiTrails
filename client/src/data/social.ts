@@ -1,5 +1,5 @@
-// Social profiles. TODO(business): replace every placeholder URL and handle.
-// Hiding a platform is one line: set `enabled: false`.
+// Social profiles. The URLs below are placeholders and are switched off until the real accounts exist.
+// TODO(business): put the real URL and handle for each account, then set `enabled: true`.
 
 export type SocialPlatform = 'instagram' | 'facebook' | 'x' | 'youtube'
 
@@ -17,28 +17,28 @@ export const socialLinks: readonly SocialLink[] = [
     label: 'Instagram',
     handle: '@varanasitrails',
     url: 'https://www.instagram.com/varanasitrails',
-    enabled: true,
+    enabled: false,
   },
   {
     platform: 'facebook',
     label: 'Facebook',
     handle: 'VaranasiTrails',
     url: 'https://www.facebook.com/varanasitrails',
-    enabled: true,
+    enabled: false,
   },
   {
     platform: 'x',
     label: 'X (Twitter)',
     handle: '@varanasitrails',
     url: 'https://x.com/varanasitrails',
-    enabled: true,
+    enabled: false,
   },
   {
     platform: 'youtube',
     label: 'YouTube',
     handle: '@varanasitrails',
     url: 'https://www.youtube.com/@varanasitrails',
-    enabled: true,
+    enabled: false,
   },
 ]
 

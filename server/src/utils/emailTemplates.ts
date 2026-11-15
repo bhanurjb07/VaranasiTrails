@@ -21,8 +21,8 @@ export const otpEmail = (
     purpose === "EMAIL_VERIFY" ? "verify your email address" : "reset your password";
   const subject =
     purpose === "EMAIL_VERIFY"
-      ? "Verify your email - VaranasiTrails"
-      : "Reset your password - VaranasiTrails";
+      ? "Verify your email for VaranasiTrails"
+      : "Reset your password for VaranasiTrails";
 
   const text = [
     `Hi ${name},`,
@@ -34,7 +34,7 @@ export const otpEmail = (
     `It expires in ${expiresInMinutes} minutes and can be used once.`,
     "If you didn't request this, you can safely ignore this email.",
     "",
-    "- VaranasiTrails",
+    "VaranasiTrails",
   ].join("\n");
 
   const html = `<!doctype html>
@@ -50,7 +50,7 @@ export const otpEmail = (
             <span style="display:inline-block;font-size:32px;letter-spacing:8px;font-weight:bold;background:#f6f3ee;padding:12px 24px;border-radius:6px;">${code}</span>
           </td></tr>
           <tr><td style="font-size:14px;color:#555;">This code expires in ${expiresInMinutes} minutes and can be used once.</td></tr>
-          <tr><td style="padding-top:16px;font-size:13px;color:#888;">Didn't request this? You can safely ignore this email - your account stays as it is.</td></tr>
+          <tr><td style="padding-top:16px;font-size:13px;color:#888;">Didn't request this? You can safely ignore this email. Your account stays as it is.</td></tr>
         </table>
       </td></tr>
     </table>

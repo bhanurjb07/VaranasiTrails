@@ -20,7 +20,7 @@ interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 export const Badge = ({ variant = 'neutral', className, ...props }: BadgeProps) => (
   <span
     className={cn(
-      'inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold',
+      'inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-semibold',
       variants[variant],
       className,
     )}

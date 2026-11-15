@@ -40,7 +40,7 @@ export const ItinerarySection = ({ form, disabled }: ItinerarySectionProps) => {
                   <div className="flex gap-3">
                     <div className="flex flex-col items-center gap-1">
                       {handle}
-                      <span className="rounded-full bg-saffron-soft px-2 py-0.5 text-xs font-bold text-saffron-dark">Day {index + 1}</span>
+                      <span className="rounded-md bg-saffron-soft px-2 py-0.5 text-xs font-bold text-saffron-dark">Day {index + 1}</span>
                     </div>
                     <div className="min-w-0 flex-1 space-y-3">
                       <Field label={`Day ${index + 1} title`} error={errors?.[index]?.title?.message}>

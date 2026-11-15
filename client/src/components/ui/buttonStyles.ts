@@ -4,7 +4,7 @@ export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'wha
 export type ButtonSize = 'sm' | 'md' | 'lg'
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-full font-semibold whitespace-nowrap transition-all duration-200 ' +
+  'inline-flex items-center justify-center gap-2 rounded-control font-semibold whitespace-nowrap transition-all duration-200 ' +
   'disabled:pointer-events-none disabled:opacity-55 active:scale-[0.98]'
 
 const variants: Record<ButtonVariant, string> = {

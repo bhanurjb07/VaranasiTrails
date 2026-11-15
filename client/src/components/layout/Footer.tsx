@@ -12,12 +12,13 @@ import { Logo } from './Logo'
 const currentYear = new Date().getFullYear()
 
 export const Footer = () => (
-  <footer className="mt-24 bg-indigo text-white/80">
+  <footer className="mt-12 bg-indigo pb-16 md:mt-24 md:pb-0 text-white/80">
     <Container className="grid gap-12 py-16 lg:grid-cols-[1.4fr_2fr]">
       <div>
         <Logo invert />
         <p className="mt-4 max-w-sm text-white/70">{site.tagline}. {site.description}</p>
 
+        {activeSocialLinks.length > 0 && (
         <ul className="mt-6 flex gap-3" aria-label={`${site.name} on social media`}>
           {activeSocialLinks.map((link) => (
             <li key={link.platform}>
@@ -26,13 +27,14 @@ export const Footer = () => (
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${link.label}: ${link.handle}`}
-                className="flex size-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-saffron hover:text-indigo"
+                className="flex size-11 items-center justify-center rounded-control bg-white/10 text-white transition-colors hover:bg-saffron hover:text-indigo"
               >
                 <SocialIcon platform={link.platform} className="size-5" />
               </a>
             </li>
           ))}
         </ul>
+        )}
       </div>
 
       <div className="grid gap-10 sm:grid-cols-3">
