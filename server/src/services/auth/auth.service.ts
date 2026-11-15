@@ -2,6 +2,7 @@ import type { OtpPurpose, User } from "@prisma/client";
 
 import { prisma } from "../../lib/prisma.js";
 import { badRequest, conflict, forbidden, tooManyRequests, unauthorized } from "../../utils/errors.js";
+import logger from "../../utils/loggers.js";
 import { fakeVerifyPassword, hashPassword, verifyPassword } from "../../utils/password.js";
 import type {
   ForgotPasswordInput,
@@ -30,9 +31,11 @@ export const publicUser =(user: User) => ({
 
 const sessionFor = async (user: User, meta: SessionMeta) => {
   if (user.isBlocked) {
+    logger.warn("[auth] Blocked account tried to sign in", { userId: user.id, ip: meta.ip });
     throw forbidden("This account has been blocked. Please contact support.", "ACCOUNT_BLOCKED");
   }
   await prisma.user.update({ where: { id: user.id }, data: { lastLoginAt: new Date() } });
+  logger.info("[auth] Session started", { userId: user.id, role: user.role, ip: meta.ip });
   const { accessToken, refreshToken } = await issueSession(user, meta);
   return { user: publicUser(user), accessToken, refreshToken };
 };
@@ -78,6 +81,7 @@ export const signup = async (input: SignupInput) => {
   // If the email fails to send, the OTP is rolled back and the same request can simply
   // be retried: it finds this pending account again and succeeds.
   const sent = await sendOtp(user, "EMAIL_VERIFY", { ignoreCooldown: true });
+  logger.info("[auth] Signup submitted", { userId: user.id, otp: sent });
   if (sent === "limit") {
     throw tooManyRequests("Too many verification emails requested. Please try again later.", "OTP_SEND_LIMIT", 3600);
   }
@@ -85,6 +89,7 @@ export const signup = async (input: SignupInput) => {
 
 export const verifyEmail = async (input: VerifyEmailInput, meta: SessionMeta) => {
   const user = await verifyEmailOtp(input.email, input.otp);
+  logger.success("[auth] Email verified", { userId: user.id });
   return sessionFor(user, meta);
 };
 
@@ -102,9 +107,11 @@ export const login = async (input: LoginInput, meta: SessionMeta) => {
 
   if (!user) {
     await fakeVerifyPassword(input.password);
+    logger.warn("[auth] Failed login (unknown account)", { ip: meta.ip });
     throw unauthorized("Invalid email or password", "INVALID_CREDENTIALS");
   }
   if (!(await verifyPassword(input.password, user.passwordHash))) {
+    logger.warn("[auth] Failed login (wrong password)", { userId: user.id, ip: meta.ip });
     throw unauthorized("Invalid email or password", "INVALID_CREDENTIALS");
   }
   // Only revealed after the password is correct, so it leaks nothing to strangers.
@@ -148,6 +155,7 @@ export const resetPassword = async (input: ResetPasswordInput) => {
     await tx.user.update({ where: { id: user.id }, data: { passwordHash } });
     await revokeAllForUser(user.id, tx);
   });
+  logger.info("[auth] Password reset, all sessions revoked", { userId: user.id });
 };
 
 export const getUserById = (id: string) => prisma.user.findUnique({ where: { id } });

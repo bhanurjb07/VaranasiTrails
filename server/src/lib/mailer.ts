@@ -1,5 +1,6 @@
 import { config } from "../config/env.js";
 import { AppError } from "../utils/errors.js";
+import logger, { errorInfo } from "../utils/loggers.js";
 
 export interface Email {
   to: string;
@@ -20,7 +21,7 @@ export const sendEmail = async (email: Email) => {
 
   if (!apiKey || !senderEmail) {
     if (config.nodeEnv === "development") {
-      console.log(`\n[mailer] BREVO_API_KEY not set - email not sent.\nTo: ${email.to}\nSubject: ${email.subject}\n${email.text}\n`);
+      logger.warn(`[mailer] BREVO_API_KEY not set - email not sent.\nTo: ${email.to}\nSubject: ${email.subject}\n${email.text}\n`);
       return;
     }
     throw new Error("Brevo is not configured (BREVO_API_KEY / BREVO_SENDER_EMAIL)");
@@ -41,12 +42,14 @@ export const sendEmail = async (email: Email) => {
       signal: AbortSignal.timeout(10_000),
     });
   } catch (error) {
-    console.error("[mailer] Brevo request failed", error);
+    logger.error("[mailer] Brevo request failed", errorInfo(error));
     throw new AppError(502, "Could not send email. Please try again shortly.", "EMAIL_SEND_FAILED");
   }
 
   if (!response.ok) {
-    console.error(`[mailer] Brevo responded ${response.status}: ${await response.text()}`);
+    logger.error(`[mailer] Brevo responded ${response.status}`, { body: await response.text() });
     throw new AppError(502, "Could not send email. Please try again shortly.", "EMAIL_SEND_FAILED");
   }
+
+  logger.info("[mailer] Email sent", { subject: email.subject });
 };

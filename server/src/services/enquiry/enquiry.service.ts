@@ -4,6 +4,7 @@ import { sendEmail } from "../../lib/mailer.js";
 import type { CreateEnquiryInput } from "../../schemas/enquiry/enquiry.schemas.js";
 import { escapeHtml } from "../../utils/emailTemplates.js";
 import { notFound } from "../../utils/errors.js";
+import logger, { errorInfo } from "../../utils/loggers.js";
 
 export const createEnquiry = async (input: CreateEnquiryInput) => {
   let destinationTitle: string | null = null;
@@ -36,9 +37,11 @@ export const createEnquiry = async (input: CreateEnquiryInput) => {
         html: `<p>${lines.map(escapeHtml).join("<br>")}</p>`,
       });
     } catch (error) {
-      console.error("[enquiry] notification email failed", error);
+      logger.error("[enquiry] notification email failed", errorInfo(error));
     }
   }
+
+  logger.info("[enquiry] New enquiry received", { id: enquiry.id, destinationId: input.destinationId ?? null });
 
   return enquiry;
 };

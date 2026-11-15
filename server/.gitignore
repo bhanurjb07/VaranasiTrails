@@ -6,3 +6,6 @@
 # Local SQLite databases
 *.db
 *.db-journal
+
+# Keep the Docker example file
+!.env.docker.example

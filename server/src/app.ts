@@ -6,6 +6,7 @@ import helmet from "helmet";
 import { config } from "./config/env.js";
 import { errorHandler, notFoundHandler } from "./middleware/errorHandler.js";
 import { globalLimiter } from "./middleware/rateLimit.js";
+import { requestLogger } from "./middleware/requestLogger.js";
 import { apiRouter } from "./routes/index.js";
 
 export const app = express();
@@ -14,6 +15,7 @@ export const app = express();
 // correct client IPs and rate limiting.
 app.set("trust proxy", config.trustProxyHops);
 
+app.use(requestLogger);
 app.use(helmet());
 app.use(cors({ origin: config.corsOrigins, credentials: true }));
 app.use(globalLimiter);

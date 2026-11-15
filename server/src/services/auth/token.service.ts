@@ -4,6 +4,7 @@ import { config } from "../../config/env.js";
 import { prisma } from "../../lib/prisma.js";
 import { randomToken, sha256 } from "../../utils/crypto.js";
 import { forbidden, unauthorized } from "../../utils/errors.js";
+import logger from "../../utils/loggers.js";
 import { signAccessToken } from "../../utils/jwt.js";
 
 export interface SessionMeta {
@@ -56,6 +57,7 @@ export const rotateSession = async (rawToken: string, meta: SessionMeta) => {
   if (!record) throw unauthorized("Invalid refresh token", "REFRESH_INVALID");
 
   if (record.rotatedAt) {
+    logger.warn("[auth] Refresh token reuse detected, revoking all sessions", { userId: record.userId, ip: meta.ip });
     await revokeAllForUser(record.userId);
     throw unauthorized("Refresh token reuse detected, please log in again", "REFRESH_REUSED");
   }

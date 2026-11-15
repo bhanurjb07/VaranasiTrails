@@ -1,4 +1,5 @@
 import { prisma } from "../../lib/prisma.js";
+import logger from "../../utils/loggers.js";
 import { hashPassword, verifyPassword } from "../../utils/password.js";
 import { revokeAllForUser } from "../auth/token.service.js";
 
@@ -70,7 +71,7 @@ const MESSAGES: Record<EnsureAdminResult, string> = {
 /** Runs ensureAdmin and logs the outcome. Never prints the password and never throws. */
 export const ensureAdminFromConfig = async (
   admin: AdminCredentials | undefined,
-  log: (message: string) => void = console.log,
+  log: (message: string) => void = (message) => logger.info(message),
 ): Promise<EnsureAdminResult | null> => {
   if (!admin) return null;
 
@@ -81,7 +82,7 @@ export const ensureAdminFromConfig = async (
   } catch (error) {
     // A bootstrap problem (for example the phone is taken) must not stop the API.
     const reason = error instanceof Error ? (error.message.trim().split(/\r?\n/).pop() ?? error.message) : String(error);
-    console.error(`[admin] Could not ensure the admin account for ${admin.email}: ${reason}`);
+    logger.error(`[admin] Could not ensure the admin account for ${admin.email}: ${reason}`);
     return null;
   }
 };

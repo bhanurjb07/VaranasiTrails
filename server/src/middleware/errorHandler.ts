@@ -2,8 +2,8 @@ import { Prisma } from "@prisma/client";
 import type { NextFunction, Request, Response } from "express";
 import { ZodError } from "zod";
 
-import { config } from "../config/env.js";
 import { AppError } from "../utils/errors.js";
+import logger, { errorInfo } from "../utils/loggers.js";
 
 export const notFoundHandler = (req: Request, res: Response) => {
   res
@@ -46,9 +46,7 @@ export const errorHandler = (err: unknown, _req: Request, res: Response, _next: 
     return res.status(413).json({ message: "Request body too large", code: "PAYLOAD_TOO_LARGE" });
   }
 
-  if (config.nodeEnv !== "test") {
-    console.error(err);
-  }
+  logger.error("Unhandled error", errorInfo(err));
 
   res.status(500).json({ message: "Internal server error", code: "INTERNAL_ERROR" });
 };

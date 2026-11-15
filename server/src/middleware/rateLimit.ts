@@ -2,6 +2,7 @@ import type { Request, Response } from "express";
 import { rateLimit } from "express-rate-limit";
 
 import { config } from "../config/env.js";
+import logger from "../utils/loggers.js";
 
 const limiter = (windowMs: number, limit: number, message: string) =>
   rateLimit({
@@ -11,7 +12,8 @@ const limiter = (windowMs: number, limit: number, message: string) =>
     legacyHeaders: false,
     // Tests make many calls from one IP; limits are covered by config, not tests.
     skip: () => config.nodeEnv === "test",
-    handler: (_req: Request, res: Response) => {
+    handler: (req: Request, res: Response) => {
+      logger.warn("Rate limit hit", { ip: req.ip, path: req.originalUrl.split("?")[0] });
       res.status(429).json({ message, code: "RATE_LIMITED" });
     },
   });

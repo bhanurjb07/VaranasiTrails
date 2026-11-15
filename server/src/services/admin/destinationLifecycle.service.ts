@@ -2,6 +2,7 @@ import { prisma } from "../../lib/prisma.js";
 import { deleteObject } from "../../lib/r2.js";
 import type { BulkAction } from "../../schemas/admin/destination.schemas.js";
 import { AppError, conflict, type FieldError } from "../../utils/errors.js";
+import logger, { errorInfo } from "../../utils/loggers.js";
 import { uniqueSlug } from "../../utils/slug.js";
 import { recordAudit } from "./audit.service.js";
 import {
@@ -112,7 +113,7 @@ export const deleteUnreferencedObjects = async (keys: string[]) => {
     try {
       await deleteObject(key);
     } catch (error) {
-      console.error(`[admin] Could not delete R2 object ${key}:`, error instanceof Error ? error.message : error);
+      logger.error(`[admin] Could not delete R2 object ${key}`, errorInfo(error));
     }
   }
 };

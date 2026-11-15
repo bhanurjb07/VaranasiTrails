@@ -1,0 +1,28 @@
+# Runs only the API locally, with a SQLite database in a Docker volume.
+#
+#   cp .env.docker.example .env.docker      (then edit ADMIN_* if you want an admin)
+#   docker compose up --build
+#
+# API:     http://localhost:5001      (health: /health)
+# OTP codes (signup / reset) are printed in the log:  docker compose logs -f server
+#
+# Point the web apps' dev proxy (VITE_DEV_PROXY_TARGET) at http://localhost:5001,
+# or run the root docker-compose.yml to get the site and admin panel as well.
+
+services:
+  server:
+    build: .
+    restart: unless-stopped
+    env_file:
+      - .env.docker
+    environment:
+      # Fixed here so a stray value in .env.docker cannot break the container.
+      PORT: 5001
+      DATABASE_URL: file:/data/varanasitrails.db
+    volumes:
+      - varanasitrails-server-data:/data
+    ports:
+      - "${API_PORT:-5001}:5001"
+
+volumes:
+  varanasitrails-server-data:

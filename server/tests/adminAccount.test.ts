@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { prisma } from "../src/lib/prisma.js";
 import { ensureAdmin, ensureAdminFromConfig } from "../src/services/admin/adminAccount.service.js";
+import logger from "../src/utils/loggers.js";
 import { ADMIN, api, resetDatabase, signupAndVerify } from "./helpers.js";
 
 beforeEach(resetDatabase);
@@ -97,7 +98,7 @@ describe("ensureAdminFromConfig", () => {
   });
 
   it("never throws: a bootstrap problem is logged and the server can still start", async () => {
-    const error = vi.spyOn(console, "error").mockImplementation(() => undefined);
+    const error = vi.spyOn(logger, "error").mockImplementation(() => undefined);
     // Phone already used by a different account makes the create fail.
     await signupAndVerify();
     const taken = (await prisma.user.findFirstOrThrow()).phone;
