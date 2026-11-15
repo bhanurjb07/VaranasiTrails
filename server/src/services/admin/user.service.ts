@@ -1,6 +1,7 @@
 import type { Prisma } from "@prisma/client";
 
 import { prisma } from "../../lib/prisma.js";
+import { publicUrl } from "../../lib/r2.js";
 import type { ListUsersQuery } from "../../schemas/admin/user.schemas.js";
 import { AppError, conflict, notFound } from "../../utils/errors.js";
 import { paginationMeta } from "../../utils/pagination.js";
@@ -54,6 +55,71 @@ const getRow = async (id: string) => {
 };
 
 export const getUser = async (id: string) => toDto(await getRow(id));
+
+/** One user plus everything they did on the site: wishlist, reviews and enquiries sent with their email. */
+export const getUserDetail = async (id: string) => {
+  const row = await getRow(id);
+
+  const [wishlist, reviews, enquiries] = await Promise.all([
+    prisma.wishlistItem.findMany({
+      where: { userId: id },
+      orderBy: { createdAt: "desc" },
+      include: {
+        destination: {
+          select: {
+            id: true,
+            title: true,
+            slug: true,
+            priceInr: true,
+            isPublished: true,
+            deletedAt: true,
+            images: { orderBy: [{ isCover: "desc" }, { sortOrder: "asc" }], take: 1, select: { key: true } },
+          },
+        },
+      },
+    }),
+    prisma.review.findMany({
+      where: { userId: id },
+      orderBy: { createdAt: "desc" },
+      include: { destination: { select: { id: true, title: true, slug: true } } },
+    }),
+    prisma.enquiry.findMany({
+      where: { email: row.email },
+      orderBy: { createdAt: "desc" },
+      take: 50,
+      include: { destination: { select: { title: true } } },
+    }),
+  ]);
+
+  return {
+    user: toDto(row),
+    wishlist: wishlist.map((item) => ({
+      addedAt: item.createdAt,
+      id: item.destination.id,
+      title: item.destination.title,
+      slug: item.destination.slug,
+      priceInr: item.destination.priceInr,
+      status: item.destination.deletedAt ? "archived" : item.destination.isPublished ? "published" : "draft",
+      coverImage: item.destination.images[0] ? publicUrl(item.destination.images[0].key) : null,
+    })),
+    reviews: reviews.map((review) => ({
+      id: review.id,
+      rating: review.rating,
+      title: review.title,
+      comment: review.comment,
+      isHidden: review.isHidden,
+      createdAt: review.createdAt,
+      destination: review.destination,
+    })),
+    enquiries: enquiries.map((enquiry) => ({
+      id: enquiry.id,
+      status: enquiry.status,
+      message: enquiry.message,
+      destinationTitle: enquiry.destination?.title ?? null,
+      createdAt: enquiry.createdAt,
+    })),
+  };
+};
 
 /** Blocking signs the user out everywhere. Admins (and yourself) cannot be blocked. */
 export const setBlocked = async (adminId: string, id: string, blocked: boolean) => {

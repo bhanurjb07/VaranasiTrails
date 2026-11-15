@@ -3,7 +3,7 @@ import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tansta
 import { toast } from '@/components/ui/toast'
 import { api, type Query } from '@/lib/apiClient'
 import { errorMessage } from '@/lib/formErrors'
-import type { AdminUser, Paginated } from '@/types/api'
+import type { AdminUser, AdminUserDetail, Paginated } from '@/types/api'
 
 export interface UserQuery {
   q?: string
@@ -18,6 +18,14 @@ export const useUserList = (query: UserQuery) =>
     queryKey: ['admin', 'users', query],
     queryFn: ({ signal }) => api.get<Paginated<AdminUser>>('/admin/users', query as Query, signal),
     placeholderData: keepPreviousData,
+  })
+
+/** Full profile of one user: wishlist, reviews and enquiries. Only fetched while the drawer is open. */
+export const useUserDetail = (id: string | undefined) =>
+  useQuery({
+    queryKey: ['admin', 'users', 'detail', id],
+    queryFn: ({ signal }) => api.get<AdminUserDetail>(`/admin/users/${id}`, undefined, signal),
+    enabled: Boolean(id),
   })
 
 export const useBlockUser = () => {

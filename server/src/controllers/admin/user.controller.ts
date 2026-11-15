@@ -11,7 +11,7 @@ export const list = async (req: Request, res: Response) => {
 };
 
 export const get = async (req: Request, res: Response) => {
-  res.json({ user: await userService.getUser(idOf(req)) });
+  res.json(await userService.getUserDetail(idOf(req)));
 };
 
 export const block = async (req: Request, res: Response) => {

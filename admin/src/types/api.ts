@@ -191,6 +191,35 @@ export interface AdminUser {
   wishlistCount: number
 }
 
+export interface AdminUserDetail {
+  user: AdminUser
+  wishlist: {
+    id: string
+    title: string
+    slug: string
+    priceInr: number
+    status: DestinationStatus
+    coverImage: string | null
+    addedAt: string
+  }[]
+  reviews: {
+    id: string
+    rating: number
+    title: string
+    comment: string
+    isHidden: boolean
+    createdAt: string
+    destination: { id: string; title: string; slug: string }
+  }[]
+  enquiries: {
+    id: string
+    status: EnquiryStatus
+    message: string
+    destinationTitle: string | null
+    createdAt: string
+  }[]
+}
+
 // --- Reviews ---
 
 export interface AdminReview {
