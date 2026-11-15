@@ -18,8 +18,8 @@ interface DestinationCardProps {
 export const DestinationCard = ({ destination, className, priority = false }: DestinationCardProps) => (
   <article
     className={cn(
-      'group relative flex h-full overflow-hidden rounded-card border border-line/70 bg-surface shadow-card sm:flex-col',
-      'transition-shadow duration-300 sm:hover:shadow-lift',
+      'group relative flex h-full overflow-hidden rounded-card border border-line/80 bg-surface shadow-card sm:flex-col',
+      'transition-[transform,box-shadow] duration-500 ease-[var(--ease-out-soft)] sm:hover:-translate-y-1 sm:hover:shadow-lift',
       className,
     )}
   >
@@ -31,10 +31,10 @@ export const DestinationCard = ({ destination, className, priority = false }: De
         height={600}
         priority={priority}
         sizes="(min-width: 1280px) 25vw, (min-width: 640px) 45vw, 38vw"
-        className="size-full"
+        className="size-full transition-transform duration-700 ease-[var(--ease-out-soft)] group-hover:scale-[1.05]"
       />
       {destination.discountPercent > 0 && (
-        <Badge variant="maroon" className="absolute top-2 left-2 bg-maroon text-white sm:top-3 sm:left-3">
+        <Badge className="absolute top-2 left-2 bg-saffron text-white shadow-glow sm:top-3 sm:left-3">
           {destination.discountPercent}% off
         </Badge>
       )}

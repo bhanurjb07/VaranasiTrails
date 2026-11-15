@@ -164,7 +164,7 @@ export const DestinationDetailPage = () => {
             </Section>
           )}
 
-          <div className="mt-6 rounded-card bg-indigo p-8 text-center text-white">
+          <div className="mt-6 bg-dusk rounded-card p-8 text-center text-white">
             <h2 className="text-2xl text-white sm:text-3xl">Still deciding?</h2>
             <p className="mx-auto mt-2 max-w-md text-white/80">
               Ask us anything about this trip, dates, group sizes or custom plans.

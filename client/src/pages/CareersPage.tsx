@@ -17,7 +17,7 @@ import type { Career } from '@/types/api'
 const chip = (active: boolean) =>
   cn(
     'rounded-md border px-3.5 py-1.5 text-sm font-medium transition-colors',
-    active ? 'border-indigo bg-indigo text-white' : 'border-line bg-surface text-indigo hover:border-indigo/50',
+    active ? 'border-indigo bg-indigo text-cream' : 'border-line bg-surface text-indigo hover:border-indigo/50',
   )
 
 export const CareersPage = () => {

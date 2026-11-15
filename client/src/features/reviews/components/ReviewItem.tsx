@@ -32,7 +32,7 @@ export const ReviewItem = ({ review, slug, mine }: ReviewItemProps) => {
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
           <span
-            className="flex size-11 items-center justify-center rounded-full bg-indigo font-semibold text-white"
+            className="flex size-11 items-center justify-center rounded-full bg-saffron-soft font-semibold text-saffron-dark"
             aria-hidden="true"
           >
             {review.user.name.charAt(0).toUpperCase()}

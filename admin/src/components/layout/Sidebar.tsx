@@ -14,7 +14,7 @@ interface SidebarProps {
 export const Sidebar = ({ collapsed, onToggle }: SidebarProps) => (
   <aside
     className={cn(
-      'sticky top-0 hidden h-dvh shrink-0 flex-col bg-indigo text-white transition-[width] duration-200 lg:flex',
+      'bg-dusk sticky top-0 hidden h-dvh shrink-0 flex-col text-white transition-[width] duration-300 ease-[var(--ease-out-soft)] lg:flex',
       collapsed ? 'w-[4.5rem]' : 'w-64',
     )}
   >
@@ -31,9 +31,9 @@ export const Sidebar = ({ collapsed, onToggle }: SidebarProps) => (
           title={collapsed ? label : undefined}
           className={({ isActive }) =>
             cn(
-              'flex items-center gap-3 rounded-control px-3 py-2.5 text-sm font-medium transition-colors',
+              'flex items-center gap-3 rounded-control px-3 py-2.5 text-sm font-medium transition-colors duration-200',
               collapsed && 'justify-center px-0',
-              isActive ? 'bg-saffron text-indigo' : 'text-white/75 hover:bg-white/10 hover:text-white',
+              isActive ? 'bg-saffron text-white shadow-glow' : 'text-white/70 hover:bg-white/8 hover:text-white',
             )
           }
         >

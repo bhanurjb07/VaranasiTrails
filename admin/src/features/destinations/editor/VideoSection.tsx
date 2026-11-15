@@ -59,7 +59,7 @@ export const VideoSection = ({ destinationId, video, saving, onSaveYouTube, onSa
 
       {video && (
         <div className="space-y-3">
-          <div className="aspect-video overflow-hidden rounded-card bg-indigo">
+          <div className="aspect-video overflow-hidden rounded-card bg-night">
             {video.type === 'YOUTUBE' ? (
               <iframe src={video.url} title="Trip video" loading="lazy" allowFullScreen className="size-full" />
             ) : (
@@ -83,7 +83,7 @@ export const VideoSection = ({ destinationId, video, saving, onSaveYouTube, onSa
             )}
           </Field>
           {embed && (
-            <div className="aspect-video overflow-hidden rounded-card bg-indigo">
+            <div className="aspect-video overflow-hidden rounded-card bg-night">
               <iframe src={embed} title="YouTube preview" loading="lazy" allowFullScreen className="size-full" />
             </div>
           )}

@@ -64,7 +64,7 @@ export const BuyBox = ({ destination: d, whatsappUrl, onEnquire }: BuyBoxProps) 
       {d.originalPriceInr && d.originalPriceInr > d.priceInr && (
         <>
           <span className="text-lg text-muted line-through">{formatPrice(d.originalPriceInr)}</span>
-          <Badge variant="maroon" className="bg-maroon text-white">
+          <Badge className="bg-saffron text-white">
             Save {d.discountPercent}%
           </Badge>
         </>

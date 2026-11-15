@@ -39,10 +39,6 @@ export const loginSchema = z.object({
 
 export const forgotEmailSchema = z.object({ email })
 
-export const otpSchema = z.object({
-  otp: z.string().regex(/^\d{6}$/, 'Enter the 6-digit code'),
-})
-
 export const resetPasswordSchema = z
   .object({
     newPassword,

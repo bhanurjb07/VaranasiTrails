@@ -53,9 +53,9 @@ export const ImageGrid = ({ images, onMove, onMakeCover, onAlt, onDelete, deleti
                   <div>
                     <div className="relative aspect-[4/3] bg-cream-deep">
                       <img src={image.url} alt={image.alt || `Photo ${index + 1}`} loading="lazy" className="size-full object-cover" />
-                      <div className="absolute top-2 left-2 rounded-control bg-white/90 shadow-card">{handle}</div>
+                      <div className="absolute top-2 left-2 rounded-control bg-surface/90 shadow-card backdrop-blur-sm">{handle}</div>
                       {image.isCover && (
-                        <Badge variant="warning" className="absolute top-2 right-2 bg-saffron text-indigo">
+                        <Badge variant="warning" className="absolute top-2 right-2 bg-saffron text-white">
                           <Star className="size-3 fill-current" aria-hidden="true" /> Cover
                         </Badge>
                       )}

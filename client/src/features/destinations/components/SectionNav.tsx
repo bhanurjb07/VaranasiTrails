@@ -41,7 +41,7 @@ export const SectionNav = ({ sections }: { sections: readonly SectionLink[] }) =
               aria-current={active === section.id ? 'true' : undefined}
               className={cn(
                 'block rounded-control px-4 py-2 text-sm font-semibold whitespace-nowrap transition-colors',
-                active === section.id ? 'bg-indigo text-white' : 'text-indigo hover:bg-indigo/5',
+                active === section.id ? 'bg-indigo text-cream' : 'text-indigo hover:bg-indigo/5',
               )}
             >
               {section.label}

@@ -2,15 +2,12 @@ import type { HTMLAttributes } from 'react'
 
 import { cn } from '@/lib/cn'
 
-type BadgeVariant = 'neutral' | 'saffron' | 'gold' | 'maroon' | 'success' | 'dark'
+type BadgeVariant = 'neutral' | 'saffron' | 'success'
 
 const variants: Record<BadgeVariant, string> = {
   neutral: 'bg-cream-deep text-indigo',
   saffron: 'bg-saffron-soft text-saffron-dark',
-  gold: 'bg-gold/15 text-[#7a5a10]',
-  maroon: 'bg-maroon/10 text-maroon',
-  success: 'bg-success/10 text-success',
-  dark: 'bg-indigo text-white',
+  success: 'bg-success/12 text-success',
 }
 
 interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
@@ -20,7 +17,7 @@ interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 export const Badge = ({ variant = 'neutral', className, ...props }: BadgeProps) => (
   <span
     className={cn(
-      'inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-semibold',
+      'inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold',
       variants[variant],
       className,
     )}

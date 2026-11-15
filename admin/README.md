@@ -2,7 +2,7 @@
 
 A separate single-page app for running the site: trips, photos, categories, enquiries, users, reviews and an audit log. It only talks to `/api/admin/*`, `/api/auth/*` and `/api/users/me/change-password` of the VaranasiTrails API. **It has no mock mode**: it always needs the real API and an admin account.
 
-**Stack:** React 19 · Vite · TypeScript (strict) · React Router (lazy routes) · TanStack Query and **Table v8** · Tailwind CSS v4 · react-hook-form + zod · `@dnd-kit` (drag to reorder) · Recharts · lucide-react · sonner. Fonts: Playfair Display and Inter.
+**Stack:** React 19 · Vite · TypeScript (strict) · React Router (lazy routes) · TanStack Query and **Table v8** · Tailwind CSS v4 · react-hook-form + zod · `@dnd-kit` (drag to reorder) · Recharts · lucide-react · sonner. Fonts: Fraunces and Inter. Same palette as the public site, with light and dark mode.
 
 > Full documentation lives in [`../docs/`](../docs/README.md): [Admin panel guide](../docs/14-admin-app.md), the admin API ([overview](../docs/09-api-admin-overview.md), [destinations](../docs/10-api-admin-destinations.md), [media](../docs/11-api-admin-media.md), [moderation](../docs/12-api-admin-moderation.md)) and [Troubleshooting](../docs/17-troubleshooting.md).
 
@@ -137,6 +137,10 @@ The R2 bucket must allow this admin origin in its CORS policy, otherwise the bro
 The login is the main defence, but put a second gate in front of the whole admin site: in Cloudflare Zero Trust, **Access, Applications, Add an application, Self-hosted**, set the domain to `admin.example.com` and add a policy that allows only your team's email addresses. Visitors then pass a one-time-code or SSO check before they even see the login page. Leave the API's domain unprotected by Access (the public site needs it); the API enforces admin roles itself.
 
 More: [docs/15](../docs/15-deployment.md).
+
+## Design and theme
+
+The admin panel uses the same "Ganga at dusk" palette, fonts (Fraunces and Inter), logo mark and motion as the public site; the tokens in `src/styles/index.css` mirror `client/src/styles/index.css`, plus admin-only status colours. Light and dark mode are switched with the small sun/moon button in the top bar (and on the login page); the choice is stored in `localStorage` (`vt_theme`) and the system setting is followed until one is chosen. The sidebar and login panel use the always-dark `bg-dusk` brand gradient. The dashboard chart reads its colours from the same tokens, so it follows the theme too.
 
 ## Notes
 

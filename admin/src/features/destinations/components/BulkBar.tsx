@@ -16,7 +16,7 @@ export const BulkBar = ({ count, onAction, onClear, busy }: BulkBarProps) => (
   <div
     role="region"
     aria-label="Bulk actions"
-    className="mb-4 flex flex-wrap items-center gap-2 rounded-card bg-indigo px-4 py-3 text-white shadow-card"
+    className="mb-4 flex flex-wrap items-center gap-2 animate-enter rounded-card bg-night px-4 py-3 text-white shadow-lift ring-1 ring-white/10"
   >
     <span className="mr-2 text-sm font-semibold">{count} selected</span>
     <Button size="sm" variant="primary" disabled={busy} onClick={() => onAction('publish')}>

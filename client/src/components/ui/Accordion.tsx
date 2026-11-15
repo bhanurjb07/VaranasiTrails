@@ -31,7 +31,7 @@ export const Accordion = ({ items, defaultOpen = [], multiple = false, className
     )
 
   return (
-    <div className={cn('divide-y divide-line rounded-card border border-line bg-surface', className)}>
+    <div className={cn('divide-y divide-line overflow-hidden rounded-card border border-line bg-surface', className)}>
       {items.map((item) => {
         const isOpen = open.includes(item.id)
         const panelId = `${base}-${item.id}-panel`
@@ -46,11 +46,11 @@ export const Accordion = ({ items, defaultOpen = [], multiple = false, className
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => toggle(item.id)}
-                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-indigo transition-colors hover:bg-cream/60"
+                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-indigo transition-colors hover:bg-cream-deep/60"
               >
                 <span>{item.title}</span>
                 <ChevronDown
-                  className={cn('size-5 shrink-0 text-saffron-dark transition-transform', isOpen && 'rotate-180')}
+                  className={cn('size-5 shrink-0 text-saffron-dark transition-transform duration-300', isOpen && 'rotate-180')}
                   aria-hidden="true"
                 />
               </button>
@@ -60,7 +60,7 @@ export const Accordion = ({ items, defaultOpen = [], multiple = false, className
               role="region"
               aria-labelledby={buttonId}
               className={cn(
-                'grid transition-[grid-template-rows] duration-300',
+                'grid transition-[grid-template-rows] duration-400 ease-[var(--ease-out-soft)]',
                 isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
               )}
             >

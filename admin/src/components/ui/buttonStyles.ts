@@ -4,15 +4,16 @@ export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'dan
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'icon'
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-control font-semibold whitespace-nowrap transition-all duration-150 ' +
-  'disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98]'
+  'inline-flex items-center justify-center gap-2 rounded-control font-semibold whitespace-nowrap select-none ' +
+  'transition-[transform,box-shadow,background-color,border-color,color,filter] duration-200 ease-[var(--ease-out-soft)] ' +
+  'disabled:pointer-events-none disabled:opacity-50 active:scale-[0.97]'
 
 const variants: Record<ButtonVariant, string> = {
-  primary: 'bg-saffron text-indigo shadow-card hover:bg-[#f08229]',
-  secondary: 'bg-indigo text-white hover:bg-indigo-soft',
-  outline: 'border border-line bg-surface text-indigo hover:border-indigo/40 hover:bg-cream',
-  ghost: 'bg-transparent text-indigo hover:bg-indigo/8',
-  danger: 'bg-danger text-white hover:bg-[#9a1f15]',
+  primary: 'bg-saffron text-white shadow-glow hover:brightness-[1.07]',
+  secondary: 'bg-indigo text-cream hover:bg-indigo-soft',
+  outline: 'border border-line bg-surface text-indigo hover:border-indigo/25 hover:bg-cream-deep',
+  ghost: 'bg-transparent text-indigo hover:bg-indigo/6',
+  danger: 'bg-danger text-white hover:brightness-110 dark:text-night',
 }
 
 const sizes: Record<ButtonSize, string> = {

@@ -17,13 +17,13 @@ const tones = {
   saffron: 'bg-saffron-soft text-saffron-dark',
   success: 'bg-success-soft text-success',
   info: 'bg-info-soft text-info',
-  indigo: 'bg-indigo/10 text-indigo',
+  indigo: 'bg-indigo/8 text-indigo',
 } as const
 
 export const StatCard = ({ label, value, hint, icon: Icon, to, tone = 'indigo' }: StatCardProps) => {
   const body = (
-    <Card className={cn('flex items-center gap-4 p-5', to && 'transition-shadow hover:shadow-lift')}>
-      <span className={cn('flex size-12 shrink-0 items-center justify-center rounded-control', tones[tone])}>
+    <Card className={cn('flex items-center gap-4 p-5', to && 'transition-[transform,box-shadow] duration-300 ease-[var(--ease-out-soft)] hover:-translate-y-0.5 hover:shadow-lift')}>
+      <span className={cn('flex size-12 shrink-0 items-center justify-center rounded-2xl', tones[tone])}>
         <Icon className="size-6" aria-hidden="true" />
       </span>
       <div className="min-w-0">

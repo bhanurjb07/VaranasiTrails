@@ -84,8 +84,8 @@ export const PreviewTab = ({ control, destination, categoryName }: PreviewTabPro
             </ul>
 
             <div className="mt-6 space-y-2">
-              <div className="rounded-control bg-[#25d366] py-3 text-center text-sm font-semibold text-indigo">Book on WhatsApp</div>
-              <div className="rounded-control border border-line py-3 text-center text-sm font-semibold text-indigo">Send an enquiry</div>
+              <div className="rounded-full bg-whatsapp py-3 text-center text-sm font-semibold text-night">Book on WhatsApp</div>
+              <div className="rounded-full border border-line py-3 text-center text-sm font-semibold text-indigo">Send an enquiry</div>
             </div>
           </div>
         </div>

@@ -34,7 +34,7 @@ export const Categories = () => {
             : data?.map((category) => {
                 const image = placeholderImages[categoryImageKeys[category.slug] ?? 'riverBoats']
                 return (
-                  <li key={category.id} className="w-36 shrink-0 snap-start sm:w-auto">
+                  <li key={category.id} className="reveal w-36 shrink-0 snap-start sm:w-auto">
                     <div>
                       <Link
                         to={`/destinations?category=${category.slug}`}
@@ -44,13 +44,14 @@ export const Categories = () => {
                           src={image.url}
                           alt=""
                           sizes="(min-width: 1024px) 25vw, 50vw"
-                          className="absolute inset-0 size-full "
+                          className="absolute inset-0 size-full transition-transform duration-700 ease-[var(--ease-out-soft)] group-hover:scale-[1.06]"
                         />
-                        <span className="absolute inset-0 bg-indigo/45" />
+                        <span className="absolute inset-0 bg-gradient-to-t from-night/85 via-night/25 to-transparent" />
                         <span className="relative p-3 font-heading text-lg text-white sm:p-5 sm:text-2xl">
                           {category.name}
-                          <span className="mt-1 block font-sans text-sm font-medium text-gold">
+                          <span className="mt-1 flex items-center gap-1 font-sans text-sm font-medium text-gold">
                             Browse trips
+                            <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
                           </span>
                         </span>
                       </Link>

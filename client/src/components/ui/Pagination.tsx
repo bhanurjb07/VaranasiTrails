@@ -22,7 +22,7 @@ const pagesToShow = (page: number, total: number): (number | 'gap')[] => {
 }
 
 const itemStyles =
-  'inline-flex size-10 items-center justify-center rounded-control text-sm font-semibold transition-colors'
+  'inline-flex size-10 items-center justify-center rounded-full text-sm font-semibold transition-colors duration-200'
 
 export const Pagination = ({ page, totalPages, onChange, className }: PaginationProps) => {
   if (totalPages <= 1) return null
@@ -50,7 +50,7 @@ export const Pagination = ({ page, totalPages, onChange, className }: Pagination
             aria-label={`Page ${item}`}
             aria-current={item === page ? 'page' : undefined}
             onClick={() => onChange(item)}
-            className={cn(itemStyles, item === page ? 'bg-indigo text-white' : 'text-indigo hover:bg-cream-deep')}
+            className={cn(itemStyles, item === page ? 'bg-indigo text-cream' : 'text-indigo hover:bg-cream-deep')}
           >
             {item}
           </button>

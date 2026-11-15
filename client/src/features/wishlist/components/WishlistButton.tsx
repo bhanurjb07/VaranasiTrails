@@ -47,8 +47,8 @@ export const WishlistButton = ({ destination, variant = 'overlay', className }: 
       className={cn(
         'inline-flex items-center justify-center transition-all duration-200 active:scale-90',
         variant === 'overlay'
-          ? 'size-10 rounded-control bg-white/90 text-indigo shadow-card backdrop-blur hover:bg-white'
-          : 'h-11 gap-2 rounded-control border border-indigo/30 px-5 text-sm font-semibold text-indigo hover:border-indigo hover:bg-indigo/5',
+          ? 'size-10 rounded-full bg-surface/90 text-indigo shadow-card backdrop-blur-md hover:bg-surface'
+          : 'h-11 gap-2 rounded-full border border-line px-5 text-sm font-semibold text-indigo hover:border-indigo/30 hover:bg-cream-deep',
         className,
       )}
     >

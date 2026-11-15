@@ -85,7 +85,7 @@ export const ContactPage = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${link.label}: ${link.handle}`}
-                    className="flex size-11 items-center justify-center rounded-control bg-indigo text-white transition-colors hover:bg-saffron hover:text-indigo"
+                    className="flex size-11 items-center justify-center rounded-full bg-night text-white transition-colors hover:bg-saffron"
                   >
                     <SocialIcon platform={link.platform} className="size-5" />
                   </a>

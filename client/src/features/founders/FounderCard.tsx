@@ -18,7 +18,7 @@ const webUrl = (value: string): string | null => {
 }
 
 const iconButton =
-  'flex size-11 items-center justify-center rounded-control bg-indigo text-white transition-colors hover:bg-saffron hover:text-indigo'
+  'flex size-11 items-center justify-center rounded-full bg-night text-white transition-colors hover:bg-saffron'
 
 export const FounderCard = ({ founder, priority = false }: { founder: Founder; priority?: boolean }) => {
   const [expanded, setExpanded] = useState(false)

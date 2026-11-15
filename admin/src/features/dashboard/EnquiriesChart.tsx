@@ -25,19 +25,19 @@ export const EnquiriesChart = ({ data }: EnquiriesChartProps) => {
           <AreaChart data={data} margin={{ top: 8, right: 8, left: -20, bottom: 0 }}>
             <defs>
               <linearGradient id="enquiryFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#E8751A" stopOpacity={0.35} />
-                <stop offset="100%" stopColor="#E8751A" stopOpacity={0.02} />
+                <stop offset="0%" stopColor="var(--color-saffron)" stopOpacity={0.35} />
+                <stop offset="100%" stopColor="var(--color-saffron)" stopOpacity={0.02} />
               </linearGradient>
             </defs>
-            <CartesianGrid stroke="#E4DAC6" strokeDasharray="3 3" vertical={false} />
-            <XAxis dataKey="date" tickFormatter={shortDate} tick={{ fontSize: 12, fill: '#6B6459' }} tickLine={false} axisLine={false} interval={4} />
-            <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: '#6B6459' }} tickLine={false} axisLine={false} />
+            <CartesianGrid stroke="var(--color-line)" strokeDasharray="3 3" vertical={false} />
+            <XAxis dataKey="date" tickFormatter={shortDate} tick={{ fontSize: 12, fill: 'var(--color-muted)' }} tickLine={false} axisLine={false} interval={4} />
+            <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: 'var(--color-muted)' }} tickLine={false} axisLine={false} />
             <Tooltip
               labelFormatter={(label) => shortDate(String(label))}
               formatter={(value) => [value, 'Enquiries']}
-              contentStyle={{ borderRadius: 10, border: '1px solid #E4DAC6', fontSize: 13 }}
+              contentStyle={{ borderRadius: 12, border: '1px solid var(--color-line)', background: 'var(--color-surface)', color: 'var(--color-ink)', fontSize: 13 }}
             />
-            <Area type="monotone" dataKey="count" stroke="#E8751A" strokeWidth={2.5} fill="url(#enquiryFill)" />
+            <Area type="monotone" dataKey="count" stroke="var(--color-saffron)" strokeWidth={2.5} fill="url(#enquiryFill)" animationDuration={900} />
           </AreaChart>
         </ResponsiveContainer>
       </div>

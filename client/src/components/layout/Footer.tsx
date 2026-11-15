@@ -12,7 +12,7 @@ import { Logo } from './Logo'
 const currentYear = new Date().getFullYear()
 
 export const Footer = () => (
-  <footer className="mt-12 bg-indigo text-white/80 md:mt-24">
+  <footer className="bg-dusk mt-12 text-white/80 md:mt-24">
     <Container className="grid gap-12 py-16 lg:grid-cols-[1.4fr_2fr]">
       <div>
         <Logo invert />
@@ -27,7 +27,7 @@ export const Footer = () => (
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${link.label}: ${link.handle}`}
-                className="flex size-11 items-center justify-center rounded-control bg-white/10 text-white transition-colors hover:bg-saffron hover:text-indigo"
+                className="flex size-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors duration-300 hover:bg-saffron"
               >
                 <SocialIcon platform={link.platform} className="size-5" />
               </a>

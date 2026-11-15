@@ -7,7 +7,7 @@ const isYouTube = (url: string) => /(?:youtube\.com|youtube-nocookie\.com|youtu\
 
 /** YouTube embed URLs play in an iframe; anything else is treated as a video file. */
 export const VideoEmbed = ({ url, title }: VideoEmbedProps) => (
-  <div className="aspect-video overflow-hidden rounded-card bg-indigo">
+  <div className="aspect-video overflow-hidden rounded-card bg-night">
     {isYouTube(url) ? (
       <iframe
         src={url}

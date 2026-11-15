@@ -62,7 +62,7 @@ export const MobileMenu = ({ open, onClose }: MobileMenuProps) => {
       {open && (
         <div className="fixed inset-0 z-50 md:hidden" role="dialog" aria-modal="true" aria-label="Menu">
           <motion.div
-            className="absolute inset-0 bg-indigo/60"
+            className="absolute inset-0 bg-night-deep/60 backdrop-blur-[2px]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -73,9 +73,9 @@ export const MobileMenu = ({ open, onClose }: MobileMenuProps) => {
             initial={{ x: '-100%' }}
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
-            transition={{ type: 'tween', duration: 0.28 }}
+            transition={{ type: 'tween', duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="flex items-center justify-between bg-indigo px-5 py-4 text-white">
+            <div className="bg-dusk flex items-center justify-between px-5 py-5 text-white">
               <p className="font-heading text-2xl">
                 {status === 'authenticated' && firstName ? `Hello, ${firstName}` : 'Welcome'}
               </p>
@@ -83,7 +83,7 @@ export const MobileMenu = ({ open, onClose }: MobileMenuProps) => {
                 type="button"
                 aria-label="Close menu"
                 onClick={onClose}
-                className="-mr-2 inline-flex size-10 items-center justify-center rounded-control text-white hover:bg-white/15"
+                className="-mr-2 inline-flex size-10 items-center justify-center rounded-full text-white transition-colors hover:bg-white/15"
               >
                 <X className="size-6" aria-hidden="true" />
               </button>
@@ -98,13 +98,13 @@ export const MobileMenu = ({ open, onClose }: MobileMenuProps) => {
                     </h2>
                     <Link
                       to="/profile"
-                      className="rounded-control border border-indigo/40 px-3 py-1.5 text-sm font-semibold text-indigo hover:bg-indigo/5"
+                      className="rounded-full border border-line px-3.5 py-1.5 text-sm font-semibold text-indigo transition-colors hover:bg-cream-deep"
                     >
                       See all
                     </Link>
                   </div>
                   <div className="mt-4 flex items-center gap-3">
-                    <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-saffron text-lg font-semibold text-indigo">
+                    <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-saffron text-lg font-semibold text-white">
                       {user.name.charAt(0).toUpperCase()}
                     </span>
                     <div className="min-w-0">
@@ -169,7 +169,7 @@ export const MobileMenu = ({ open, onClose }: MobileMenuProps) => {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`${link.label}: ${link.handle}`}
-                        className="flex size-11 items-center justify-center rounded-control bg-indigo text-white transition-colors hover:bg-saffron hover:text-indigo"
+                        className="flex size-11 items-center justify-center rounded-full bg-night text-white transition-colors hover:bg-saffron"
                       >
                         <SocialIcon platform={link.platform} className="size-5" />
                       </a>

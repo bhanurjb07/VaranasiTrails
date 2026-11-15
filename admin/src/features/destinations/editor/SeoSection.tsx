@@ -61,10 +61,10 @@ export const SeoSection = ({ form, disabled }: SeoSectionProps) => {
           )}
         </Field>
 
-        <div aria-label="Search result preview" className="rounded-card border border-line bg-white p-4">
+        <div aria-label="Search result preview" className="rounded-card border border-line bg-surface p-4">
           <p className="mb-2 text-xs font-semibold tracking-wide text-muted uppercase">Search result preview</p>
           <p className="truncate text-xs text-muted">{host} &rsaquo; destinations &rsaquo; {slug || 'your-trip'}</p>
-          <p className="mt-0.5 truncate text-lg text-[#1a0dab]">{shownTitle.slice(0, 70)}</p>
+          <p className="mt-0.5 truncate text-lg text-info">{shownTitle.slice(0, 70)}</p>
           <p className="mt-0.5 line-clamp-2 text-sm text-muted">{shownDescription.slice(0, 170)}</p>
         </div>
       </fieldset>

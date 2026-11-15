@@ -33,8 +33,8 @@ export const Modal = ({ open, onClose, title, description, children, className }
         if (event.target === ref.current) onClose()
       }}
       className={cn(
-        'm-auto w-[calc(100%-2rem)] max-w-lg rounded-card bg-surface p-0 text-ink shadow-lift',
-        'backdrop:bg-indigo/60 backdrop:backdrop-blur-sm',
+        'm-auto w-[calc(100%-2rem)] max-w-lg rounded-card border border-line/60 bg-surface p-0 text-ink shadow-lift',
+        'open:animate-enter backdrop:bg-night-deep/65 backdrop:backdrop-blur-sm',
         className,
       )}
     >

@@ -32,7 +32,7 @@ export const UserMenu = ({ onDark }: UserMenuProps) => {
 
   if (!user) return null
 
-  const itemClass = 'flex items-center gap-3 px-4 py-2.5 text-sm text-indigo transition-colors hover:bg-cream'
+  const itemClass = 'flex items-center gap-3 px-4 py-2.5 text-sm text-indigo transition-colors hover:bg-cream-deep'
 
   return (
     <div ref={ref} className="relative">
@@ -42,11 +42,11 @@ export const UserMenu = ({ onDark }: UserMenuProps) => {
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
         className={cn(
-          'flex items-center gap-2 rounded-control py-1 pr-2 pl-1 transition-colors',
+          'flex items-center gap-2 rounded-full py-1 pr-2.5 pl-1 transition-colors',
           onDark ? 'text-white hover:bg-white/15' : 'text-indigo hover:bg-indigo/5',
         )}
       >
-        <span className="flex size-9 items-center justify-center rounded-full bg-saffron font-semibold text-indigo">
+        <span className="flex size-9 items-center justify-center rounded-full bg-saffron font-semibold text-white">
           {user.name.charAt(0).toUpperCase()}
         </span>
         <span className="hidden max-w-28 truncate text-sm font-medium lg:inline">{user.name.split(' ')[0]}</span>
@@ -56,7 +56,7 @@ export const UserMenu = ({ onDark }: UserMenuProps) => {
       {open && (
         <div
           role="menu"
-          className="absolute right-0 mt-2 w-56 overflow-hidden rounded-card border border-line bg-surface py-1 shadow-lift"
+          className="animate-enter absolute right-0 mt-2 w-56 origin-top-right overflow-hidden rounded-card border border-line bg-surface py-1 shadow-lift"
         >
           <p className="truncate border-b border-line px-4 py-3 text-xs text-muted">{user.email}</p>
           <Link role="menuitem" to="/profile" className={itemClass} onClick={() => setOpen(false)}>

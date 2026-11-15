@@ -12,9 +12,9 @@ export const WhyUs = () => (
         {whyUs.items.map((item) => {
           const Icon = homeIcons[item.icon]
           return (
-            <li key={item.title}>
+            <li key={item.title} className="reveal">
               <div className="flex items-start gap-4 sm:block">
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-control bg-saffron-soft text-saffron-dark">
+                <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-saffron-soft text-saffron-dark ring-1 ring-saffron/15">
                   {Icon && <Icon className="size-6" aria-hidden="true" />}
                 </span>
                 <div>

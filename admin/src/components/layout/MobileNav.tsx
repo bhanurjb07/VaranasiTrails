@@ -34,7 +34,7 @@ export const MobileNav = ({ open, onClose }: MobileNavProps) => {
       onClick={(event) => {
         if (event.target === ref.current) onClose()
       }}
-      className="m-0 h-dvh max-h-none w-72 max-w-[85vw] bg-indigo p-0 text-white backdrop:bg-indigo-deep/60 lg:hidden"
+      className="bg-dusk m-0 h-dvh max-h-none w-72 max-w-[85vw] p-0 text-white open:animate-[slide-in-left_0.32s_var(--ease-out-soft)] backdrop:bg-night-deep/60 lg:hidden"
     >
       {open && (
         <div className="flex h-full flex-col">
@@ -53,7 +53,7 @@ export const MobileNav = ({ open, onClose }: MobileNavProps) => {
                 className={({ isActive }) =>
                   cn(
                     'flex items-center gap-3 rounded-control px-3 py-3 text-sm font-medium',
-                    isActive ? 'bg-saffron text-indigo' : 'text-white/75 hover:bg-white/10',
+                    isActive ? 'bg-saffron text-white shadow-glow' : 'text-white/75 hover:bg-white/10',
                   )
                 }
               >

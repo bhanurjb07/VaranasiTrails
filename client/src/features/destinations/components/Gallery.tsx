@@ -40,7 +40,7 @@ export const Gallery = ({ images, title, videoUrl }: GalleryProps) => {
             className="size-full transition-transform duration-500 group-hover:scale-[1.02]"
           />
         </button>
-        <span className="pointer-events-none absolute right-4 bottom-4 flex items-center gap-2 rounded-md bg-indigo/80 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur">
+        <span className="pointer-events-none absolute right-4 bottom-4 flex items-center gap-2 rounded-md bg-night/75 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur">
           <Expand className="size-3.5" aria-hidden="true" />
           {index + 1} / {Math.max(images.length, 1)}
         </span>

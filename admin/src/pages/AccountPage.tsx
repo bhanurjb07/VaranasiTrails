@@ -21,7 +21,7 @@ export const AccountPage = () => {
       <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr]">
         <Card className="h-fit p-6">
           <div className="flex items-center gap-4">
-            <span className="flex size-14 items-center justify-center rounded-full bg-indigo font-heading text-2xl text-white">
+            <span className="flex size-14 items-center justify-center rounded-full bg-saffron font-heading text-2xl text-white">
               {user.name.charAt(0).toUpperCase()}
             </span>
             <div className="min-w-0">

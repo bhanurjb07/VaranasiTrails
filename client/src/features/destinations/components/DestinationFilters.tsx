@@ -122,8 +122,8 @@ export const DestinationFilters = ({ filters, categories, update, onReset, activ
                 onClick={() => update({ category: category.slug || undefined })}
                 className={`rounded-md border px-3.5 py-1.5 text-sm font-medium transition-colors ${
                   selected
-                    ? 'border-indigo bg-indigo text-white'
-                    : 'border-line bg-white text-indigo hover:border-indigo/50'
+                    ? 'border-indigo bg-indigo text-cream'
+                    : 'border-line bg-surface text-indigo hover:border-indigo/40'
                 }`}
               >
                 {category.name}

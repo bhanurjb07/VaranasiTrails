@@ -13,14 +13,14 @@ export const CtaBanner = () => {
   return (
     <section className="py-8 sm:py-20 md:py-28">
       <Container>
-        <div className="relative isolate overflow-hidden rounded-card bg-indigo px-6 py-16 text-center sm:px-16 sm:py-20">
+        <div className="reveal relative isolate overflow-hidden rounded-[1.75rem] bg-night px-6 py-16 text-center sm:px-16 sm:py-20">
           <ImageWithFallback
             src={image.url}
             alt=""
             sizes="100vw"
             className="absolute inset-0 -z-20 size-full opacity-45"
           />
-          <div className="absolute inset-0 -z-10 bg-indigo/70" />
+          <div className="bg-dusk absolute inset-0 -z-10 opacity-85" />
           <h2 className="text-balance text-4xl text-white sm:text-5xl">{ctaBanner.title}</h2>
           <p className="mx-auto mt-4 max-w-xl text-lg text-white/85">{ctaBanner.text}</p>
           <ButtonLink href={whatsappUrl} variant="whatsapp" size="lg" className="mt-8">

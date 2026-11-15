@@ -10,7 +10,7 @@ export const Table = ({ className, ...props }: HTMLAttributes<HTMLTableElement>)
 )
 
 export const THead = (props: HTMLAttributes<HTMLTableSectionElement>) => (
-  <thead className="border-b border-line bg-cream/60 text-xs tracking-wide text-muted uppercase" {...props} />
+  <thead className="border-b border-line bg-cream-deep/50 text-[0.7rem] font-semibold tracking-[0.08em] text-muted uppercase" {...props} />
 )
 
 export const TBody = (props: HTMLAttributes<HTMLTableSectionElement>) => (
@@ -18,7 +18,7 @@ export const TBody = (props: HTMLAttributes<HTMLTableSectionElement>) => (
 )
 
 export const Tr = ({ className, ...props }: HTMLAttributes<HTMLTableRowElement>) => (
-  <tr className={cn('transition-colors hover:bg-cream/50', className)} {...props} />
+  <tr className={cn('transition-colors duration-150 hover:bg-cream-deep/45', className)} {...props} />
 )
 
 export const Th = ({ className, ...props }: ThHTMLAttributes<HTMLTableCellElement>) => (

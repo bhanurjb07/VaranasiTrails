@@ -2,7 +2,7 @@
 
 The public website: browse trips, read a product-style detail page, sign up with an email OTP, keep a wishlist, leave reviews and start a WhatsApp chat to book. There is **no booking or payment system**; bookings happen on WhatsApp.
 
-**Stack:** React 19 · Vite · TypeScript (strict) · React Router (lazy routes) · TanStack Query · Tailwind CSS v4 · react-hook-form + zod · Framer Motion · lucide-react · sonner (toasts) · react-helmet-async (SEO). Fonts: Playfair Display (headings) and Inter (body) via `@fontsource`.
+**Stack:** React 19 · Vite · TypeScript (strict) · React Router (lazy routes) · TanStack Query · Tailwind CSS v4 · react-hook-form + zod · Framer Motion · lucide-react · sonner (toasts) · react-helmet-async (SEO) · three.js (home page 3D background). Fonts: Fraunces (headings) and Inter (body) via `@fontsource-variable`. Light and dark mode with a small toggle in the header.
 
 > Full documentation lives in [`../docs/`](../docs/README.md): [Public website guide](../docs/13-client-app.md), [API reference](../docs/06-api-conventions.md#endpoint-index), [Troubleshooting](../docs/17-troubleshooting.md).
 
@@ -83,6 +83,21 @@ All routes live in `src/app/router.tsx` (each page is a lazy chunk) and share th
 | `/wishlist` | WishlistPage | **yes** | Saved trips |
 | `/about`, `/contact`, `/privacy`, `/terms` | content pages | no | Text from `src/data/` |
 | `*` | NotFoundPage | no | 404 |
+
+## Design system, theme and motion
+
+- **Palette ("Ganga at dusk"):** deep twilight violet (`night`), a sindoor/saffron primary (`saffron`), diya gold (`gold`) and a Ganga teal accent (`river`), on warm off-white surfaces. Tokens live in `src/styles/index.css` (`@theme`) and are mirrored in `admin/src/styles/index.css`, so both apps look the same. Components use the token utilities (`bg-saffron`, `text-indigo` ...), never raw hex values.
+- **Light / dark mode:** every colour token is redefined under `:root[data-theme="dark"]`. `indigo` is the strong foreground and flips between modes; `night` is always dark, so `bg-night text-white` (and the `bg-dusk` gradient utility) read correctly in both. The small sun/moon button (`ThemeToggle`) switches mode; the choice is stored in `localStorage` (`vt_theme`) and, until the visitor picks one, the operating-system setting is followed. A tiny inline script in `index.html` applies the theme before the first paint, so there is no flash. `dark:` utilities are available through a `@custom-variant`.
+- **Fonts:** Fraunces (headings) and Inter (body), through `@fontsource-variable`.
+- **Motion:** short, soft and purposeful. `animate-enter` (fade-up on mount), `animate-page` (opacity-only fade on route change, so fixed bars never shift), `.reveal` (scroll-driven reveal with no JavaScript; browsers without support simply show the content), hover lifts on cards and buttons, and a cross-fade when the theme changes. Everything is switched off for visitors who prefer reduced motion.
+
+### 3D home background
+
+The home hero renders a "Ganga at dusk" scene with three.js (`src/features/home/scene/`): a violet-to-saffron sky, a ghats-and-temples skyline with lit windows, animated water with a glittering reflection of the glow, floating diyas with reflections, rising embers and twinkling stars.
+
+- `HeroBackground.tsx` lazy-loads `heroScene.ts`, so three.js is a separate chunk downloaded only on the home page (about 141 KB gzipped). The dusk gradient behind it shows while it loads or if WebGL is unavailable.
+- Works on phones and laptops: tall screens get a wider lens and tilt down so the river fills the frame; phones render fewer particles at a lower pixel ratio and sway gently on their own (a finger drag nudges the view); laptops follow the mouse slightly. Scrolling lifts the camera a little.
+- The animation pauses when the hero is off-screen or the tab is hidden, and visitors who prefer reduced motion get a single still frame.
 
 ## Phone and tablet layout
 

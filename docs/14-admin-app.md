@@ -2,7 +2,7 @@
 
 A separate single-page app for running the site: trips, photos, categories, enquiries, users, reviews and an audit log. It only talks to `/api/admin/*` and `/api/auth/*` + `/api/users/me/change-password` of the API. **It has no mock mode**; it always needs the real server and an admin account.
 
-Libraries: React 19, Vite, TypeScript (strict), React Router (lazy routes), TanStack Query, **TanStack Table v8** (pinned; v9 has a different API), react-hook-form + zod, Tailwind CSS v4, `@dnd-kit` (drag to reorder), Recharts (dashboard chart), lucide-react, sonner. Fonts: Playfair Display and Inter. The dev server runs on **port 5174**.
+Libraries: React 19, Vite, TypeScript (strict), React Router (lazy routes), TanStack Query, **TanStack Table v8** (pinned; v9 has a different API), react-hook-form + zod, Tailwind CSS v4, `@dnd-kit` (drag to reorder), Recharts (dashboard chart), lucide-react, sonner. Fonts: Fraunces and Inter. The dev server runs on **port 5174**.
 
 ## Access control
 
@@ -169,6 +169,10 @@ Details: [Environment variables](03-environment-variables.md#admin-panel-adminen
 | `npm run typecheck` / `lint` / `test` | `tsc -b` / oxlint / vitest |
 
 Test files: `lib/apiClient.test.ts` (refresh logic), `lib/csv.test.ts` (formula-safe CSV), `lib/imageCompress.test.ts` (resize + quality search), `lib/youtube.test.ts` (link parsing), `features/destinations/editor/readiness.test.tsx` (publish checklist). See [Testing](16-testing.md).
+
+## Design and theme
+
+The admin panel uses the same "Ganga at dusk" palette, fonts (Fraunces and Inter), logo mark and motion as the public site; the tokens in `src/styles/index.css` mirror `client/src/styles/index.css`, plus admin-only status colours. Light and dark mode are switched with the small sun/moon button in the top bar (and on the login page); the choice is stored in `localStorage` (`vt_theme`) and the system setting is followed until one is chosen. The sidebar and login panel use the always-dark `bg-dusk` brand gradient. The dashboard chart reads its colours from the same tokens, so it follows the theme too.
 
 ## Notes
 
