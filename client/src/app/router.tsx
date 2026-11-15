@@ -31,6 +31,7 @@ const routes: RouteObject[] = [
         ],
       },
       { path: 'about', ...page(() => import('@/pages/AboutPage'), 'AboutPage') },
+      { path: 'founders', ...page(() => import('@/pages/FoundersPage'), 'FoundersPage') },
       { path: 'careers', ...page(() => import('@/pages/CareersPage'), 'CareersPage') },
       { path: 'careers/:id', ...page(() => import('@/pages/CareerDetailPage'), 'CareerDetailPage') },
       { path: 'contact', ...page(() => import('@/pages/ContactPage'), 'ContactPage') },

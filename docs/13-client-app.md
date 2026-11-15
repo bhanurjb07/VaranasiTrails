@@ -20,6 +20,8 @@ Defined in `src/app/router.tsx`. Every page is lazy-loaded (its own chunk). All 
 | `/profile` | `ProfilePage` | **logged in** | Your details; the edit-details and change-password forms stay hidden until asked, one open at a time |
 | `/wishlist` | `WishlistPage` | **logged in** | Saved trips |
 | `/about`, `/contact` | `AboutPage`, `ContactPage` | public | Static content from `src/data/` |
+| `/founders` | `FoundersPage` | public | Founder photos, short introduction with a Know more toggle, phone, email, Instagram and Facebook. Content and photos come from `src/data/founder.ts` and `src/assets/`; empty contact fields are hidden |
+| `/careers`, `/careers/:id` | `CareersPage`, `CareerDetailPage` | public | Open positions posted from the admin panel, see [Careers](18-careers.md) |
 | `/privacy`, `/terms` | `PrivacyPage`, `TermsPage` | public | Legal text from `src/data/legal.ts` |
 | `*` | `NotFoundPage` | public | 404 |
 
