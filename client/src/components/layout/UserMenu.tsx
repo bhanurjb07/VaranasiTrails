@@ -1,4 +1,4 @@
-import { ChevronDown, Heart, LogOut, User } from 'lucide-react'
+import { ChevronDown, Heart, LogOut, Repeat, User } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 
@@ -72,11 +72,23 @@ export const UserMenu = ({ onDark }: UserMenuProps) => {
             onClick={async () => {
               setOpen(false)
               await logout()
-              toast.success('You have been logged out')
+              navigate('/login')
+            }}
+          >
+            <Repeat className="size-4" aria-hidden="true" /> Switch account
+          </button>
+          <button
+            role="menuitem"
+            type="button"
+            className={cn(itemClass, 'w-full')}
+            onClick={async () => {
+              setOpen(false)
+              await logout()
+              toast.success('You have been signed out')
               navigate('/')
             }}
           >
-            <LogOut className="size-4" aria-hidden="true" /> Log out
+            <LogOut className="size-4" aria-hidden="true" /> Sign out
           </button>
         </div>
       )}

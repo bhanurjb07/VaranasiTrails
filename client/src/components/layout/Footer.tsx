@@ -12,7 +12,7 @@ import { Logo } from './Logo'
 const currentYear = new Date().getFullYear()
 
 export const Footer = () => (
-  <footer className="mt-12 bg-indigo pb-16 md:mt-24 md:pb-0 text-white/80">
+  <footer className="mt-12 bg-indigo text-white/80 md:mt-24">
     <Container className="grid gap-12 py-16 lg:grid-cols-[1.4fr_2fr]">
       <div>
         <Logo invert />

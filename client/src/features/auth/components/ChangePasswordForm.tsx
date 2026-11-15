@@ -13,16 +13,22 @@ import { userApi } from '../userApi'
 import { PasswordInput } from './PasswordInput'
 import { PasswordRules } from './PasswordRules'
 
-const schema = z.object({
-  oldPassword: z.string().min(1, 'Enter your current password'),
-  newPassword: z
-    .string()
-    .min(1, 'Choose a new password')
-    .superRefine((value, ctx) => {
-      const failed = passwordRules.find((rule) => !rule.test(value))
-      if (failed) ctx.addIssue({ code: 'custom', message: `Password needs: ${failed.label.toLowerCase()}` })
-    }),
-})
+const schema = z
+  .object({
+    oldPassword: z.string().min(1, 'Enter your current password'),
+    newPassword: z
+      .string()
+      .min(1, 'Choose a new password')
+      .superRefine((value, ctx) => {
+        const failed = passwordRules.find((rule) => !rule.test(value))
+        if (failed) ctx.addIssue({ code: 'custom', message: `Password needs: ${failed.label.toLowerCase()}` })
+      }),
+    confirm: z.string().min(1, 'Re-enter your new password'),
+  })
+  .refine((value) => value.newPassword === value.confirm, {
+    path: ['confirm'],
+    message: 'Passwords do not match',
+  })
 
 type Values = z.input<typeof schema>
 
@@ -78,6 +84,17 @@ export const ChangePasswordForm = () => {
         )}
       </Field>
       <PasswordRules value={newPasswordValue ?? ''} />
+      <Field label="Confirm new password" error={errors.confirm?.message}>
+        {({ id, describedBy, invalid }) => (
+          <PasswordInput
+            id={id}
+            autoComplete="new-password"
+            invalid={invalid}
+            aria-describedby={describedBy}
+            {...register('confirm')}
+          />
+        )}
+      </Field>
       <Button type="submit" loading={change.isPending}>
         Change password
       </Button>

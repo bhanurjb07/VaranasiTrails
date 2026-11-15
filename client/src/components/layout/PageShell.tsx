@@ -1,7 +1,6 @@
 import { Outlet, ScrollRestoration, useLocation } from 'react-router'
 
 import { RouteErrorBoundary } from '@/app/ErrorBoundary'
-import { BottomNav } from './BottomNav'
 import { FloatingWhatsApp } from './FloatingWhatsApp'
 import { Footer } from './Footer'
 import { Header } from './Header'
@@ -27,7 +26,6 @@ export const PageShell = () => {
       </main>
       <Footer />
       <FloatingWhatsApp />
-      <BottomNav />
       <ScrollRestoration />
     </>
   )

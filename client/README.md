@@ -79,10 +79,21 @@ All routes live in `src/app/router.tsx` (each page is a lazy chunk) and share th
 | `/destinations` | DestinationsPage | no | Search, filter, sort, paginate (filters live in the URL) |
 | `/destinations/:slug` | DestinationDetailPage | no | Gallery, buy box, highlights, itinerary, inclusions, video, reviews, related trips, enquiry modal |
 | `/signup`, `/verify-email`, `/login`, `/forgot-password` | auth pages | no | Account flows with email OTP |
-| `/profile` | ProfilePage | **yes** | Edit name/phone, change password |
+| `/profile` | ProfilePage | **yes** | Your details; the edit-details and change-password forms stay hidden until asked, one open at a time |
 | `/wishlist` | WishlistPage | **yes** | Saved trips |
 | `/about`, `/contact`, `/privacy`, `/terms` | content pages | no | Text from `src/data/` |
 | `*` | NotFoundPage | no | 404 |
+
+## Phone and tablet layout
+
+The site is responsive; below the `md` breakpoint (768 px) the layout changes:
+
+- **Header** is always a solid bar on phones (on larger screens the home page lets the hero sit under a translucent bar). It has a menu button, the logo and a WhatsApp icon.
+- **Search bar:** a phone-only search field (`MobileSearchBar`) sits under the header; submitting goes to `/destinations?q=<text>`. The big search box inside the home hero is hidden on phones to avoid a second search.
+- **Menu drawer** (`MobileMenu`): greets the user ("Hello, <first name>"), shows a profile card with **See all**, **Switch account** and **Sign out** when logged in (log in / sign up links for visitors), then the site links, WhatsApp and social links.
+- **Trip detail:** a sticky bottom bar (`StickyMobileBar`, shown below the `lg` breakpoint) keeps the price and a **Book on WhatsApp** button within reach.
+- **Filters** open in a modal drawer instead of a sidebar.
+- The page content gets top padding to clear the taller phone header.
 
 ## Folder map
 
@@ -125,7 +136,7 @@ Nothing site-wide is hard-coded in components.
 | File | What to edit |
 |---|---|
 | `site.ts` | Brand name, tagline, logo text, email, office address, support hours, SEO defaults, `siteUrl` |
-| `social.ts` | Instagram, Facebook, X, YouTube URLs and handles. Set `enabled: false` to hide one |
+| `social.ts` | Instagram, Facebook, X, YouTube URLs and handles. **All four are `enabled: false` (placeholders)** until the real accounts exist; set `enabled: true` per platform to show it |
 | `contact.ts` | Phone, **WhatsApp number** (digits only, international format, no `+`) and the **WhatsApp message templates** |
 | `navigation.ts` | Header and footer links |
 | `home.ts` | Hero copy, how it works, why choose us, FAQ, call-to-action banner, About page text (marked `TODO(business)`: review every line and add a real "our story") |
@@ -148,7 +159,7 @@ The 41 photos in `src/data/placeholderMedia.ts` are hotlinked from Wikimedia Com
 
 ## Scripts
 
-See [Run it](#run-it). Tests (`npm test`): `lib/apiClient.test.ts` (refresh-and-retry), `lib/format.test.ts`, `lib/whatsapp.test.ts`, `features/auth/components/OtpInput.test.tsx`. Details: [docs/16](../docs/16-testing.md).
+See [Run it](#run-it). Tests (`npm test`): `lib/apiClient.test.ts` (refresh-and-retry), `lib/format.test.ts`, `lib/whatsapp.test.ts`, `features/auth/components/OtpInput.test.tsx`, `features/auth/accountUi.test.tsx` (mobile-menu account block and the profile page). Details: [docs/16](../docs/16-testing.md).
 
 ## Production build and deployment
 

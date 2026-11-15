@@ -120,14 +120,14 @@ For each dropped file (two at a time):
 4. `PUT` the file to `uploadUrl` (XMLHttpRequest for progress) with the same `Content-Type`.
 5. `POST /api/admin/destinations/:id/images` `{ key, alt }`.
 
-The R2 bucket must allow this admin origin in its CORS policy, otherwise the browser blocks step 4 (policy JSON in `server/README.md` and [docs/11](../docs/11-api-admin-media.md#bucket-cors)).
+The R2 bucket must allow this admin origin in its CORS policy, otherwise the browser blocks step 4 (policy JSON in [docs/11](../docs/11-api-admin-media.md#bucket-cors)).
 
 ## Deploying to Cloudflare Pages
 
 1. Create a Pages project from the repo. Root directory: `admin`. Build command: `npm run build`. Output directory: `dist`.
 2. Environment variables (production, build time): `VITE_API_URL=https://api.example.com/api` and `VITE_PUBLIC_SITE_URL=https://app.example.com`.
 3. The single-page-app fallback is already in place: `public/_redirects` contains `/* /index.html 200`, so deep links work.
-4. On the API: add the admin origin to `CORS_ORIGIN` (together with the public site), set `COOKIE_DOMAIN=.example.com` and keep `COOKIE_SAMESITE=lax` so `admin.example.com` and `api.example.com` share the login cookie. See `server/README.md`.
+4. On the API: add the admin origin to `CORS_ORIGIN` (together with the public site), set `COOKIE_DOMAIN=.example.com` and keep `COOKIE_SAMESITE=lax` so `admin.example.com` and `api.example.com` share the login cookie. See [docs/05](../docs/05-authentication-and-security.md#the-refresh-cookie) and [docs/15](../docs/15-deployment.md).
 5. On the R2 bucket: add the admin origin to the bucket CORS policy, otherwise photo uploads are blocked by the browser.
 
 **Docker:** the repository root `docker-compose.yml` serves the admin panel with nginx on http://localhost:8081 (nginx proxies `/api/` to the API and adds `X-Robots-Tag: noindex, nofollow`).
