@@ -28,6 +28,7 @@ export const footerGroups: readonly NavGroup[] = [
     title: 'Company',
     links: [
       { label: 'About us', to: '/about' },
+      { label: 'Careers', to: '/careers' },
       { label: 'Contact', to: '/contact' },
       { label: 'Privacy policy', to: '/privacy' },
       { label: 'Terms of service', to: '/terms' },

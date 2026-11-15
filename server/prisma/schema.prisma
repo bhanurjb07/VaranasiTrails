@@ -279,3 +279,41 @@ model AuditLog {
   @@index([entityType, entityId])
   @@map("audit_logs")
 }
+
+enum EmploymentType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  INTERNSHIP
+}
+
+enum WorkMode {
+  ONSITE
+  REMOTE
+  HYBRID
+}
+
+// An open position shown on the public Careers page while isPublished is true and the
+// closing date has not passed. responsibilities and requirements hold one item per line.
+model JobListing {
+  id               String         @id @default(uuid())
+  title            String
+  department       String
+  location         String
+  employmentType   EmploymentType @default(FULL_TIME)
+  workMode         WorkMode       @default(ONSITE)
+  experience       String?
+  salary           String?
+  aboutRole        String
+  responsibilities String         @default("")
+  requirements     String
+  applyUrl         String
+  isPublished      Boolean        @default(false)
+  closesAt         DateTime?
+  publishedAt      DateTime?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@index([isPublished, department])
+  @@map("job_listings")
+}

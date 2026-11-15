@@ -17,7 +17,7 @@ import { downloadFile, toCsv } from '@/lib/csv'
 import { formatDate } from '@/lib/format'
 import type { AuditEntry, Paginated } from '@/types/api'
 
-const entityTypes = ['destination', 'category', 'enquiry', 'user', 'review']
+const entityTypes = ['destination', 'category', 'career', 'enquiry', 'user', 'review']
 
 const tone = (action: string) =>
   action.endsWith('delete') ? 'danger' : action.endsWith('block') || action.endsWith('archive') || action.endsWith('hide') ? 'warning' : action.endsWith('publish') ? 'success' : 'info'

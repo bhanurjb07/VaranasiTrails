@@ -217,6 +217,10 @@ Composite primary key `(userId, destinationId)`, both FKs cascade; `createdAt`. 
 
 Index `(status, createdAt)`.
 
+### `job_listings`
+
+Open positions for the Careers page. Not linked to any other table. Columns, rules and the live / draft / closed states are in [Careers](18-careers.md#data-job_listings).
+
 ### `audit_logs`
 
 | Column | Type | Notes |

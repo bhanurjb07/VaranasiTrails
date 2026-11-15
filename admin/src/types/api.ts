@@ -220,6 +220,33 @@ export interface AdminUserDetail {
   }[]
 }
 
+// --- Careers ---
+
+export type EmploymentType = 'FULL_TIME' | 'PART_TIME' | 'CONTRACT' | 'INTERNSHIP'
+export type WorkMode = 'ONSITE' | 'REMOTE' | 'HYBRID'
+
+export interface AdminCareer {
+  id: string
+  title: string
+  department: string
+  location: string
+  employmentType: EmploymentType
+  workMode: WorkMode
+  experience: string | null
+  salary: string | null
+  aboutRole: string
+  responsibilities: string[]
+  requirements: string[]
+  applyUrl: string
+  closesAt: string | null
+  publishedAt: string | null
+  isPublished: boolean
+  /** live: visible now. closed: published but past its closing date. draft: not published. */
+  status: 'live' | 'closed' | 'draft'
+  createdAt: string
+  updatedAt: string
+}
+
 // --- Reviews ---
 
 export interface AdminReview {

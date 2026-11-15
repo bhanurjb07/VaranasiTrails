@@ -35,6 +35,7 @@ New to the project? Read 1 to 3 first, then jump to whatever you need.
 | 15 | [Deployment](15-deployment.md) | Docker, Cloudflare Pages, Node hosts, Turso, R2, subdomain cookies |
 | 16 | [Testing](16-testing.md) | How the three test suites work and what they cover |
 | 17 | [Troubleshooting](17-troubleshooting.md) | Symptoms and fixes (including "mock data is not visible") |
+| 18 | [Careers](18-careers.md) | Job listings: data, public and admin API, admin screen, public Careers page |
 
 ## Quick answers
 

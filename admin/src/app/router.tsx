@@ -24,6 +24,7 @@ const routes: RouteObject[] = [
           { path: 'destinations/new', ...page(() => import('@/pages/DestinationEditorPage'), 'DestinationEditorPage') },
           { path: 'destinations/:id', ...page(() => import('@/pages/DestinationEditorPage'), 'DestinationEditorPage') },
           { path: 'categories', ...page(() => import('@/pages/CategoriesPage'), 'CategoriesPage') },
+          { path: 'careers', ...page(() => import('@/pages/CareersPage'), 'CareersPage') },
           { path: 'enquiries', ...page(() => import('@/pages/EnquiriesPage'), 'EnquiriesPage') },
           { path: 'users', ...page(() => import('@/pages/UsersPage'), 'UsersPage') },
           { path: 'reviews', ...page(() => import('@/pages/ReviewsPage'), 'ReviewsPage') },

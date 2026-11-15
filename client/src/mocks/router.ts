@@ -52,6 +52,9 @@ const routes: Route[] = [
   route('DELETE', '/wishlist/:destinationId', accountHandlers.removeWishlist),
 
   route('POST', '/enquiries', accountHandlers.createEnquiry),
+
+  // No job listings exist in mock mode, so the Careers page shows its empty state.
+  route('GET', '/careers', () => ({ data: [] })),
 ]
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))

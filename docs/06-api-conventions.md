@@ -186,6 +186,7 @@ All codes the API can return, with the HTTP status and where they come from.
 | Response | Header |
 |---|---|
 | `GET /api/destinations`, `GET /api/destinations/:slug`, `GET /api/destinations/:slug/reviews`, `GET /api/categories` | `Cache-Control: public, max-age=60` |
+| `GET /api/careers`, `GET /api/careers/:id` | `Cache-Control: no-cache` (always revalidate, so hidden roles vanish at once) |
 | Everything else | none (no cache header) |
 
 The websites additionally cache with TanStack Query (1 minute for lists/details, 5 minutes for categories).
@@ -233,6 +234,7 @@ Limited endpoints return the IETF draft-7 headers `RateLimit` and `RateLimit-Pol
 | PUT | `/api/wishlist/:destinationId` | user | [Public](08-api-public.md#put-apiwishlistdestinationid) |
 | DELETE | `/api/wishlist/:destinationId` | user | [Public](08-api-public.md#delete-apiwishlistdestinationid) |
 | POST | `/api/enquiries` | none | [Public](08-api-public.md#post-apienquiries) |
+| GET | `/api/careers`, `/api/careers/:id` | none | [Careers](18-careers.md#public-api) |
 | GET | `/api/admin/dashboard` | admin | [Admin overview](09-api-admin-overview.md#get-apiadmindashboard) |
 | GET | `/api/admin/audit-log` | admin | [Admin overview](09-api-admin-overview.md#get-apiadminaudit-log) |
 | GET, POST | `/api/admin/categories` | admin | [Admin overview](09-api-admin-overview.md#categories) |
@@ -255,3 +257,6 @@ Limited endpoints return the IETF draft-7 headers `RateLimit` and `RateLimit-Pol
 | GET | `/api/admin/reviews` | admin | [Admin moderation](12-api-admin-moderation.md#reviews) |
 | PATCH | `/api/admin/reviews/:id/hide`, `/unhide` | admin | [Admin moderation](12-api-admin-moderation.md#patch-apiadminreviewsidhide) |
 | DELETE | `/api/admin/reviews/:id` | admin | [Admin moderation](12-api-admin-moderation.md#delete-apiadminreviewsid) |
+| GET, POST | `/api/admin/careers` | admin | [Careers](18-careers.md#admin-api) |
+| GET | `/api/admin/careers/departments` | admin | [Careers](18-careers.md#admin-api) |
+| GET, PATCH, DELETE | `/api/admin/careers/:id` | admin | [Careers](18-careers.md#admin-api) |

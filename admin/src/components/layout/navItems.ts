@@ -1,4 +1,5 @@
 import {
+  Briefcase,
   LayoutDashboard,
   MapPinned,
   MessageSquareText,
@@ -21,6 +22,7 @@ export const navItems: readonly NavItem[] = [
   { to: '/destinations', label: 'Destinations', icon: MapPinned },
   { to: '/categories', label: 'Categories', icon: Tags },
   { to: '/enquiries', label: 'Enquiries', icon: MessageSquareText },
+  { to: '/careers', label: 'Careers', icon: Briefcase },
   { to: '/users', label: 'Users', icon: Users },
   { to: '/reviews', label: 'Reviews', icon: Star },
   { to: '/audit-log', label: 'Audit log', icon: ScrollText },
@@ -31,6 +33,7 @@ export const sectionLabels: Record<string, string> = {
   destinations: 'Destinations',
   categories: 'Categories',
   enquiries: 'Enquiries',
+  careers: 'Careers',
   users: 'Users',
   reviews: 'Reviews',
   'audit-log': 'Audit log',

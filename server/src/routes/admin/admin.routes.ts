@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import { adminLimiter } from "../../middleware/rateLimit.js";
 import { requireAdmin, requireAuth } from "../../middleware/requireAuth.js";
+import { adminCareerRouter } from "./career.routes.js";
 import { adminCategoryRouter } from "./category.routes.js";
 import { adminAuditRouter, adminDashboardRouter } from "./dashboard.routes.js";
 import { adminDestinationRouter, adminUploadRouter } from "./destination.routes.js";
@@ -17,6 +18,7 @@ adminRouter.use(requireAuth, requireAdmin, adminLimiter);
 
 adminRouter.use("/dashboard", adminDashboardRouter);
 adminRouter.use("/categories", adminCategoryRouter);
+adminRouter.use("/careers", adminCareerRouter);
 adminRouter.use("/destinations", adminDestinationRouter);
 adminRouter.use("/uploads", adminUploadRouter);
 adminRouter.use("/enquiries", adminEnquiryRouter);
