@@ -28,7 +28,7 @@ import { NotFoundPage } from './NotFoundPage'
 
 const Section = ({ id, title, children }: { id: string; title: string; children: React.ReactNode }) => (
   <section id={id} aria-labelledby={`${id}-title`} className="scroll-mt-44 py-6 md:scroll-mt-32 md:py-10">
-    <h2 id={`${id}-title`} className="mb-6 text-3xl">
+    <h2 id={`${id}-title`} className="mb-4 font-sans text-2xl font-bold text-ink">
       {title}
     </h2>
     {children}
@@ -96,18 +96,18 @@ export const DestinationDetailPage = () => {
         <nav aria-label="Breadcrumb" className="py-5 text-sm text-muted">
           <ol className="flex flex-wrap items-center gap-1.5">
             <li>
-              <Link to="/" className="hover:text-indigo hover:underline">
+              <Link to="/" className="hover:text-ink hover:underline">
                 Home
               </Link>
             </li>
             <ChevronRight className="size-4" aria-hidden="true" />
             <li>
-              <Link to="/destinations" className="hover:text-indigo hover:underline">
+              <Link to="/destinations" className="hover:text-ink hover:underline">
                 Trips
               </Link>
             </li>
             <ChevronRight className="size-4" aria-hidden="true" />
-            <li aria-current="page" className="font-medium text-indigo">
+            <li aria-current="page" className="font-medium text-ink">
               {d.title}
             </li>
           </ol>
@@ -127,7 +127,7 @@ export const DestinationDetailPage = () => {
           <SectionNav sections={sections} />
 
           <Section id="overview" title="Overview">
-            <div className="space-y-4 text-lg leading-relaxed text-ink/90">
+            <div className="space-y-4 text-base leading-relaxed text-ink-soft sm:text-lg">
               {d.overview.split(/\n{2,}/).map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
               ))}
@@ -164,9 +164,9 @@ export const DestinationDetailPage = () => {
             </Section>
           )}
 
-          <div className="mt-6 bg-dusk rounded-card p-8 text-center text-white">
-            <h2 className="text-2xl text-white sm:text-3xl">Still deciding?</h2>
-            <p className="mx-auto mt-2 max-w-md text-white/80">
+          <div className="mt-6 rounded-lg bg-navy p-8 text-center text-ivory">
+            <h2 className="font-sans text-2xl font-bold text-ivory sm:text-3xl">Still deciding?</h2>
+            <p className="mx-auto mt-2 max-w-md text-ivory/90">
               Ask us anything about this trip, dates, group sizes or custom plans.
             </p>
             <button type="button" onClick={() => setEnquiry(true)} className={`${buttonStyles('primary', 'lg')} mt-6`}>

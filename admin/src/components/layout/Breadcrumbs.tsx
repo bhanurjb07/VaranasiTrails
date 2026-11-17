@@ -7,7 +7,7 @@ import { sectionLabels } from './navItems'
 export const Breadcrumbs = () => {
   const { pathname } = useLocation()
   const parts = pathname.split('/').filter(Boolean)
-  if (parts.length === 0) return <span className="text-sm font-semibold text-indigo">Dashboard</span>
+  if (parts.length === 0) return <span className="text-sm font-semibold text-ink">Dashboard</span>
 
   const crumbs = parts.map((part, index) => {
     const to = `/${parts.slice(0, index + 1).join('/')}`
@@ -19,7 +19,7 @@ export const Breadcrumbs = () => {
     <nav aria-label="Breadcrumb">
       <ol className="flex items-center gap-1.5 text-sm text-muted">
         <li>
-          <Link to="/" aria-label="Dashboard" className="flex items-center hover:text-indigo">
+          <Link to="/" aria-label="Dashboard" className="flex items-center hover:text-ink">
             <Home className="size-4" aria-hidden="true" />
           </Link>
         </li>
@@ -27,11 +27,11 @@ export const Breadcrumbs = () => {
           <li key={crumb.to} className="flex items-center gap-1.5">
             <ChevronRight className="size-3.5" aria-hidden="true" />
             {index === crumbs.length - 1 ? (
-              <span aria-current="page" className="font-semibold text-indigo">
+              <span aria-current="page" className="font-semibold text-ink">
                 {crumb.label}
               </span>
             ) : (
-              <Link to={crumb.to} className="hover:text-indigo hover:underline">
+              <Link to={crumb.to} className="hover:text-ink hover:underline">
                 {crumb.label}
               </Link>
             )}

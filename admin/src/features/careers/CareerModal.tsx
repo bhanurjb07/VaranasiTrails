@@ -218,7 +218,7 @@ export const CareerModal = ({ open, onClose, career }: CareerModalProps) => {
 
         <div className="flex items-center justify-between gap-4 rounded-control border border-line px-4 py-3">
           <div>
-            <p className="text-sm font-medium text-indigo">Show on the Careers page</p>
+            <p className="text-sm font-medium text-ink">Show on the Careers page</p>
             <p className="text-xs text-muted">Leave this off to keep the listing as a draft.</p>
           </div>
           <Controller control={control} name="isPublished" render={({ field }) => <Switch label="Show on the Careers page" checked={field.value} onChange={field.onChange} />} />

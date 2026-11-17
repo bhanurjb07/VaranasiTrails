@@ -19,7 +19,7 @@ interface MobileMenuProps {
 }
 
 const rowClass =
-  'flex w-full items-center gap-3 rounded-control px-3 py-3.5 text-left text-base font-medium text-indigo hover:bg-cream-deep'
+  'flex w-full items-center gap-3 rounded-control px-3 py-3.5 text-left text-base font-medium text-ink hover:bg-canvas-alt'
 
 export const MobileMenu = ({ open, onClose }: MobileMenuProps) => {
   const { status, user, logout } = useAuth()
@@ -62,28 +62,28 @@ export const MobileMenu = ({ open, onClose }: MobileMenuProps) => {
       {open && (
         <div className="fixed inset-0 z-50 md:hidden" role="dialog" aria-modal="true" aria-label="Menu">
           <motion.div
-            className="absolute inset-0 bg-night-deep/60 backdrop-blur-[2px]"
+            className="absolute inset-0 bg-navy-deep/60 "
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
           />
           <motion.aside
-            className="absolute inset-y-0 left-0 flex w-[min(22rem,90vw)] flex-col bg-cream shadow-lift"
+            className="absolute inset-y-0 left-0 flex w-[min(22rem,90vw)] flex-col bg-canvas "
             initial={{ x: '-100%' }}
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
             transition={{ type: 'tween', duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="bg-dusk flex items-center justify-between px-5 py-5 text-white">
-              <p className="font-heading text-2xl">
+            <div className="bg-navy flex items-center justify-between px-5 py-5 text-ivory">
+              <p className="font-sans text-xl font-bold">
                 {status === 'authenticated' && firstName ? `Hello, ${firstName}` : 'Welcome'}
               </p>
               <button
                 type="button"
                 aria-label="Close menu"
                 onClick={onClose}
-                className="-mr-2 inline-flex size-10 items-center justify-center rounded-full text-white transition-colors hover:bg-white/15"
+                className="-mr-2 inline-flex size-10 items-center justify-center rounded-control text-ivory transition-colors hover:bg-ivory/15"
               >
                 <X className="size-6" aria-hidden="true" />
               </button>
@@ -91,24 +91,24 @@ export const MobileMenu = ({ open, onClose }: MobileMenuProps) => {
 
             <div className="flex-1 overflow-y-auto p-5">
               {status === 'authenticated' && user ? (
-                <section aria-labelledby="menu-profile" className="rounded-card border border-line bg-surface p-4">
+                <section aria-labelledby="menu-profile" className="rounded-lg border border-line bg-paper p-4">
                   <div className="flex items-center justify-between gap-3">
-                    <h2 id="menu-profile" className="font-sans text-lg font-bold text-indigo">
+                    <h2 id="menu-profile" className="font-sans text-lg font-bold text-ink">
                       Profile
                     </h2>
                     <Link
                       to="/profile"
-                      className="rounded-full border border-line px-3.5 py-1.5 text-sm font-semibold text-indigo transition-colors hover:bg-cream-deep"
+                      className="rounded-control border border-ink/25 px-3.5 py-1.5 text-sm font-medium text-ink transition-colors hover:bg-canvas-alt"
                     >
                       See all
                     </Link>
                   </div>
                   <div className="mt-4 flex items-center gap-3">
-                    <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-saffron text-lg font-semibold text-white">
+                    <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-navy text-lg font-semibold text-ivory">
                       {user.name.charAt(0).toUpperCase()}
                     </span>
                     <div className="min-w-0">
-                      <p className="truncate font-semibold text-indigo">{user.name}</p>
+                      <p className="truncate font-semibold text-ink">{user.name}</p>
                       <p className="text-sm text-muted">Account holder</p>
                     </div>
                   </div>
@@ -125,7 +125,7 @@ export const MobileMenu = ({ open, onClose }: MobileMenuProps) => {
                 </section>
               ) : (
                 status === 'anonymous' && (
-                  <section aria-label="Account" className="rounded-card border border-line bg-surface p-4">
+                  <section aria-label="Account" className="rounded-lg border border-line bg-paper p-4">
                     <p className="text-sm text-muted">Sign in to save trips and write reviews.</p>
                     <div className="mt-3 grid grid-cols-2 gap-2">
                       <ButtonLink to="/login" size="md" className="w-full">
@@ -169,7 +169,7 @@ export const MobileMenu = ({ open, onClose }: MobileMenuProps) => {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`${link.label}: ${link.handle}`}
-                        className="flex size-11 items-center justify-center rounded-full bg-night text-white transition-colors hover:bg-saffron"
+                        className="flex size-11 items-center justify-center rounded-control border border-line text-ink transition-colors hover:bg-canvas-alt"
                       >
                         <SocialIcon platform={link.platform} className="size-5" />
                       </a>

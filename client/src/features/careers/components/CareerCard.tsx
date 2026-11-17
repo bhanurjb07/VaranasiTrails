@@ -37,7 +37,7 @@ export const CareerCard = ({ career }: { career: Career }) => {
   return (
     <Card className="p-5 sm:p-6">
       <h3 className="text-xl sm:text-2xl">
-        <Link to={`/careers/${career.id}`} className="hover:text-saffron-dark">
+        <Link to={`/careers/${career.id}`} className="hover:text-brand-text">
           {career.title}
         </Link>
       </h3>

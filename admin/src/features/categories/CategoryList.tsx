@@ -28,12 +28,12 @@ export const CategoryList = ({ categories, onMove, onToggleActive, onEdit, onDel
               {(handle) => (
                 <Card className="flex flex-wrap items-center gap-4 p-4">
                   {handle}
-                  <span className="size-14 shrink-0 overflow-hidden rounded-control bg-cream-deep">
+                  <span className="size-14 shrink-0 overflow-hidden rounded-control bg-canvas-alt">
                     {category.imageUrl && <img src={category.imageUrl} alt="" loading="lazy" className="size-full object-cover" />}
                   </span>
 
                   <div className="min-w-0 flex-1 basis-56">
-                    <p className="truncate font-semibold text-indigo">{category.name}</p>
+                    <p className="truncate font-semibold text-ink">{category.name}</p>
                     <p className="truncate text-xs text-muted">/{category.slug}</p>
                     {category.description && <p className="mt-0.5 line-clamp-1 text-sm text-muted">{category.description}</p>}
                   </div>

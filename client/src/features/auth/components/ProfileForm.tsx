@@ -23,7 +23,7 @@ const schema = z.object({
 
 type Values = z.input<typeof schema>
 
-export const ProfileForm = () => {
+export const ProfileForm = ({ onDone }: { onDone?: () => void }) => {
   const { user, updateUser } = useAuth()
   const {
     register,
@@ -42,6 +42,7 @@ export const ProfileForm = () => {
       updateUser(updated)
       reset({ name: updated.name, phone: updated.phone.replace(/^\+91/, '') || variables.phone || '' })
       toast.success('Profile updated')
+      onDone?.()
     },
     onError: (error) => {
       if (isApiError(error) && error.code === 'PHONE_EXISTS') {

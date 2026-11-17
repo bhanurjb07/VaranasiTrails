@@ -16,8 +16,8 @@ import type { Career } from '@/types/api'
 
 const chip = (active: boolean) =>
   cn(
-    'rounded-md border px-3.5 py-1.5 text-sm font-medium transition-colors',
-    active ? 'border-indigo bg-indigo text-cream' : 'border-line bg-surface text-indigo hover:border-indigo/50',
+    'rounded-control border px-3.5 py-1.5 text-sm font-medium transition-colors',
+    active ? 'border-brand bg-brand text-ivory' : 'border-line bg-white text-ink hover:border-brand',
   )
 
 export const CareersPage = () => {
@@ -90,7 +90,7 @@ export const CareersPage = () => {
             <div className="space-y-10">
               {groups.map(([name, careers]) => (
                 <section key={name} aria-labelledby={`dept-${name}`}>
-                  <h2 id={`dept-${name}`} className="mb-4 text-2xl sm:text-3xl">
+                  <h2 id={`dept-${name}`} className="mb-4 font-sans text-xl font-bold sm:text-2xl">
                     {name}
                   </h2>
                   <ul className="grid gap-4 lg:grid-cols-2">

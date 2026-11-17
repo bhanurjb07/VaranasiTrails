@@ -23,7 +23,7 @@ export const Gallery = ({ images, title, videoUrl }: GalleryProps) => {
 
   const photos = (
     <div>
-      <div className="group relative overflow-hidden rounded-card bg-cream-deep">
+      <div className="group relative overflow-hidden rounded-card bg-canvas-alt">
         <button
           type="button"
           onClick={() => setLightbox(true)}
@@ -40,7 +40,7 @@ export const Gallery = ({ images, title, videoUrl }: GalleryProps) => {
             className="size-full transition-transform duration-500 group-hover:scale-[1.02]"
           />
         </button>
-        <span className="pointer-events-none absolute right-4 bottom-4 flex items-center gap-2 rounded-md bg-night/75 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur">
+        <span className="pointer-events-none absolute right-4 bottom-4 flex items-center gap-2 rounded-control bg-navy/75 px-3 py-1.5 text-xs font-semibold text-ivory ">
           <Expand className="size-3.5" aria-hidden="true" />
           {index + 1} / {Math.max(images.length, 1)}
         </span>
@@ -66,7 +66,7 @@ export const Gallery = ({ images, title, videoUrl }: GalleryProps) => {
                 onClick={() => setIndex(i)}
                 className={cn(
                   'block h-16 w-24 overflow-hidden rounded-control border-2 transition-all sm:h-20 sm:w-28',
-                  i === index ? 'border-saffron' : 'border-transparent opacity-70 hover:opacity-100',
+                  i === index ? 'border-navy' : 'border-transparent opacity-70 hover:opacity-100',
                 )}
               >
                 <ImageWithFallback

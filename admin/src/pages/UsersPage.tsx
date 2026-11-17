@@ -98,7 +98,7 @@ export const UsersPage = () => {
                 <Tr key={user.id} className="cursor-pointer" onClick={() => setSelected(user)}>
                   <Td>
                     <button type="button" onClick={() => setSelected(user)} className="text-left">
-                      <span className="block font-semibold text-indigo hover:underline">{user.name}</span>
+                      <span className="block font-semibold text-ink hover:underline">{user.name}</span>
                       <span className="block text-xs text-muted">{user.email}</span>
                     </button>
                   </Td>

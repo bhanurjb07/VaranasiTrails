@@ -29,7 +29,7 @@ export class ErrorBoundary extends Component<Props, State> {
     return (
       <div
         role="alert"
-        className={`flex flex-col items-center justify-center px-6 text-center ${this.props.fullPage ? 'min-h-screen bg-cream' : 'min-h-[50vh]'}`}
+        className={`flex flex-col items-center justify-center px-6 text-center ${this.props.fullPage ? 'min-h-screen bg-canvas' : 'min-h-[50vh]'}`}
       >
         <h1 className="text-3xl">Something went wrong</h1>
         <p className="mt-3 max-w-md text-muted">

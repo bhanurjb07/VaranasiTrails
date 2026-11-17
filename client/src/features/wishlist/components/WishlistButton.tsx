@@ -45,15 +45,15 @@ export const WishlistButton = ({ destination, variant = 'overlay', className }: 
       aria-label={label}
       title={label}
       className={cn(
-        'inline-flex items-center justify-center transition-all duration-200 active:scale-90',
+        'inline-flex items-center justify-center transition-colors duration-500 ease-out',
         variant === 'overlay'
-          ? 'size-10 rounded-full bg-surface/90 text-indigo shadow-card backdrop-blur-md hover:bg-surface'
-          : 'h-11 gap-2 rounded-full border border-line px-5 text-sm font-semibold text-indigo hover:border-indigo/30 hover:bg-cream-deep',
+          ? 'size-9 rounded-control bg-canvas/85 text-ink hover:bg-canvas'
+          : 'h-11 gap-2 rounded-control border border-ink/25 px-5 text-sm font-medium text-ink hover:border-ink',
         className,
       )}
     >
       <Heart
-        className={cn('size-5 transition-colors', saved && 'fill-maroon text-maroon')}
+        className={cn('size-[1.05rem] transition-colors duration-500', saved && 'fill-danger text-danger')}
         aria-hidden="true"
       />
       {variant === 'labelled' && <span>{saved ? 'Saved' : 'Save'}</span>}

@@ -11,7 +11,7 @@ export const ProtectedRoute = () => {
   if (status === 'loading') {
     return (
       <div className="flex min-h-[50vh] items-center justify-center" role="status" aria-label="Loading">
-        <Spinner className="size-8 text-saffron" />
+        <Spinner className="size-8 text-navy" />
       </div>
     )
   }

@@ -16,11 +16,11 @@ export const ReviewComposer = ({ slug }: { slug: string }) => {
   } else if (status === 'anonymous' || !user) {
     body = (
       <p className="text-muted">
-        <Link to="/login" state={{ from }} className="font-semibold text-saffron-dark hover:underline">
+        <Link to="/login" state={{ from }} className="font-semibold text-brand-text hover:underline">
           Log in
         </Link>{' '}
         or{' '}
-        <Link to="/signup" className="font-semibold text-saffron-dark hover:underline">
+        <Link to="/signup" className="font-semibold text-brand-text hover:underline">
           create an account
         </Link>{' '}
         to share your experience.
@@ -33,7 +33,7 @@ export const ReviewComposer = ({ slug }: { slug: string }) => {
         <Link
           to={`/verify-email?email=${encodeURIComponent(user.email)}`}
           state={{ from }}
-          className="font-semibold text-saffron-dark hover:underline"
+          className="font-semibold text-brand-text hover:underline"
         >
           Verify now
         </Link>

@@ -31,7 +31,7 @@ export const MobileSearchBar = () => {
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Search trips in Varanasi"
-          className="h-11 w-full rounded-full border border-line bg-surface pr-4 pl-11 text-base text-ink placeholder:text-muted/80 transition-[border-color,box-shadow] focus:border-saffron/70 focus:ring-4 focus:ring-saffron/15 focus:outline-none"
+          className="h-11 w-full rounded-lg bg-white pr-4 pl-11 text-base text-ink placeholder:text-muted focus:outline-2 focus:outline-brand"
         />
       </div>
     </form>

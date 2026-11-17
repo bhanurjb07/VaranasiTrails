@@ -18,7 +18,7 @@ const webUrl = (value: string): string | null => {
 }
 
 const iconButton =
-  'flex size-11 items-center justify-center rounded-full bg-night text-white transition-colors hover:bg-saffron'
+  'flex size-11 items-center justify-center rounded-control border border-line text-ink transition-colors duration-500 hover:border-brand'
 
 export const FounderCard = ({ founder, priority = false }: { founder: Founder; priority?: boolean }) => {
   const [expanded, setExpanded] = useState(false)
@@ -44,13 +44,13 @@ export const FounderCard = ({ founder, priority = false }: { founder: Founder; p
       />
 
       <div className="flex flex-1 flex-col p-5 sm:p-7">
-        <p className="text-xs font-semibold tracking-[0.18em] text-saffron-dark uppercase">{founder.role}</p>
-        <h2 className="mt-1 text-3xl">{founder.name}</h2>
-        <p className="mt-3 text-lg text-ink/90">{founder.shortIntro}</p>
+        <p className="text-sm text-brand-text">{founder.role}</p>
+        <h2 className="mt-1 font-sans text-2xl font-bold text-ink">{founder.name}</h2>
+        <p className="mt-3 text-base text-ink-soft sm:text-lg">{founder.shortIntro}</p>
 
         {hasMore && (
           <>
-            <div id={moreId} hidden={!expanded} className="mt-4 space-y-3 text-ink/90">
+            <div id={moreId} hidden={!expanded} className="mt-4 space-y-3 text-ink-soft">
               {founder.fullIntro.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
@@ -60,7 +60,7 @@ export const FounderCard = ({ founder, priority = false }: { founder: Founder; p
               aria-expanded={expanded}
               aria-controls={moreId}
               onClick={() => setExpanded((value) => !value)}
-              className="mt-4 inline-flex items-center gap-1.5 self-start font-semibold text-saffron-dark hover:underline"
+              className="mt-4 inline-flex items-center gap-1.5 self-start font-semibold text-brand-text hover:underline"
             >
               {expanded ? 'Show less' : 'Know more'}
               <ChevronDown className={cn('size-4 transition-transform', expanded && 'rotate-180')} aria-hidden="true" />
@@ -74,7 +74,7 @@ export const FounderCard = ({ founder, priority = false }: { founder: Founder; p
               <ul className="space-y-2.5 text-ink">
                 {phone && (
                   <li className="flex items-center gap-3">
-                    <Phone className="size-5 shrink-0 text-saffron-dark" aria-hidden="true" />
+                    <Phone className="size-5 shrink-0 text-brand-text" aria-hidden="true" />
                     <a href={`tel:${phone}`} className="hover:underline">
                       {formatPhone(phone)}
                     </a>
@@ -82,7 +82,7 @@ export const FounderCard = ({ founder, priority = false }: { founder: Founder; p
                 )}
                 {email && (
                   <li className="flex min-w-0 items-center gap-3">
-                    <Mail className="size-5 shrink-0 text-saffron-dark" aria-hidden="true" />
+                    <Mail className="size-5 shrink-0 text-brand-text" aria-hidden="true" />
                     <a href={`mailto:${email}`} className="min-w-0 break-all hover:underline">
                       {email}
                     </a>

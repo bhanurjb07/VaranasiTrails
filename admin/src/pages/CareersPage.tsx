@@ -123,7 +123,7 @@ export const CareersPage = () => {
                 <Tr key={career.id}>
                   <Td>
                     <button type="button" onClick={() => setEditing(career)} className="text-left">
-                      <span className="block font-semibold text-indigo hover:underline">{career.title}</span>
+                      <span className="block font-semibold text-ink hover:underline">{career.title}</span>
                       <span className="block text-xs text-muted">
                         {career.department} &middot; {career.location}
                       </span>

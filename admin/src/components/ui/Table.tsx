@@ -4,13 +4,13 @@ import { cn } from '@/lib/cn'
 
 /** Styled table primitives. The wrapper scrolls sideways on small screens. */
 export const Table = ({ className, ...props }: HTMLAttributes<HTMLTableElement>) => (
-  <div className="relative overflow-x-auto rounded-card border border-line bg-surface shadow-card">
+  <div className="relative overflow-x-auto rounded-card border border-line bg-paper ">
     <table className={cn('w-full border-collapse text-left text-sm', className)} {...props} />
   </div>
 )
 
 export const THead = (props: HTMLAttributes<HTMLTableSectionElement>) => (
-  <thead className="border-b border-line bg-cream-deep/50 text-[0.7rem] font-semibold tracking-[0.08em] text-muted uppercase" {...props} />
+  <thead className="border-b border-line bg-canvas-alt text-sm font-bold text-ink" {...props} />
 )
 
 export const TBody = (props: HTMLAttributes<HTMLTableSectionElement>) => (
@@ -18,7 +18,7 @@ export const TBody = (props: HTMLAttributes<HTMLTableSectionElement>) => (
 )
 
 export const Tr = ({ className, ...props }: HTMLAttributes<HTMLTableRowElement>) => (
-  <tr className={cn('transition-colors duration-150 hover:bg-cream-deep/45', className)} {...props} />
+  <tr className={cn('transition-colors duration-150 hover:bg-canvas-alt/45', className)} {...props} />
 )
 
 export const Th = ({ className, ...props }: ThHTMLAttributes<HTMLTableCellElement>) => (

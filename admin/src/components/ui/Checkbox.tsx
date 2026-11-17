@@ -8,5 +8,5 @@ interface CheckboxProps extends Omit<ComponentProps<'input'>, 'type'> {
 
 /** Checkbox whose label is announced but not shown (used in table rows). */
 export const Checkbox = ({ label, className, ...props }: CheckboxProps) => (
-  <input type="checkbox" aria-label={label} className={cn('size-4 cursor-pointer rounded accent-saffron', className)} {...props} />
+  <input type="checkbox" aria-label={label} className={cn('size-4 cursor-pointer rounded accent-brand', className)} {...props} />
 )

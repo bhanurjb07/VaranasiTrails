@@ -8,7 +8,7 @@ export const RouteError = () => {
   console.error('Route error', error)
 
   return (
-    <div role="alert" className="flex min-h-screen flex-col items-center justify-center bg-cream px-6 text-center">
+    <div role="alert" className="flex min-h-screen flex-col items-center justify-center bg-canvas px-6 text-center">
       <h1 className="text-3xl">This screen could not load</h1>
       <p className="mt-2 max-w-md text-muted">Check your connection and reload. If it keeps happening after a new release, a hard refresh clears old files.</p>
       <div className="mt-6 flex gap-3">

@@ -6,8 +6,8 @@ import { Spinner } from '@/components/ui/Spinner'
 import { useAuth } from './useAuth'
 
 export const FullScreenSpinner = () => (
-  <div className="flex min-h-screen items-center justify-center bg-cream" role="status" aria-label="Loading">
-    <Spinner className="size-8 text-saffron" />
+  <div className="flex min-h-screen items-center justify-center bg-canvas" role="status" aria-label="Loading">
+    <Spinner className="size-8 text-navy" />
   </div>
 )
 
@@ -20,7 +20,7 @@ export const ProtectedRoute = () => {
 
   if (status === 'forbidden') {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-cream px-6 text-center">
+      <div className="flex min-h-screen flex-col items-center justify-center bg-canvas px-6 text-center">
         <ShieldAlert className="size-12 text-danger" aria-hidden="true" />
         <h1 className="mt-4 text-3xl">No access</h1>
         <p className="mt-2 max-w-sm text-muted">This area is only for VaranasiTrails administrators. You have been logged out.</p>

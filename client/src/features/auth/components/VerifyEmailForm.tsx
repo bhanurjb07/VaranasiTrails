@@ -96,7 +96,7 @@ export const VerifyEmailForm = ({ email }: { email: string }) => {
             type="button"
             onClick={() => resend.mutate()}
             disabled={resend.isPending}
-            className="font-semibold text-saffron-dark hover:underline disabled:opacity-60"
+            className="font-semibold text-brand-text hover:underline disabled:opacity-60"
           >
             Resend code
           </button>

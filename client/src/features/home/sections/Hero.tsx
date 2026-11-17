@@ -1,122 +1,128 @@
-import { CalendarDays, IndianRupee, MessageCircle, Search } from 'lucide-react'
-import { useState, type CSSProperties, type FormEvent } from 'react'
+import { ArrowRight } from 'lucide-react'
+import { useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router'
 
+import { ImageWithFallback } from '@/components/common/ImageWithFallback'
 import { Container } from '@/components/layout/Container'
-import { Button } from '@/components/ui/Button'
 import { hero } from '@/data/home'
-import { HeroBackground } from '../scene/HeroBackground'
+import { placeholderImages } from '@/data/placeholderMedia'
+import { durationRanges } from '@/features/destinations/filterOptions'
+import { useCategories } from '@/features/destinations/hooks/useDestinations'
 
-const HIGHLIGHT = 'Varanasi'
+const fieldLabel = 'block text-sm text-ink'
+const fieldControl =
+  'mt-1.5 h-14 w-full appearance-none rounded-lg bg-white px-4 text-base font-medium text-ink placeholder:font-normal placeholder:text-muted focus:outline-2 focus:outline-offset-0 focus:outline-brand'
 
-const promises = [
-  { icon: IndianRupee, label: 'Clear prices' },
-  { icon: CalendarDays, label: 'Day-by-day plans' },
-  { icon: MessageCircle, label: 'Book on WhatsApp' },
-] as const
-
-/** Staggered entrance: each block rises in a little after the one before. */
-const step = (index: number): CSSProperties => ({ animationDelay: `${120 + index * 90}ms` })
-
-/** The title with the first "Varanasi" picked out in the warm gradient. */
-const Title = () => {
-  const at = hero.title.indexOf(HIGHLIGHT)
-  if (at === -1) return <>{hero.title}</>
-  return (
-    <>
-      {hero.title.slice(0, at)}
-      <span className="text-glow">{HIGHLIGHT}</span>
-      {hero.title.slice(at + HIGHLIGHT.length)}
-    </>
-  )
-}
-
+/**
+ * Full-bleed photograph with the copy set low and to the left, and a quiet booking bar:
+ * hairline-separated fields that open the trips list with those filters applied.
+ */
 export const Hero = () => {
   const navigate = useNavigate()
+  const categories = useCategories()
   const [query, setQuery] = useState('')
+  const [category, setCategory] = useState('')
+  const [duration, setDuration] = useState('any')
+  const image = placeholderImages.riverBoats
 
   const onSubmit = (event: FormEvent) => {
     event.preventDefault()
-    const text = query.trim()
-    navigate(text ? `/destinations?q=${encodeURIComponent(text)}` : '/destinations')
+    const params = new URLSearchParams()
+    if (query.trim()) params.set('q', query.trim())
+    if (category) params.set('category', category)
+    const range = durationRanges.find((option) => option.id === duration)
+    if (range?.min !== undefined) params.set('minDays', String(range.min))
+    if (range?.max !== undefined) params.set('maxDays', String(range.max))
+    const search = params.toString()
+    navigate(search ? `/destinations?${search}` : '/destinations')
   }
 
   return (
-    <section className="relative isolate flex min-h-[calc(100svh-7.25rem)] items-end overflow-hidden bg-night pb-10 md:min-h-[100svh] md:items-center md:pb-0">
-      <HeroBackground />
-      {/* Keeps the copy readable over the scene: darker towards the text, clear towards the glow. */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-night/90 via-night/35 to-transparent md:bg-gradient-to-r md:from-night/75 md:via-night/25" />
-      <div className="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-b from-transparent to-cream" />
+    <section className="relative isolate flex min-h-[19rem] flex-col justify-end overflow-hidden bg-navy-deep sm:min-h-[34rem] md:min-h-[100svh]">
+      <div className="absolute inset-0 -z-20 overflow-hidden">
+        <ImageWithFallback
+          src={image.url}
+          alt={image.alt}
+          priority
+          sizes="100vw"
+          width={1920}
+          height={1080}
+          className="animate-drift size-full"
+        />
+      </div>
+      {/* A plain dark scrim, heavier at the bottom where the text sits. */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-deep/90 via-navy-deep/35 to-navy-deep/20" />
 
-      <Container className="pt-10 md:pt-24">
-        <div className="max-w-2xl">
-          <p
-            className="animate-enter mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-3.5 py-1.5 text-xs font-semibold tracking-[0.18em] text-white/85 uppercase backdrop-blur-md sm:mb-6"
-            style={step(0)}
-          >
-            <span className="size-1.5 rounded-full bg-gold shadow-[0_0_10px_2px_var(--color-gold)]" aria-hidden="true" />
+      <Container className="pt-10 pb-5 sm:pt-16 sm:pb-10 md:pt-40 md:pb-16">
+        <div className="animate-enter max-w-3xl">
+          <p className="flex items-center gap-3 text-sm font-medium text-ivory/85 sm:gap-4 sm:text-sm">
+            <span className="h-px w-6 bg-brand sm:w-10" aria-hidden="true" />
             {hero.eyebrow}
           </p>
-          <h1
-            className="animate-enter text-balance text-[2.35rem] leading-[1.05] text-white sm:text-6xl lg:text-7xl"
-            style={step(1)}
-          >
-            <Title />
+          <h1 className="mt-3 text-balance font-sans text-[2rem] leading-tight font-bold text-ivory sm:mt-5 sm:text-5xl md:text-6xl">
+            {hero.title}
           </h1>
-          <p className="animate-enter mt-4 max-w-xl text-base text-white/80 sm:mt-6 sm:text-lg md:text-xl" style={step(2)}>
-            {hero.subtitle}
-          </p>
-
-          <form
-            onSubmit={onSubmit}
-            role="search"
-            className="animate-enter mt-9 hidden w-full max-w-xl items-center gap-2 rounded-full border border-white/15 bg-white/10 p-1.5 shadow-lift backdrop-blur-xl md:flex"
-            style={step(3)}
-          >
-            <label htmlFor="hero-search" className="sr-only">
-              Search trips
-            </label>
-            <div className="relative flex-1">
-              <Search className="absolute top-1/2 left-4 size-5 -translate-y-1/2 text-white/60" aria-hidden="true" />
-              <input
-                id="hero-search"
-                type="search"
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder={hero.searchPlaceholder}
-                className="h-12 w-full rounded-full bg-transparent pr-4 pl-12 text-white placeholder:text-white/55 focus:outline-none"
-              />
-            </div>
-            <Button type="submit" size="lg">
-              {hero.primaryCta}
-            </Button>
-          </form>
-
-          <ul className="animate-enter mt-5 flex flex-wrap gap-2 md:mt-6" aria-label="Popular searches" style={step(4)}>
-            {hero.quickLinks.map((link) => (
-              <li key={link.to}>
-                <Link
-                  to={link.to}
-                  className="inline-block rounded-full border border-white/20 bg-white/8 px-4 py-1.5 text-sm font-medium text-white/90 backdrop-blur-md transition-colors duration-300 hover:border-white/40 hover:bg-white/18 hover:text-white"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          <ul
-            className="animate-enter mt-8 hidden flex-wrap gap-x-6 gap-y-2 text-sm text-white/70 sm:flex md:mt-12"
-            style={step(5)}
-          >
-            {promises.map(({ icon: Icon, label }) => (
-              <li key={label} className="flex items-center gap-2">
-                <Icon className="size-4 text-gold" aria-hidden="true" />
-                {label}
-              </li>
-            ))}
-          </ul>
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ivory/80 sm:mt-6 sm:text-lg">{hero.subtitle}</p>
         </div>
+
+        <form
+          onSubmit={onSubmit}
+          role="search"
+          aria-label="Find a trip"
+          className="animate-enter mt-10 hidden gap-2 rounded-lg bg-gold p-3 sm:grid sm:grid-cols-2 md:mt-14 lg:grid-cols-[1.4fr_1fr_1fr_auto]"
+        >
+          <label className="block">
+            <span className={fieldLabel}>Where</span>
+            <input
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder={hero.searchPlaceholder}
+              className={fieldControl}
+            />
+          </label>
+          <label className="block">
+            <span className={fieldLabel}>Experience</span>
+            <select value={category} onChange={(event) => setCategory(event.target.value)} className={fieldControl}>
+              <option value="">All experiences</option>
+              {categories.data?.map((option) => (
+                <option key={option.id} value={option.slug}>
+                  {option.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="block">
+            <span className={fieldLabel}>Duration</span>
+            <select value={duration} onChange={(event) => setDuration(event.target.value)} className={fieldControl}>
+              {durationRanges.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <button
+            type="submit"
+            className="flex h-14 items-center justify-center gap-3 self-end rounded-lg bg-brand px-10 text-lg font-medium text-ivory transition-colors duration-300 ease-out hover:bg-brand-deep sm:col-span-2 lg:col-span-1"
+          >
+            {hero.primaryCta}
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </button>
+        </form>
+
+        <p className="scrollbar-none -mx-5 mt-4 flex items-center gap-x-5 overflow-x-auto px-5 text-sm whitespace-nowrap text-ivory/75 sm:mx-0 sm:mt-6 sm:flex-wrap sm:gap-x-6 sm:gap-y-2 sm:px-0">
+          <span className="text-sm sm:text-sm">Popular</span>
+          {hero.quickLinks.map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              className="border-b border-ivory/25 pb-0.5 transition-colors duration-500 hover:border-brand hover:text-ivory"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </p>
       </Container>
     </section>
   )

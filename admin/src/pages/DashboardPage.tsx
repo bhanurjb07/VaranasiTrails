@@ -32,8 +32,8 @@ export const DashboardPage = () => {
         <div className="space-y-6">
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <StatCard label="Published trips" value={data.destinations.published} hint={`${data.destinations.archived} archived`} icon={MapPinned} tone="success" to="/destinations?status=published" />
-            <StatCard label="Drafts" value={data.destinations.draft} hint="Not visible to the public" icon={FilePen} tone="indigo" to="/destinations?status=draft" />
-            <StatCard label="New enquiries" value={data.enquiries.NEW} hint={`${data.enquiries.total} in total`} icon={MessageSquareText} tone="saffron" to="/enquiries" />
+            <StatCard label="Drafts" value={data.destinations.draft} hint="Not visible to the public" icon={FilePen} tone="navy" to="/destinations?status=draft" />
+            <StatCard label="New enquiries" value={data.enquiries.NEW} hint={`${data.enquiries.total} in total`} icon={MessageSquareText} tone="brand" to="/enquiries" />
             <StatCard label="Users" value={data.users.total} hint={`${data.users.newLast30Days} new in 30 days`} icon={Users} tone="info" to="/users" />
           </div>
 

@@ -22,7 +22,7 @@ const pagesToShow = (page: number, total: number): (number | 'gap')[] => {
 }
 
 const itemStyles =
-  'inline-flex size-10 items-center justify-center rounded-full text-sm font-semibold transition-colors duration-200'
+  'inline-flex size-10 items-center justify-center rounded-control text-sm font-medium transition-colors duration-500'
 
 export const Pagination = ({ page, totalPages, onChange, className }: PaginationProps) => {
   if (totalPages <= 1) return null
@@ -34,7 +34,7 @@ export const Pagination = ({ page, totalPages, onChange, className }: Pagination
         aria-label="Previous page"
         disabled={page <= 1}
         onClick={() => onChange(page - 1)}
-        className={cn(itemStyles, 'text-indigo hover:bg-cream-deep disabled:opacity-40')}
+        className={cn(itemStyles, 'text-ink hover:bg-canvas-alt disabled:opacity-40')}
       >
         <ChevronLeft className="size-5" aria-hidden="true" />
       </button>
@@ -50,7 +50,7 @@ export const Pagination = ({ page, totalPages, onChange, className }: Pagination
             aria-label={`Page ${item}`}
             aria-current={item === page ? 'page' : undefined}
             onClick={() => onChange(item)}
-            className={cn(itemStyles, item === page ? 'bg-indigo text-cream' : 'text-indigo hover:bg-cream-deep')}
+            className={cn(itemStyles, item === page ? 'bg-ink text-canvas' : 'text-ink hover:bg-canvas-alt')}
           >
             {item}
           </button>
@@ -61,7 +61,7 @@ export const Pagination = ({ page, totalPages, onChange, className }: Pagination
         aria-label="Next page"
         disabled={page >= totalPages}
         onClick={() => onChange(page + 1)}
-        className={cn(itemStyles, 'text-indigo hover:bg-cream-deep disabled:opacity-40')}
+        className={cn(itemStyles, 'text-ink hover:bg-canvas-alt disabled:opacity-40')}
       >
         <ChevronRight className="size-5" aria-hidden="true" />
       </button>

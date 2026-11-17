@@ -51,15 +51,15 @@ export const DestinationTable = ({ rows, selection, onSelectionChange, onAction 
           const trip = row.original
           return (
             <div className="flex items-center gap-3">
-              <span className="size-12 shrink-0 overflow-hidden rounded-control bg-cream-deep">
+              <span className="size-12 shrink-0 overflow-hidden rounded-control bg-canvas-alt">
                 {trip.coverImage ? (
                   <img src={trip.coverImage} alt="" loading="lazy" className="size-full object-cover" />
                 ) : (
-                  <span className="flex size-full items-center justify-center text-[0.65rem] text-muted">No photo</span>
+                  <span className="flex size-full items-center justify-center text-sm text-muted">No photo</span>
                 )}
               </span>
               <span className="min-w-0">
-                <Link to={`/destinations/${trip.id}`} className="block max-w-72 truncate font-semibold text-indigo hover:underline">
+                <Link to={`/destinations/${trip.id}`} className="block max-w-72 truncate font-semibold text-ink hover:underline">
                   {trip.title}
                 </Link>
                 <span className="block truncate text-xs text-muted">{trip.city} &middot; /{trip.slug}</span>
@@ -73,7 +73,7 @@ export const DestinationTable = ({ rows, selection, onSelectionChange, onAction 
         header: 'Price',
         cell: ({ row }) => (
           <span className="whitespace-nowrap">
-            <span className="font-medium text-indigo">{formatPrice(row.original.priceInr)}</span>
+            <span className="font-medium text-ink">{formatPrice(row.original.priceInr)}</span>
             {row.original.originalPriceInr && <span className="ml-1.5 text-xs text-muted line-through">{formatPrice(row.original.originalPriceInr)}</span>}
           </span>
         ),
@@ -88,7 +88,7 @@ export const DestinationTable = ({ rows, selection, onSelectionChange, onAction 
             onClick={() => onAction(row.original, row.original.isFeatured ? 'unfeature' : 'feature')}
             aria-label={row.original.isFeatured ? `Remove ${row.original.title} from featured` : `Feature ${row.original.title}`}
             aria-pressed={row.original.isFeatured}
-            className="rounded-control p-1.5 hover:bg-cream-deep disabled:opacity-40"
+            className="rounded-control p-1.5 hover:bg-canvas-alt disabled:opacity-40"
           >
             <Star className={cn('size-5', row.original.isFeatured ? 'fill-gold text-gold' : 'text-line')} aria-hidden="true" />
           </button>
@@ -154,7 +154,7 @@ export const DestinationTable = ({ rows, selection, onSelectionChange, onAction 
       </THead>
       <TBody>
         {table.getRowModel().rows.map((row) => (
-          <Tr key={row.id} className={row.getIsSelected() ? 'bg-saffron-soft/40' : undefined}>
+          <Tr key={row.id} className={row.getIsSelected() ? 'bg-canvas-alt/40' : undefined}>
             {row.getVisibleCells().map((cell) => (
               <Td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</Td>
             ))}

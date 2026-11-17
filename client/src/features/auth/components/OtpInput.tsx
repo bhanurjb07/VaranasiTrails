@@ -95,9 +95,9 @@ export const OtpInput = ({
           onPaste={handlePaste}
           onFocus={(event) => event.target.select()}
           className={cn(
-            'size-12 rounded-control border bg-surface text-center font-heading text-2xl font-semibold text-indigo sm:size-14',
-            'transition-colors focus:border-indigo focus:ring-2 focus:ring-indigo/20 focus:outline-none',
-            invalid ? 'border-danger' : value[index] ? 'border-indigo/50' : 'border-line',
+            'size-12 rounded-control border bg-paper text-center font-sans text-2xl font-bold text-ink sm:size-14',
+            'transition-colors focus:border-ink focus:ring-2 focus:ring-ink/20 focus:outline-none',
+            invalid ? 'border-danger' : value[index] ? 'border-ink/50' : 'border-line',
             disabled && 'opacity-60',
           )}
         />

@@ -18,7 +18,7 @@ export const SignupPage = () => {
         footer={
           <>
             Already have an account?{' '}
-            <Link to="/login" className="font-semibold text-saffron-dark hover:underline">
+            <Link to="/login" className="font-semibold text-brand-text hover:underline">
               Log in
             </Link>
           </>

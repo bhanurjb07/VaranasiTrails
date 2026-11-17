@@ -25,7 +25,7 @@ export const ItinerarySection = ({ form, disabled }: ItinerarySectionProps) => {
   return (
     <SectionCard id="itinerary" title="Itinerary" description="One card per day. Drag to reorder; days are numbered automatically.">
       {mismatch && (
-        <p className="mb-4 flex items-start gap-2 rounded-control bg-saffron-soft px-4 py-3 text-sm text-saffron-dark" role="status">
+        <p className="mb-4 flex items-start gap-2 rounded-control bg-canvas-alt px-4 py-3 text-sm text-brand-text" role="status">
           <CircleAlert className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
           The trip is set to {days} day{days === 1 ? '' : 's'} but the itinerary has {fields.length}. That is allowed, just check it is intended.
         </p>
@@ -35,12 +35,12 @@ export const ItinerarySection = ({ form, disabled }: ItinerarySectionProps) => {
         <ol className="space-y-3">
           {fields.map((field, index) => (
             <li key={field.id}>
-              <SortableItem id={field.id} handleLabel={`Reorder day ${index + 1}`} className="rounded-card border border-line bg-cream/40 p-4">
+              <SortableItem id={field.id} handleLabel={`Reorder day ${index + 1}`} className="rounded-card border border-line bg-canvas/40 p-4">
                 {(handle) => (
                   <div className="flex gap-3">
                     <div className="flex flex-col items-center gap-1">
                       {handle}
-                      <span className="rounded-md bg-saffron-soft px-2 py-0.5 text-xs font-bold text-saffron-dark">Day {index + 1}</span>
+                      <span className="rounded-control bg-canvas-alt px-2 py-0.5 text-xs font-bold text-brand-text">Day {index + 1}</span>
                     </div>
                     <div className="min-w-0 flex-1 space-y-3">
                       <Field label={`Day ${index + 1} title`} error={errors?.[index]?.title?.message}>

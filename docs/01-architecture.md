@@ -115,7 +115,7 @@ Both apps share the same approach, so learning one teaches you the other:
 | Routing | React Router with **lazy-loaded pages** (every page is its own JS chunk) |
 | Server state | TanStack Query (caching, retries, optimistic updates) |
 | Forms | react-hook-form + zod, with server `VALIDATION_ERROR` field errors mapped back onto fields |
-| Styling | Tailwind CSS v4 with design tokens in `src/styles/index.css`; fonts Fraunces (headings) and Inter (body); light and dark mode share one token set |
+| Styling | Tailwind CSS v4 with design tokens in `src/styles/index.css`; fonts Cormorant Garamond (headlines) and DM Sans (body); ivory / forest / brass tokens shared by both apps, with a light and a dark set |
 | API access | One `apiClient.ts` per app. The **access token lives in memory only**; the refresh token is an `httpOnly` cookie. A `401` triggers one shared refresh, then one retry. |
 | Environment | Read in exactly one file, `src/lib/env.ts`; everything else imports `env`. |
 | Folder shape | `app/` (shell, router, providers) · `pages/` (thin route files) · `features/<name>/` (api, hooks, components) · `components/` (ui, layout) · `lib/` · `hooks/` · `types/` |

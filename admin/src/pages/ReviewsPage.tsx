@@ -123,22 +123,22 @@ export const ReviewsPage = () => {
             </THead>
             <TBody>
               {data.data.map((review) => (
-                <Tr key={review.id} className={review.isHidden ? 'bg-cream/70' : undefined}>
+                <Tr key={review.id} className={review.isHidden ? 'bg-canvas/70' : undefined}>
                   <Td className="max-w-md">
                     <div className="flex items-center gap-2">
                       <Stars value={review.rating} />
                       {review.isHidden && <Badge variant="archived">Hidden</Badge>}
                     </div>
-                    <p className="mt-1 font-semibold text-indigo">{review.title}</p>
+                    <p className="mt-1 font-semibold text-ink">{review.title}</p>
                     <p className="line-clamp-2 text-muted">{review.comment}</p>
                   </Td>
                   <Td className="max-w-48">
-                    <Link to={`/destinations/${review.destination.id}`} className="block truncate font-medium text-indigo hover:underline">
+                    <Link to={`/destinations/${review.destination.id}`} className="block truncate font-medium text-ink hover:underline">
                       {review.destination.title}
                     </Link>
                   </Td>
                   <Td>
-                    <span className="block font-medium text-indigo">{review.user.name}</span>
+                    <span className="block font-medium text-ink">{review.user.name}</span>
                     <span className="block text-xs text-muted">{review.user.email}</span>
                   </Td>
                   <Td className="whitespace-nowrap text-muted">{timeAgo(review.createdAt)}</Td>

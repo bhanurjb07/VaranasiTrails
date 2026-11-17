@@ -32,7 +32,7 @@ const schema = z
 
 type Values = z.input<typeof schema>
 
-export const ChangePasswordForm = () => {
+export const ChangePasswordForm = ({ onDone }: { onDone?: () => void }) => {
   const {
     register,
     handleSubmit,
@@ -49,6 +49,7 @@ export const ChangePasswordForm = () => {
     onSuccess: () => {
       toast.success('Password changed. Other devices have been signed out.')
       reset()
+      onDone?.()
     },
     onError: (error) => {
       if (isApiError(error) && error.code === 'INVALID_PASSWORD') {

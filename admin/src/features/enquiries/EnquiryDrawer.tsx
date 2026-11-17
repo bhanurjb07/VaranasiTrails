@@ -22,7 +22,7 @@ interface EnquiryDrawerProps {
 export const EnquiryDrawer = ({ enquiry, onClose }: EnquiryDrawerProps) =>
   enquiry ? <EnquiryPanel key={enquiry.id} enquiry={enquiry} onClose={onClose} /> : null
 
-const contactLink = 'inline-flex items-center gap-2 rounded-control border border-line px-3 py-2 text-sm font-semibold text-indigo transition-colors hover:border-indigo/40 hover:bg-cream'
+const contactLink = 'inline-flex items-center gap-2 rounded-control border border-line px-3 py-2 text-sm font-semibold text-ink transition-colors hover:border-ink/40 hover:bg-canvas'
 
 const EnquiryPanel = ({ enquiry, onClose }: { enquiry: AdminEnquiry; onClose: () => void }) => {
   const { update, remove } = useEnquiryMutations()
@@ -62,7 +62,7 @@ const EnquiryPanel = ({ enquiry, onClose }: { enquiry: AdminEnquiry; onClose: ()
             <div className="flex flex-wrap items-center gap-2">
               <EnquiryStatusBadge status={enquiry.status} />
               {enquiry.destination ? (
-                <Link to={`/destinations/${enquiry.destination.id}`} className="text-sm font-semibold text-saffron-dark hover:underline">
+                <Link to={`/destinations/${enquiry.destination.id}`} className="text-sm font-semibold text-brand-text hover:underline">
                   About: {enquiry.destination.title}
                 </Link>
               ) : (
@@ -83,8 +83,8 @@ const EnquiryPanel = ({ enquiry, onClose }: { enquiry: AdminEnquiry; onClose: ()
             </div>
 
             <section aria-label="Message">
-              <h3 className="mb-2 font-sans text-sm font-semibold tracking-wide text-muted uppercase">Message</h3>
-              <p className="rounded-control bg-cream px-4 py-3 text-sm whitespace-pre-line text-ink">{enquiry.message}</p>
+              <h3 className="mb-2 font-sans text-sm font-semibold text-muted">Message</h3>
+              <p className="rounded-control bg-canvas px-4 py-3 text-sm whitespace-pre-line text-ink">{enquiry.message}</p>
             </section>
 
             <Field label="Status">

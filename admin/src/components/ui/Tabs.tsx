@@ -19,7 +19,7 @@ export const Tabs = <T extends string>({ options, value, onChange, label, classN
   <div
     role="tablist"
     aria-label={label}
-    className={cn('scrollbar-none inline-flex max-w-full gap-1 overflow-x-auto rounded-control bg-cream-deep p-1', className)}
+    className={cn('scrollbar-none inline-flex max-w-full gap-1 overflow-x-auto rounded-control bg-canvas-alt p-1', className)}
     onKeyDown={(event) => {
       const index = options.findIndex((option) => option.value === value)
       const next = event.key === 'ArrowRight' ? index + 1 : event.key === 'ArrowLeft' ? index - 1 : null
@@ -39,13 +39,13 @@ export const Tabs = <T extends string>({ options, value, onChange, label, classN
           tabIndex={selected ? 0 : -1}
           onClick={() => onChange(option.value)}
           className={cn(
-            'inline-flex items-center gap-2 rounded-[0.45rem] px-3.5 py-1.5 text-sm font-semibold whitespace-nowrap transition-colors',
-            selected ? 'bg-surface text-indigo shadow-card' : 'text-muted hover:text-indigo',
+            'inline-flex items-center gap-2 rounded-control px-3.5 py-1.5 text-sm font-semibold whitespace-nowrap transition-colors',
+            selected ? 'bg-paper text-ink ' : 'text-muted hover:text-ink',
           )}
         >
           {option.label}
           {option.count !== undefined && (
-            <span className={cn('rounded-md px-1.5 text-xs', selected ? 'bg-saffron-soft text-saffron-dark' : 'bg-line/60')}>
+            <span className={cn('rounded-control px-1.5 text-xs', selected ? 'bg-canvas-alt text-brand-text' : 'bg-line/60')}>
               {option.count}
             </span>
           )}

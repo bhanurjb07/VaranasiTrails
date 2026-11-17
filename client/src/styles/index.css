@@ -1,90 +1,61 @@
 @import "tailwindcss";
 
-/* `dark:` utilities follow the data-theme attribute set by the theme toggle. */
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /*
- * Design tokens: "Ganga at dusk".
- *   night   deep twilight violet (brand panels, hero, footer)
- *   saffron sindoor/vermilion primary, with a brighter glow tone
- *   gold    diya light (stars, small highlights)
- *   river   Ganga teal (secondary accent)
- * Components use these utilities (bg-saffron, text-indigo, ...), never raw hex values.
- * `indigo` is the strong foreground (headings, primary text actions) and flips in dark mode.
- * `night` is always dark, so `bg-night text-white` reads correctly in both themes.
- * The same tokens are mirrored in admin/src/styles/index.css.
+ * Design tokens: the Booking.com colour scheme (white, deep blue, bright blue, yellow).
+ * This file is the single source of truth; admin/src/styles/index.css mirrors it.
+ * There is a single light theme.
+ *
+ *   canvas        page background (white)
+ *   canvas-alt    alternate sections (light grey)
+ *   paper         cards and inputs
+ *   ink           headings and body text
+ *   muted         secondary text
+ *   navy          header, footer, dark feature sections (deep blue)
+ *   brand         primary buttons, links, small marks (bright blue)
+ *   brand-text    brand blue for text on white
+ *   gold          rating stars and small highlights (yellow)
+ *   line          1px hairlines
+ *   ivory         constant white: text on navy, on brand and on photos
+ *
+ * Contrast (WCAG AA, small text): ink 17:1, muted 7:1, brand-text 6.4:1 on white;
+ * white on navy 10.8:1, white on brand 4.9:1.
  */
 @theme {
-  --color-cream: #fbf8f4;
-  --color-cream-deep: #f3eee7;
-  --color-surface: #ffffff;
-  --color-line: #e8e1d7;
-  --color-ink: #2a2536;
-  --color-muted: #6b6478;
-  --color-indigo: #1c1838;
-  --color-indigo-soft: #3a3466;
+  --color-canvas: #ffffff;
+  --color-canvas-alt: #f5f5f5;
+  --color-paper: #ffffff;
+  --color-ink: #1a1a1a;
+  --color-ink-soft: #333333;
+  --color-muted: #595959;
+  --color-line: #e7e7e7;
 
-  --color-night: #15112e;
-  --color-night-soft: #241d4a;
-  --color-night-deep: #0c0a1e;
+  --color-navy: #003b95;
+  --color-navy-soft: #004cb8;
+  --color-navy-deep: #00224f;
 
-  --color-saffron: #cf4a2b;
-  --color-saffron-bright: #f0773d;
-  --color-saffron-dark: #b8401f;
-  --color-saffron-soft: #fdebe3;
-  --color-gold: #e9a23b;
-  --color-river: #1f9e94;
-  --color-maroon: #a3243b;
+  --color-brand: #006ce4;
+  --color-brand-deep: #0057b8;
+  --color-brand-text: #0057b8;
+  --color-gold: #febb02;
+  --color-ivory: #ffffff;
 
-  --color-whatsapp: #25d366;
-  --color-whatsapp-dark: #1aa851;
-  --color-danger: #c0362c;
-  --color-success: #1e7f4f;
+  --color-danger: #d4111e;
+  --color-success: #008234;
 
-  --font-heading: "Fraunces Variable", Georgia, "Times New Roman", serif;
-  --font-sans: "Inter Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-heading: "DM Sans Variable", "DM Sans", ui-sans-serif, sans-serif;
+  --font-sans: "DM Sans Variable", "DM Sans", ui-sans-serif, sans-serif;
 
-  --radius-card: 1.25rem;
-  --radius-control: 0.75rem;
+  --radius-card: 0.5rem;
+  --radius-control: 0.5rem;
 
-  --shadow-card: 0 1px 2px rgb(28 24 56 / 0.05), 0 10px 28px -16px rgb(28 24 56 / 0.22);
-  --shadow-lift: 0 2px 6px rgb(28 24 56 / 0.06), 0 24px 48px -20px rgb(28 24 56 / 0.32);
-  --shadow-glow: 0 10px 30px -10px rgb(207 74 43 / 0.55);
+  /* Hairlines, not shadows. Kept as tokens so any leftover use renders as nothing. */
+  --shadow-card: none;
+  --shadow-lift: none;
 
-  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-soft: cubic-bezier(0.25, 1, 0.5, 1);
 
   --breakpoint-xs: 30rem;
-}
-
-:root[data-theme="dark"] {
-  color-scheme: dark;
-
-  --color-cream: #100d20;
-  --color-cream-deep: #171329;
-  --color-surface: #1c1834;
-  --color-line: #2e2950;
-  --color-ink: #e9e5f2;
-  --color-muted: #a39db8;
-  --color-indigo: #f6f3ff;
-  --color-indigo-soft: #d9d3f2;
-
-  --color-night: #1a1536;
-  --color-night-soft: #272050;
-  --color-night-deep: #08061a;
-
-  --color-saffron-bright: #ff8a50;
-  --color-saffron-dark: #ff9a72;
-  --color-saffron-soft: #3b1e1e;
-  --color-gold: #f2b04a;
-  --color-river: #4cc9bd;
-  --color-maroon: #f07a8c;
-
-  --color-danger: #f2877c;
-  --color-success: #5bcb92;
-
-  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.35), 0 12px 30px -18px rgb(0 0 0 / 0.7);
-  --shadow-lift: 0 2px 6px rgb(0 0 0 / 0.4), 0 26px 50px -22px rgb(0 0 0 / 0.85);
-  --shadow-glow: 0 10px 34px -10px rgb(240 119 61 / 0.5);
 }
 
 @layer base {
@@ -106,10 +77,11 @@
   }
 
   body {
-    background-color: var(--color-cream);
+    background-color: var(--color-canvas);
     color: var(--color-ink);
     font-family: var(--font-sans);
-    line-height: 1.65;
+    font-size: 1rem;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -119,39 +91,30 @@
   h3,
   h4 {
     font-family: var(--font-heading);
-    font-optical-sizing: auto;
-    color: var(--color-indigo);
-    line-height: 1.12;
-    letter-spacing: -0.02em;
-    font-weight: 600;
+    color: var(--color-ink);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0;
+  }
+
+  /* Thin-line icons everywhere (lucide sets stroke-width as an attribute; CSS wins). */
+  svg.lucide {
+    stroke-width: 1.25px;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-saffron);
+    outline: 1px solid var(--color-brand);
     outline-offset: 3px;
-    border-radius: 6px;
   }
 
   ::selection {
-    background: var(--color-saffron);
-    color: #fff;
+    background: var(--color-navy);
+    color: var(--color-ivory);
   }
 
   img {
     max-width: 100%;
     height: auto;
-  }
-
-  /* Set for a moment by the theme toggle so colours cross-fade instead of snapping. */
-  .theme-transition,
-  .theme-transition *,
-  .theme-transition *::before,
-  .theme-transition *::after {
-    transition:
-      background-color 0.35s ease,
-      border-color 0.35s ease,
-      color 0.35s ease,
-      fill 0.35s ease !important;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -169,6 +132,24 @@
   }
 }
 
+@layer components {
+  /* Small plain label above titles. */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--color-brand-text);
+  }
+
+  /* A short brand rule, used sparingly under eyebrows and as a hover mark. */
+  .rule {
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    background: var(--color-brand);
+  }
+}
+
 @layer utilities {
   .scrollbar-none {
     scrollbar-width: none;
@@ -177,36 +158,19 @@
     display: none;
   }
 
-  /* Brand panel: twilight sky with a low saffron glow on the horizon. */
-  .bg-dusk {
-    background-color: var(--color-night);
-    background-image:
-      radial-gradient(120% 70% at 85% 110%, rgb(240 119 61 / 0.45), transparent 60%),
-      radial-gradient(90% 60% at 10% 0%, rgb(76 201 189 / 0.16), transparent 60%),
-      linear-gradient(180deg, var(--color-night-deep), var(--color-night));
-  }
-
-  /* Warm gradient text for one or two accent words. */
-  .text-glow {
-    background: linear-gradient(100deg, var(--color-gold), var(--color-saffron-bright) 55%, #ff6b5a);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  /* Content entrance: a slow, plain fade. */
+  .animate-enter {
+    animation: fade-in 0.6s ease-out both;
   }
 
   /* Route change: opacity only, so fixed children (the phone booking bar) never shift. */
   .animate-page {
-    animation: page-in 0.4s ease-out both;
+    animation: fade-in 0.5s ease-out both;
   }
 
-  /* Entrance for page content: short, soft, once. */
-  .animate-enter {
-    animation: enter 0.55s var(--ease-out-soft) both;
-  }
-
-  /* Slow expanding ring behind the floating chat button. Stops under prefers-reduced-motion. */
-  .animate-ripple {
-    animation: ripple 2.8s var(--ease-out-soft) infinite;
+  /* Hero photograph: a very slow drift in scale, barely noticeable. */
+  .animate-drift {
+    animation: drift 18s ease-out both;
   }
 
   /*
@@ -217,23 +181,12 @@
     .reveal {
       animation: reveal linear both;
       animation-timeline: view();
-      animation-range: entry 0% entry 35%;
+      animation-range: entry 0% entry 40%;
     }
   }
 }
 
-@keyframes enter {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes page-in {
+@keyframes fade-in {
   from {
     opacity: 0;
   }
@@ -245,7 +198,7 @@
 @keyframes reveal {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -253,32 +206,17 @@
   }
 }
 
+@keyframes drift {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 @keyframes shimmer {
   100% {
     transform: translateX(100%);
-  }
-}
-
-@keyframes ripple {
-  0% {
-    transform: scale(1);
-    opacity: 0.45;
-  }
-  70%,
-  100% {
-    transform: scale(1.65);
-    opacity: 0;
-  }
-}
-
-@keyframes float-glow {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0.85;
-  }
-  50% {
-    transform: translate3d(0, -14px, 0) scale(1.06);
-    opacity: 1;
   }
 }

@@ -43,8 +43,8 @@ export const Tabs = ({ items, value, onChange, className }: TabsProps) => {
                 if (event.key === 'ArrowLeft') move(index, -1)
               }}
               className={cn(
-                'rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-200',
-                selected ? 'bg-indigo text-cream' : 'bg-cream-deep text-indigo hover:bg-line',
+                'rounded-lg px-4 py-2 text-base font-medium transition-colors duration-300',
+                selected ? 'bg-navy text-ivory' : 'bg-canvas-alt text-ink hover:bg-line',
               )}
             >
               {item.label}

@@ -77,7 +77,7 @@ export const LoginForm = () => {
       </Field>
 
       <div className="flex justify-end">
-        <Link to="/forgot-password" className="text-sm font-medium text-saffron-dark hover:underline">
+        <Link to="/forgot-password" className="text-sm font-medium text-brand-text hover:underline">
           Forgot password?
         </Link>
       </div>

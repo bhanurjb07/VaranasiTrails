@@ -21,11 +21,11 @@ export const AccountPage = () => {
       <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr]">
         <Card className="h-fit p-6">
           <div className="flex items-center gap-4">
-            <span className="flex size-14 items-center justify-center rounded-full bg-saffron font-heading text-2xl text-white">
+            <span className="flex size-14 items-center justify-center rounded-full bg-navy font-heading text-2xl text-ivory">
               {user.name.charAt(0).toUpperCase()}
             </span>
             <div className="min-w-0">
-              <p className="truncate text-lg font-semibold text-indigo">{user.name}</p>
+              <p className="truncate text-lg font-semibold text-ink">{user.name}</p>
               <Badge variant="success" className="mt-1">
                 <BadgeCheck className="size-3.5" aria-hidden="true" /> Administrator
               </Badge>
@@ -34,15 +34,15 @@ export const AccountPage = () => {
           <dl className="mt-6 space-y-3 text-sm">
             <div>
               <dt className="text-muted">Email</dt>
-              <dd className="font-medium break-all text-indigo">{user.email}</dd>
+              <dd className="font-medium break-all text-ink">{user.email}</dd>
             </div>
             <div>
               <dt className="text-muted">Phone</dt>
-              <dd className="font-medium text-indigo">{user.phone}</dd>
+              <dd className="font-medium text-ink">{user.phone}</dd>
             </div>
             <div>
               <dt className="text-muted">Member since</dt>
-              <dd className="font-medium text-indigo">{formatDate(user.createdAt)}</dd>
+              <dd className="font-medium text-ink">{formatDate(user.createdAt)}</dd>
             </div>
           </dl>
           <Button

@@ -19,12 +19,12 @@ interface BuyBoxProps {
 
 const Fact = ({ icon, label, children }: { icon: ReactNode; label: string; children: ReactNode }) => (
   <li className="flex items-start gap-3">
-    <span className="mt-0.5 text-saffron-dark" aria-hidden="true">
+    <span className="mt-0.5 text-brand" aria-hidden="true">
       {icon}
     </span>
     <span>
       <span className="block text-xs text-muted">{label}</span>
-      <span className="font-medium text-indigo">{children}</span>
+      <span className="font-medium text-ink">{children}</span>
     </span>
   </li>
 )
@@ -46,13 +46,13 @@ const share = async (title: string) => {
 }
 
 export const BuyBox = ({ destination: d, whatsappUrl, onEnquire }: BuyBoxProps) => (
-  <div className="rounded-card border border-line/70 bg-surface p-6 shadow-card sm:p-7">
-    <p className="text-xs font-semibold tracking-[0.16em] text-saffron-dark uppercase">{d.category.name}</p>
-    <h1 className="mt-2 text-3xl leading-tight sm:text-4xl">{d.title}</h1>
-    <p className="mt-2 text-muted">{d.tagline}</p>
+  <div className="rounded-lg border border-line bg-canvas p-5 sm:p-6">
+    <p className="text-sm text-brand-text">{d.category.name}</p>
+    <h1 className="mt-1 font-sans text-2xl leading-tight font-bold text-ink sm:text-3xl">{d.title}</h1>
+    <p className="mt-2 text-base text-ink-soft">{d.tagline}</p>
 
     <a href="#reviews" className="mt-4 inline-flex items-center gap-2 text-sm hover:underline">
-      <span className="font-semibold text-indigo">{d.ratingCount > 0 ? d.ratingAvg.toFixed(1) : 'New'}</span>
+      <span className="font-semibold text-ink">{d.ratingCount > 0 ? d.ratingAvg.toFixed(1) : 'New'}</span>
       <Rating value={d.ratingAvg} size="sm" />
       <span className="text-muted">
         {d.ratingCount > 0 ? `${d.ratingCount} review${d.ratingCount === 1 ? '' : 's'}` : 'Be the first to review'}
@@ -60,11 +60,11 @@ export const BuyBox = ({ destination: d, whatsappUrl, onEnquire }: BuyBoxProps) 
     </a>
 
     <div className="mt-6 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-t border-line pt-6">
-      <span className="font-heading text-4xl font-semibold text-indigo">{formatPrice(d.priceInr)}</span>
+      <span className="font-sans text-3xl font-bold text-ink">{formatPrice(d.priceInr)}</span>
       {d.originalPriceInr && d.originalPriceInr > d.priceInr && (
         <>
           <span className="text-lg text-muted line-through">{formatPrice(d.originalPriceInr)}</span>
-          <Badge className="bg-saffron text-white">
+          <Badge className="bg-gold text-navy-deep">
             Save {d.discountPercent}%
           </Badge>
         </>

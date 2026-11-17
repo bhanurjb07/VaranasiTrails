@@ -31,7 +31,7 @@ export const SectionNav = ({ sections }: { sections: readonly SectionLink[] }) =
   return (
     <nav
       aria-label="Trip sections"
-      className="sticky top-[7.25rem] z-20 md:top-[3.9rem] -mx-5 border-b border-line bg-cream/90 px-5 backdrop-blur sm:-mx-8 sm:px-8"
+      className="sticky top-[7.25rem] z-20 md:top-[3.9rem] -mx-5 border-b border-line bg-canvas px-5 sm:-mx-8 sm:px-8"
     >
       <ul className="scrollbar-none flex gap-1 overflow-x-auto py-2">
         {sections.map((section) => (
@@ -40,8 +40,8 @@ export const SectionNav = ({ sections }: { sections: readonly SectionLink[] }) =
               href={`#${section.id}`}
               aria-current={active === section.id ? 'true' : undefined}
               className={cn(
-                'block rounded-control px-4 py-2 text-sm font-semibold whitespace-nowrap transition-colors',
-                active === section.id ? 'bg-indigo text-cream' : 'text-indigo hover:bg-indigo/5',
+                'block rounded-lg px-4 py-2 text-base font-medium whitespace-nowrap transition-colors',
+                active === section.id ? 'bg-navy text-ivory' : 'text-ink hover:bg-ink/5',
               )}
             >
               {section.label}

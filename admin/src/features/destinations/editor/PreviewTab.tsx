@@ -30,19 +30,19 @@ export const PreviewTab = ({ control, destination, categoryName }: PreviewTabPro
   const exclusions = v.exclusions.filter((item) => item.value.trim())
 
   return (
-    <div className="overflow-hidden rounded-card border border-line bg-cream shadow-card" aria-label="Preview of the public trip page">
-      <div className="flex items-center gap-2 border-b border-line bg-surface px-4 py-2.5">
+    <div className="overflow-hidden rounded-card border border-line bg-canvas " aria-label="Preview of the public trip page">
+      <div className="flex items-center gap-2 border-b border-line bg-paper px-4 py-2.5">
         <span className="size-2.5 rounded-full bg-danger/60" />
-        <span className="size-2.5 rounded-full bg-gold/70" />
+        <span className="size-2.5 rounded-full bg-brand/70" />
         <span className="size-2.5 rounded-full bg-success/60" />
-        <span className="ml-3 truncate rounded-md bg-cream px-3 py-1 text-xs text-muted">/destinations/{v.slug || 'your-trip'}</span>
+        <span className="ml-3 truncate rounded-control bg-canvas px-3 py-1 text-xs text-muted">/destinations/{v.slug || 'your-trip'}</span>
         <Badge variant="info" className="ml-auto">Preview</Badge>
       </div>
 
       <div className="space-y-10 p-5 sm:p-8">
         <div className="grid gap-8 lg:grid-cols-[1.35fr_1fr]">
           <div className="min-w-0">
-            <div className="aspect-[16/10] overflow-hidden rounded-card bg-cream-deep">
+            <div className="aspect-[16/10] overflow-hidden rounded-card bg-canvas-alt">
               {main ? (
                 <img src={main.url} alt={main.alt} className="size-full object-cover" />
               ) : (
@@ -52,7 +52,7 @@ export const PreviewTab = ({ control, destination, categoryName }: PreviewTabPro
             {images.length > 1 && (
               <div className="scrollbar-none mt-3 flex gap-3 overflow-x-auto">
                 {images.map((image, index) => (
-                  <button key={image.id} type="button" aria-label={`Show photo ${index + 1}`} onClick={() => setActive(index)} className={cn('h-16 w-24 shrink-0 overflow-hidden rounded-control border-2', index === active ? 'border-saffron' : 'border-transparent opacity-70')}>
+                  <button key={image.id} type="button" aria-label={`Show photo ${index + 1}`} onClick={() => setActive(index)} className={cn('h-16 w-24 shrink-0 overflow-hidden rounded-control border-2', index === active ? 'border-navy' : 'border-transparent opacity-70')}>
                     <img src={image.url} alt="" className="size-full object-cover" />
                   </button>
                 ))}
@@ -60,13 +60,13 @@ export const PreviewTab = ({ control, destination, categoryName }: PreviewTabPro
             )}
           </div>
 
-          <div className="rounded-card border border-line/70 bg-surface p-6 shadow-card">
-            <p className="text-xs font-semibold tracking-[0.16em] text-saffron-dark uppercase">{categoryName || 'Category'}</p>
+          <div className="rounded-card border border-line/70 bg-paper p-6 ">
+            <p className="text-xs font-semibold text-brand-text">{categoryName || 'Category'}</p>
             <h3 className="mt-2 font-heading text-3xl leading-tight">{v.title || 'Your trip title'}</h3>
             <p className="mt-2 text-muted">{v.tagline || 'Your tagline appears here.'}</p>
 
             <div className="mt-5 flex flex-wrap items-baseline gap-x-3 border-t border-line pt-5">
-              <span className="font-heading text-4xl font-semibold text-indigo">{formatPrice(price)}</span>
+              <span className="font-sans text-3xl font-bold text-ink">{formatPrice(price)}</span>
               {v.originalPriceInr && v.originalPriceInr > price && (
                 <>
                   <span className="text-lg text-muted line-through">{formatPrice(v.originalPriceInr)}</span>
@@ -76,16 +76,16 @@ export const PreviewTab = ({ control, destination, categoryName }: PreviewTabPro
             </div>
 
             <ul className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
-              <li className="flex items-center gap-2"><Clock className="size-4 text-saffron-dark" aria-hidden="true" />{formatDuration(v.durationDays ?? 1, v.durationNights ?? 0)}</li>
-              <li className="flex items-center gap-2"><Users className="size-4 text-saffron-dark" aria-hidden="true" />Up to {v.maxGroupSize ?? 0} people</li>
-              <li className="flex items-center gap-2"><Gauge className="size-4 text-saffron-dark" aria-hidden="true" />{difficultyLabel[v.difficulty]}</li>
-              <li className="flex items-center gap-2"><Sun className="size-4 text-saffron-dark" aria-hidden="true" />{v.bestTimeToVisit || 'Best time'}</li>
-              {v.meetingPoint && <li className="flex items-center gap-2 sm:col-span-2"><MapPin className="size-4 text-saffron-dark" aria-hidden="true" />{v.meetingPoint}</li>}
+              <li className="flex items-center gap-2"><Clock className="size-4 text-brand-text" aria-hidden="true" />{formatDuration(v.durationDays ?? 1, v.durationNights ?? 0)}</li>
+              <li className="flex items-center gap-2"><Users className="size-4 text-brand-text" aria-hidden="true" />Up to {v.maxGroupSize ?? 0} people</li>
+              <li className="flex items-center gap-2"><Gauge className="size-4 text-brand-text" aria-hidden="true" />{difficultyLabel[v.difficulty]}</li>
+              <li className="flex items-center gap-2"><Sun className="size-4 text-brand-text" aria-hidden="true" />{v.bestTimeToVisit || 'Best time'}</li>
+              {v.meetingPoint && <li className="flex items-center gap-2 sm:col-span-2"><MapPin className="size-4 text-brand-text" aria-hidden="true" />{v.meetingPoint}</li>}
             </ul>
 
             <div className="mt-6 space-y-2">
-              <div className="rounded-full bg-whatsapp py-3 text-center text-sm font-semibold text-night">Book on WhatsApp</div>
-              <div className="rounded-full border border-line py-3 text-center text-sm font-semibold text-indigo">Send an enquiry</div>
+              <div className="rounded-control bg-navy py-3 text-center text-sm font-medium text-ivory">Book on WhatsApp</div>
+              <div className="rounded-control border border-ink/25 py-3 text-center text-sm font-medium text-ink">Send an enquiry</div>
             </div>
           </div>
         </div>
@@ -104,7 +104,7 @@ export const PreviewTab = ({ control, destination, categoryName }: PreviewTabPro
             <h3 className="mb-3 font-heading text-2xl">Highlights</h3>
             <ul className="grid gap-3 sm:grid-cols-2">
               {highlights.map((item, index) => (
-                <li key={index} className="rounded-control bg-surface p-3 text-sm shadow-card">{item.value}</li>
+                <li key={index} className="rounded-control bg-paper p-3 text-sm ">{item.value}</li>
               ))}
             </ul>
           </section>
@@ -115,8 +115,8 @@ export const PreviewTab = ({ control, destination, categoryName }: PreviewTabPro
             <h3 className="mb-3 font-heading text-2xl">Day-by-day itinerary</h3>
             <ol className="space-y-3">
               {v.itinerary.map((day, index) => (
-                <li key={index} className="rounded-card border border-line bg-surface p-4">
-                  <p className="font-semibold text-indigo"><span className="mr-2 rounded-md bg-saffron-soft px-2.5 py-0.5 text-xs font-bold text-saffron-dark uppercase">Day {index + 1}</span>{day.title}</p>
+                <li key={index} className="rounded-card border border-line bg-paper p-4">
+                  <p className="font-semibold text-ink"><span className="mr-2 rounded-control bg-canvas-alt px-2.5 py-0.5 text-xs font-bold text-brand-text">Day {index + 1}</span>{day.title}</p>
                   <p className="mt-2 text-sm whitespace-pre-line text-muted">{day.description}</p>
                 </li>
               ))}
@@ -126,13 +126,13 @@ export const PreviewTab = ({ control, destination, categoryName }: PreviewTabPro
 
         {(inclusions.length > 0 || exclusions.length > 0) && (
           <section className="grid gap-5 md:grid-cols-2">
-            <div className="rounded-card border border-line/70 bg-surface p-5">
+            <div className="rounded-card border border-line/70 bg-paper p-5">
               <h3 className="mb-3 font-heading text-xl">What is included</h3>
               <ul className="space-y-2 text-sm">{inclusions.map((item, index) => <li key={index} className="flex gap-2"><Check className="mt-0.5 size-4 shrink-0 text-success" aria-hidden="true" />{item.value}</li>)}</ul>
             </div>
-            <div className="rounded-card border border-line/70 bg-surface p-5">
+            <div className="rounded-card border border-line/70 bg-paper p-5">
               <h3 className="mb-3 font-heading text-xl">What is not included</h3>
-              <ul className="space-y-2 text-sm">{exclusions.map((item, index) => <li key={index} className="flex gap-2"><X className="mt-0.5 size-4 shrink-0 text-maroon" aria-hidden="true" />{item.value}</li>)}</ul>
+              <ul className="space-y-2 text-sm">{exclusions.map((item, index) => <li key={index} className="flex gap-2"><X className="mt-0.5 size-4 shrink-0 text-danger" aria-hidden="true" />{item.value}</li>)}</ul>
             </div>
           </section>
         )}

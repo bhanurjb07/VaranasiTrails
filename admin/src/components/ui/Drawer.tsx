@@ -34,8 +34,8 @@ export const Drawer = ({ open, onClose, title, description, children, footer, cl
         if (event.target === ref.current) onClose()
       }}
       className={cn(
-        'm-0 mr-0 ml-auto h-dvh max-h-none w-full max-w-lg border-l border-line bg-surface p-0 text-ink shadow-lift',
-        'open:animate-[slide-in-right_0.32s_var(--ease-out-soft)] backdrop:bg-night-deep/55 backdrop:backdrop-blur-[2px]',
+        'm-0 mr-0 ml-auto h-dvh max-h-none w-full max-w-lg border-l border-line bg-paper p-0 text-ink ',
+        'open:animate-[slide-in-right_0.32s_var(--ease-out-soft)] backdrop:bg-navy-deep/55 ',
         className,
       )}
     >
@@ -52,7 +52,7 @@ export const Drawer = ({ open, onClose, title, description, children, footer, cl
               type="button"
               onClick={onClose}
               aria-label="Close panel"
-              className="rounded-control p-2 text-muted transition-colors hover:bg-cream hover:text-indigo"
+              className="rounded-control p-2 text-muted transition-colors hover:bg-canvas hover:text-ink"
             >
               <X className="size-5" aria-hidden="true" />
             </button>

@@ -6,7 +6,7 @@ interface InclusionsListProps {
 }
 
 const Column = ({ title, items, included }: { title: string; items: readonly string[]; included: boolean }) => (
-  <div className="rounded-card border border-line/70 bg-surface p-6">
+  <div className="rounded-card border border-line/70 bg-paper p-6">
     <h3 className="mb-4 text-xl">{title}</h3>
     <ul className="space-y-3">
       {items.map((item) => (
@@ -14,7 +14,7 @@ const Column = ({ title, items, included }: { title: string; items: readonly str
           {included ? (
             <Check className="mt-0.5 size-5 shrink-0 text-success" aria-label="Included" />
           ) : (
-            <X className="mt-0.5 size-5 shrink-0 text-maroon" aria-label="Not included" />
+            <X className="mt-0.5 size-5 shrink-0 text-danger" aria-label="Not included" />
           )}
           <span>{item}</span>
         </li>

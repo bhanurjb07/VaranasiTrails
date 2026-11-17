@@ -10,25 +10,25 @@ interface StatCardProps {
   hint?: string
   icon: LucideIcon
   to?: string
-  tone?: 'saffron' | 'success' | 'info' | 'indigo'
+  tone?: 'brand' | 'success' | 'info' | 'navy'
 }
 
 const tones = {
-  saffron: 'bg-saffron-soft text-saffron-dark',
+  brand: 'bg-canvas-alt text-brand-text',
   success: 'bg-success-soft text-success',
   info: 'bg-info-soft text-info',
-  indigo: 'bg-indigo/8 text-indigo',
+  navy: 'bg-ink/8 text-ink',
 } as const
 
-export const StatCard = ({ label, value, hint, icon: Icon, to, tone = 'indigo' }: StatCardProps) => {
+export const StatCard = ({ label, value, hint, icon: Icon, to, tone = 'navy' }: StatCardProps) => {
   const body = (
-    <Card className={cn('flex items-center gap-4 p-5', to && 'transition-[transform,box-shadow] duration-300 ease-[var(--ease-out-soft)] hover:-translate-y-0.5 hover:shadow-lift')}>
-      <span className={cn('flex size-12 shrink-0 items-center justify-center rounded-2xl', tones[tone])}>
+    <Card className={cn('flex items-center gap-4 p-5', to && 'transition-colors duration-500 ease-out hover:border-ink/30')}>
+      <span className={cn('flex size-12 shrink-0 items-center justify-center rounded-control', tones[tone])}>
         <Icon className="size-6" aria-hidden="true" />
       </span>
       <div className="min-w-0">
         <p className="text-sm text-muted">{label}</p>
-        <p className="font-heading text-3xl leading-tight font-semibold text-indigo">{value}</p>
+        <p className="font-sans text-3xl leading-tight font-bold text-ink">{value}</p>
         {hint && <p className="truncate text-xs text-muted">{hint}</p>}
       </div>
     </Card>

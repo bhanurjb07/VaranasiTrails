@@ -13,16 +13,16 @@ import { useBlockUser, useUserDetail } from './useUsers'
 const Row = ({ label, children }: { label: string; children: React.ReactNode }) => (
   <div className="flex items-start justify-between gap-4 border-b border-line/60 py-3 text-sm last:border-0">
     <dt className="text-muted">{label}</dt>
-    <dd className="text-right font-medium break-all text-indigo">{children}</dd>
+    <dd className="text-right font-medium break-all text-ink">{children}</dd>
   </div>
 )
 
 const Section = ({ title, count, children }: { title: string; count: number; children: React.ReactNode }) => (
   <section>
-    <h3 className="mb-2 flex items-center gap-2 font-sans text-sm font-semibold text-indigo">
+    <h3 className="mb-2 flex items-center gap-2 font-sans text-sm font-semibold text-ink">
       {title} <Badge>{count}</Badge>
     </h3>
-    {count === 0 ? <p className="rounded-control bg-cream px-4 py-3 text-sm text-muted">Nothing yet.</p> : <ul className="space-y-2">{children}</ul>}
+    {count === 0 ? <p className="rounded-control bg-canvas px-4 py-3 text-sm text-muted">Nothing yet.</p> : <ul className="space-y-2">{children}</ul>}
   </section>
 )
 
@@ -38,10 +38,10 @@ const Activity = ({ detail, loading, failed }: { detail?: AdminUserDetail; loadi
             {item.coverImage ? (
               <img src={item.coverImage} alt="" className="size-12 shrink-0 rounded-control object-cover" />
             ) : (
-              <span className="size-12 shrink-0 rounded-control bg-cream-deep" aria-hidden="true" />
+              <span className="size-12 shrink-0 rounded-control bg-canvas-alt" aria-hidden="true" />
             )}
             <span className="min-w-0 flex-1">
-              <span className="block truncate font-medium text-indigo">{item.title}</span>
+              <span className="block truncate font-medium text-ink">{item.title}</span>
               <span className="block text-xs text-muted">
                 {formatPrice(item.priceInr)} &middot; saved {formatDate(item.addedAt)}
               </span>
@@ -55,7 +55,7 @@ const Activity = ({ detail, loading, failed }: { detail?: AdminUserDetail; loadi
         {detail.reviews.map((review) => (
           <li key={review.id} className="rounded-control border border-line/70 p-3 text-sm">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="font-medium text-indigo">{review.destination.title}</span>
+              <span className="font-medium text-ink">{review.destination.title}</span>
               <Badge variant="warning">{review.rating} / 5</Badge>
               {review.isHidden && <Badge variant="danger">Hidden</Badge>}
             </div>
@@ -132,7 +132,7 @@ export const UserDrawer = ({ user, onClose }: { user: AdminUser | null; onClose:
               <Row label="Trips in wishlist">{user.wishlistCount}</Row>
             </dl>
 
-            {isAdmin && <p className="rounded-control bg-cream px-4 py-3 text-sm text-muted">Administrator accounts cannot be blocked from here.</p>}
+            {isAdmin && <p className="rounded-control bg-canvas px-4 py-3 text-sm text-muted">Administrator accounts cannot be blocked from here.</p>}
 
             <Activity detail={detail.data} loading={detail.isPending} failed={detail.isError} />
           </div>

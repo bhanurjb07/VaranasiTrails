@@ -1,10 +1,8 @@
-import { CalendarDays, Heart, MessageCircle } from 'lucide-react'
 import type { ReactNode } from 'react'
 
-import { SkylineArt } from '@/components/common/SkylineArt'
+import { ImageWithFallback } from '@/components/common/ImageWithFallback'
 import { Container } from '@/components/layout/Container'
-import { LogoMark } from '@/components/layout/Logo'
-import { site } from '@/data/site'
+import { placeholderImages } from '@/data/placeholderMedia'
 
 interface AuthCardProps {
   title: string
@@ -13,57 +11,45 @@ interface AuthCardProps {
   footer?: ReactNode
 }
 
-const perks = [
-  { icon: Heart, text: 'Save trips to your wishlist' },
-  { icon: CalendarDays, text: 'Day-by-day plans with clear prices' },
-  { icon: MessageCircle, text: 'Book in one tap on WhatsApp' },
-] as const
+const perks = ['Save trips to your wishlist', 'Day-by-day plans with clear prices', 'Book in one tap on WhatsApp'] as const
 
 /**
- * Shared frame for every auth page: a dusk brand panel beside the form on wide
- * screens, and a short dusk banner above the form on phones.
+ * Shared frame for every auth page: a photograph of the ghats beside the form on wide
+ * screens, and a short photo band above it on phones.
  */
-export const AuthCard = ({ title, subtitle, children, footer }: AuthCardProps) => (
-  <Container className="py-6 sm:py-12">
-    <div className="animate-enter mx-auto grid max-w-5xl overflow-hidden rounded-[1.75rem] border border-line/80 bg-surface shadow-lift lg:grid-cols-[0.95fr_1.05fr]">
-      <aside className="bg-dusk relative isolate overflow-hidden px-6 pt-7 pb-24 text-white sm:px-10 lg:flex lg:flex-col lg:justify-between lg:p-12 lg:pb-44">
-        <div
-          aria-hidden="true"
-          className="absolute -top-24 -right-20 -z-10 size-72 rounded-full bg-saffron-bright/25 blur-3xl animate-[float-glow_9s_ease-in-out_infinite]"
-        />
-        <div className="flex items-center gap-3">
-          <LogoMark className="size-10 ring-1 ring-white/15 rounded-[11px]" />
-          <p className="font-heading text-xl font-semibold">
-            {site.logoText}
-            <span className="text-glow">{site.logoAccent}</span>
-          </p>
-        </div>
+export const AuthCard = ({ title, subtitle, children, footer }: AuthCardProps) => {
+  const image = placeholderImages.ghatSunrise
 
-        <div className="relative mt-6 lg:mt-0">
-          <p className="max-w-sm font-heading text-2xl leading-snug text-white sm:text-3xl lg:text-4xl">
-            Your journey along the <span className="text-glow">Ganga</span> starts here.
+  return (
+    <Container className="py-4 max-sm:px-0 sm:py-16">
+      <div className="animate-enter mx-auto grid max-w-5xl overflow-hidden border-line bg-canvas sm:rounded-lg sm:border lg:grid-cols-[1fr_1.05fr]">
+        <aside className="relative isolate flex min-h-36 flex-col justify-end overflow-hidden bg-navy-deep p-5 text-ivory sm:min-h-52 sm:p-10 lg:min-h-[38rem] lg:p-12">
+          <ImageWithFallback
+            src={image.url}
+            alt=""
+            sizes="(min-width: 1024px) 40vw, 100vw"
+            className="absolute inset-0 -z-20 size-full"
+          />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-deep/90 via-navy-deep/40 to-navy-deep/10" />
+          <p className="max-w-sm font-sans text-2xl leading-tight font-bold text-ivory sm:text-3xl">
+            Your journey along the Ganga starts here.
           </p>
-          <ul className="mt-8 hidden space-y-3.5 lg:block">
-            {perks.map(({ icon: Icon, text }) => (
-              <li key={text} className="flex items-center gap-3 text-white/80">
-                <span className="flex size-9 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/15">
-                  <Icon className="size-4 text-gold" aria-hidden="true" />
-                </span>
+          <ul className="mt-8 hidden border-t border-ivory/20 lg:block">
+            {perks.map((text) => (
+              <li key={text} className="border-b border-ivory/20 py-3 text-base text-ivory/90">
                 {text}
               </li>
             ))}
           </ul>
+        </aside>
+
+        <div className="p-5 sm:p-10 lg:p-14">
+          <h1 className="font-sans text-2xl font-bold text-ink sm:text-3xl">{title}</h1>
+          {subtitle && <p className="mt-2 text-base text-muted">{subtitle}</p>}
+          <div className="mt-6 sm:mt-10">{children}</div>
+          {footer && <p className="mt-8 border-t border-line pt-5 text-center text-sm text-muted sm:mt-10 sm:pt-6">{footer}</p>}
         </div>
-
-        <SkylineArt className="absolute inset-x-0 bottom-0 -z-10 h-28 opacity-90 lg:h-44" />
-      </aside>
-
-      <div className="relative -mt-14 rounded-t-[1.75rem] bg-surface p-6 sm:p-10 lg:mt-0 lg:rounded-none lg:p-14">
-        <h1 className="text-3xl sm:text-4xl">{title}</h1>
-        {subtitle && <p className="mt-2 text-muted">{subtitle}</p>}
-        <div className="mt-8">{children}</div>
-        {footer && <p className="mt-8 border-t border-line pt-6 text-center text-sm text-muted">{footer}</p>}
       </div>
-    </div>
-  </Container>
-)
+    </Container>
+  )
+}

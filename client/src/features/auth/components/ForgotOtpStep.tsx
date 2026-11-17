@@ -53,7 +53,7 @@ export const ForgotOtpStep = ({ email, onVerified, onBack }: ForgotOtpStepProps)
   return (
     <div className="space-y-6">
       <p className="text-muted">
-        If an account exists for <strong className="text-indigo">{email}</strong>, we have emailed a 6-digit code.
+        If an account exists for <strong className="text-ink">{email}</strong>, we have emailed a 6-digit code.
       </p>
       <OtpInput
         value={code}
@@ -73,7 +73,7 @@ export const ForgotOtpStep = ({ email, onVerified, onBack }: ForgotOtpStepProps)
         Verify code
       </Button>
       <div className="flex items-center justify-between text-sm text-muted">
-        <button type="button" onClick={onBack} className="font-medium text-indigo hover:underline">
+        <button type="button" onClick={onBack} className="font-medium text-ink hover:underline">
           Use a different email
         </button>
         {remaining > 0 ? (
@@ -83,7 +83,7 @@ export const ForgotOtpStep = ({ email, onVerified, onBack }: ForgotOtpStepProps)
             type="button"
             onClick={() => resend.mutate()}
             disabled={resend.isPending}
-            className="font-semibold text-saffron-dark hover:underline disabled:opacity-60"
+            className="font-semibold text-brand-text hover:underline disabled:opacity-60"
           >
             Resend code
           </button>

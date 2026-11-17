@@ -1,104 +1,54 @@
 @import "tailwindcss";
 
-/* `dark:` utilities follow the data-theme attribute set by the theme toggle. */
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
-
 /*
- * Design tokens: the same "Ganga at dusk" palette as the public site
- * (client/src/styles/index.css), plus admin-only status colours.
- * `indigo` is the strong foreground and flips in dark mode; `night` is always dark.
+ * Design tokens: the Booking.com colour scheme, shared with the public site
+ * (client/src/styles/index.css is the reference), plus admin-only status colours.
+ * There is a single light theme; ivory is constant white (text on navy and on brand).
  */
 @theme {
-  --color-cream: #fbf8f4;
-  --color-cream-deep: #f3eee7;
-  --color-surface: #ffffff;
-  --color-line: #e8e1d7;
-  --color-ink: #2a2536;
-  --color-muted: #6b6478;
-  --color-indigo: #1c1838;
-  --color-indigo-soft: #3a3466;
+  --color-canvas: #ffffff;
+  --color-canvas-alt: #f5f5f5;
+  --color-paper: #ffffff;
+  --color-ink: #1a1a1a;
+  --color-ink-soft: #333333;
+  --color-muted: #595959;
+  --color-line: #e7e7e7;
 
-  --color-night: #15112e;
-  --color-night-soft: #241d4a;
-  --color-night-deep: #0c0a1e;
+  --color-navy: #003b95;
+  --color-navy-soft: #004cb8;
+  --color-navy-deep: #00224f;
 
-  --color-saffron: #cf4a2b;
-  --color-saffron-bright: #f0773d;
-  --color-saffron-dark: #b8401f;
-  --color-saffron-soft: #fdebe3;
-  --color-gold: #e9a23b;
-  --color-river: #1f9e94;
-  --color-maroon: #a3243b;
-  --color-whatsapp: #25d366;
+  --color-brand: #006ce4;
+  --color-brand-deep: #0057b8;
+  --color-brand-text: #0057b8;
+  --color-gold: #febb02;
+  --color-ivory: #ffffff;
 
-  --color-danger: #c0362c;
-  --color-danger-soft: #fcebe9;
-  --color-success: #1e7f4f;
-  --color-success-soft: #e4f4eb;
-  --color-info: #2459a6;
-  --color-info-soft: #e7eefa;
+  --color-danger: #d4111e;
+  --color-danger-soft: #fde8ea;
+  --color-success: #008234;
+  --color-success-soft: #e6f4ea;
+  --color-info: #0057b8;
+  --color-info-soft: #ebf3ff;
 
   /* Status badges */
-  --color-status-draft: #5d5870;
-  --color-status-draft-bg: #eeecf2;
-  --color-status-published: #1e7f4f;
-  --color-status-published-bg: #e4f4eb;
-  --color-status-archived: #a3243b;
-  --color-status-archived-bg: #f8e6e9;
+  --color-status-draft: #595959;
+  --color-status-draft-bg: #f0f0f0;
+  --color-status-published: #008234;
+  --color-status-published-bg: #e6f4ea;
+  --color-status-archived: #d4111e;
+  --color-status-archived-bg: #fde8ea;
 
-  --font-heading: "Fraunces Variable", Georgia, "Times New Roman", serif;
-  --font-sans: "Inter Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-heading: "DM Sans Variable", "DM Sans", ui-sans-serif, sans-serif;
+  --font-sans: "DM Sans Variable", "DM Sans", ui-sans-serif, sans-serif;
 
-  --radius-card: 1rem;
-  --radius-control: 0.65rem;
+  --radius-card: 0.5rem;
+  --radius-control: 0.5rem;
 
-  --shadow-card: 0 1px 2px rgb(28 24 56 / 0.05), 0 8px 24px -16px rgb(28 24 56 / 0.22);
-  --shadow-lift: 0 2px 6px rgb(28 24 56 / 0.06), 0 24px 48px -20px rgb(28 24 56 / 0.32);
-  --shadow-glow: 0 8px 24px -10px rgb(207 74 43 / 0.55);
+  --shadow-card: none;
+  --shadow-lift: none;
 
-  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-:root[data-theme="dark"] {
-  color-scheme: dark;
-
-  --color-cream: #100d20;
-  --color-cream-deep: #171329;
-  --color-surface: #1c1834;
-  --color-line: #2e2950;
-  --color-ink: #e9e5f2;
-  --color-muted: #a39db8;
-  --color-indigo: #f6f3ff;
-  --color-indigo-soft: #d9d3f2;
-
-  --color-night: #1a1536;
-  --color-night-soft: #272050;
-  --color-night-deep: #08061a;
-
-  --color-saffron-bright: #ff8a50;
-  --color-saffron-dark: #ff9a72;
-  --color-saffron-soft: #3b1e1e;
-  --color-gold: #f2b04a;
-  --color-river: #4cc9bd;
-  --color-maroon: #f07a8c;
-
-  --color-danger: #f2877c;
-  --color-danger-soft: #3d1c20;
-  --color-success: #5bcb92;
-  --color-success-soft: #16352a;
-  --color-info: #8ab4f2;
-  --color-info-soft: #1a2846;
-
-  --color-status-draft: #b8b2cc;
-  --color-status-draft-bg: #2a2545;
-  --color-status-published: #5bcb92;
-  --color-status-published-bg: #16352a;
-  --color-status-archived: #f07a8c;
-  --color-status-archived-bg: #3d1c26;
-
-  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.35), 0 12px 30px -18px rgb(0 0 0 / 0.7);
-  --shadow-lift: 0 2px 6px rgb(0 0 0 / 0.4), 0 26px 50px -22px rgb(0 0 0 / 0.85);
-  --shadow-glow: 0 8px 28px -10px rgb(240 119 61 / 0.5);
+  --ease-out-soft: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 @layer base {
@@ -112,7 +62,7 @@
   }
 
   body {
-    background-color: var(--color-cream);
+    background-color: var(--color-canvas);
     color: var(--color-ink);
     font-family: var(--font-sans);
     line-height: 1.55;
@@ -123,33 +73,24 @@
   h2,
   h3 {
     font-family: var(--font-heading);
-    font-optical-sizing: auto;
-    color: var(--color-indigo);
-    line-height: 1.18;
-    letter-spacing: -0.02em;
-    font-weight: 600;
+    color: var(--color-ink);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0;
+  }
+
+  svg.lucide {
+    stroke-width: 1.25px;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-saffron);
+    outline: 1px solid var(--color-brand);
     outline-offset: 3px;
-    border-radius: 6px;
   }
 
   ::selection {
-    background: var(--color-saffron);
-    color: #fff;
-  }
-
-  .theme-transition,
-  .theme-transition *,
-  .theme-transition *::before,
-  .theme-transition *::after {
-    transition:
-      background-color 0.35s ease,
-      border-color 0.35s ease,
-      color 0.35s ease,
-      fill 0.35s ease !important;
+    background: var(--color-navy);
+    color: var(--color-ivory);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -163,6 +104,15 @@
   }
 }
 
+@layer components {
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--color-brand-text);
+  }
+}
+
 @layer utilities {
   .scrollbar-none {
     scrollbar-width: none;
@@ -171,34 +121,17 @@
     display: none;
   }
 
-  .bg-dusk {
-    background-color: var(--color-night);
-    background-image:
-      radial-gradient(120% 70% at 85% 110%, rgb(240 119 61 / 0.45), transparent 60%),
-      radial-gradient(90% 60% at 10% 0%, rgb(76 201 189 / 0.16), transparent 60%),
-      linear-gradient(180deg, var(--color-night-deep), var(--color-night));
-  }
-
-  .text-glow {
-    background: linear-gradient(100deg, var(--color-gold), var(--color-saffron-bright) 55%, #ff6b5a);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
   .animate-enter {
-    animation: enter 0.45s var(--ease-out-soft) both;
+    animation: fade-in 0.5s ease-out both;
   }
 }
 
-@keyframes enter {
+@keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(10px);
   }
   to {
     opacity: 1;
-    transform: none;
   }
 }
 
@@ -223,17 +156,5 @@
   }
   to {
     transform: translateX(0);
-  }
-}
-
-@keyframes float-glow {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0.85;
-  }
-  50% {
-    transform: translate3d(0, -14px, 0) scale(1.06);
-    opacity: 1;
   }
 }

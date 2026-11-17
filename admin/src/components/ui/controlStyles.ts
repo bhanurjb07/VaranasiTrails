@@ -2,10 +2,8 @@ import { cn } from '@/lib/cn'
 
 export const controlStyles = (invalid?: boolean, className?: string) =>
   cn(
-    'h-11 w-full rounded-control border bg-surface px-4 text-[0.95rem] text-ink placeholder:text-muted/70',
-    'transition-[border-color,box-shadow] duration-200 focus:outline-none focus:ring-4',
-    invalid
-      ? 'border-danger focus:ring-danger/15'
-      : 'border-line hover:border-muted/45 focus:border-saffron/70 focus:ring-saffron/15',
+    'h-11 w-full rounded-lg border bg-white px-4 text-base text-ink placeholder:text-muted',
+    'transition-colors duration-300 ease-out focus:outline-none',
+    invalid ? 'border-danger focus:border-danger' : 'border-line hover:border-ink/30 focus:border-brand focus:ring-1 focus:ring-brand',
     className,
   )

@@ -47,13 +47,13 @@ export const Menu = ({ items, label, className }: MenuProps) => {
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
-        className="flex size-8 items-center justify-center rounded-control text-muted transition-colors hover:bg-cream-deep hover:text-indigo"
+        className="flex size-8 items-center justify-center rounded-control text-muted transition-colors hover:bg-canvas-alt hover:text-ink"
       >
         <MoreHorizontal className="size-5" aria-hidden="true" />
       </button>
 
       {open && (
-        <div role="menu" className="absolute right-0 z-20 mt-1 w-52 overflow-hidden rounded-card border border-line bg-surface py-1 shadow-lift">
+        <div role="menu" className="absolute right-0 z-20 mt-1 w-52 overflow-hidden rounded-card border border-line bg-paper py-1 ">
           {visible.map(({ label: itemLabel, icon: Icon, onSelect, danger, disabled }) => (
             <button
               key={itemLabel}
@@ -66,7 +66,7 @@ export const Menu = ({ items, label, className }: MenuProps) => {
               }}
               className={cn(
                 'flex w-full items-center gap-3 px-4 py-2 text-left text-sm transition-colors disabled:opacity-50',
-                danger ? 'text-danger hover:bg-danger-soft' : 'text-indigo hover:bg-cream',
+                danger ? 'text-danger hover:bg-danger-soft' : 'text-ink hover:bg-canvas',
               )}
             >
               {Icon && <Icon className="size-4" aria-hidden="true" />}

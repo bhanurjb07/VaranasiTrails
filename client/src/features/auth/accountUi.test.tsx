@@ -82,8 +82,9 @@ describe('profile page', () => {
     render(wrap(auth(), <ProfilePage />, '/profile'))
 
     expect(screen.getByText('sachin@example.com')).toBeTruthy()
-    expect(screen.getByRole('button', { name: /change details/i })).toBeTruthy()
-    expect(screen.getByRole('button', { name: /change password/i })).toBeTruthy()
+    expect(screen.getByRole('button', { name: /edit name/i })).toBeTruthy()
+    expect(screen.getByRole('button', { name: /edit mobile number/i })).toBeTruthy()
+    expect(screen.getByRole('button', { name: /edit password/i })).toBeTruthy()
     expect(screen.queryByLabelText('Current password')).toBeNull()
     expect(screen.queryByLabelText('Full name')).toBeNull()
   })
@@ -91,16 +92,16 @@ describe('profile page', () => {
   it('opens one form at a time and closes it again', async () => {
     render(wrap(auth(), <ProfilePage />, '/profile'))
 
-    await userEvent.click(screen.getByRole('button', { name: /change password/i }))
+    await userEvent.click(screen.getByRole('button', { name: /edit password/i }))
     expect(screen.getByLabelText('Current password')).toBeTruthy()
     expect(screen.getByLabelText('Confirm new password')).toBeTruthy()
     expect(screen.queryByLabelText('Full name')).toBeNull()
 
-    await userEvent.click(screen.getByRole('button', { name: /change details/i }))
+    await userEvent.click(screen.getByRole('button', { name: /edit name/i }))
     expect(screen.getByLabelText('Full name')).toBeTruthy()
     expect(screen.queryByLabelText('Current password')).toBeNull()
 
-    await userEvent.click(screen.getByRole('button', { name: /change details/i }))
+    await userEvent.click(screen.getByRole('button', { name: /cancel editing name/i }))
     expect(screen.queryByLabelText('Full name')).toBeNull()
   })
 })

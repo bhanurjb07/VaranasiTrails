@@ -25,8 +25,8 @@ export const EnquiriesChart = ({ data }: EnquiriesChartProps) => {
           <AreaChart data={data} margin={{ top: 8, right: 8, left: -20, bottom: 0 }}>
             <defs>
               <linearGradient id="enquiryFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="var(--color-saffron)" stopOpacity={0.35} />
-                <stop offset="100%" stopColor="var(--color-saffron)" stopOpacity={0.02} />
+                <stop offset="0%" stopColor="var(--color-navy)" stopOpacity={0.35} />
+                <stop offset="100%" stopColor="var(--color-navy)" stopOpacity={0.02} />
               </linearGradient>
             </defs>
             <CartesianGrid stroke="var(--color-line)" strokeDasharray="3 3" vertical={false} />
@@ -35,9 +35,9 @@ export const EnquiriesChart = ({ data }: EnquiriesChartProps) => {
             <Tooltip
               labelFormatter={(label) => shortDate(String(label))}
               formatter={(value) => [value, 'Enquiries']}
-              contentStyle={{ borderRadius: 12, border: '1px solid var(--color-line)', background: 'var(--color-surface)', color: 'var(--color-ink)', fontSize: 13 }}
+              contentStyle={{ borderRadius: 12, border: '1px solid var(--color-line)', background: 'var(--color-paper)', color: 'var(--color-ink)', fontSize: 13 }}
             />
-            <Area type="monotone" dataKey="count" stroke="var(--color-saffron)" strokeWidth={2.5} fill="url(#enquiryFill)" animationDuration={900} />
+            <Area type="monotone" dataKey="count" stroke="var(--color-navy)" strokeWidth={2.5} fill="url(#enquiryFill)" animationDuration={900} />
           </AreaChart>
         </ResponsiveContainer>
       </div>

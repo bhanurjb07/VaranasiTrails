@@ -109,9 +109,9 @@ export const CategoryModal = ({ open, onClose, category }: CategoryModalProps) =
         </Field>
 
         <div>
-          <span className="mb-1.5 block text-sm font-medium text-indigo">Image</span>
+          <span className="mb-1.5 block text-sm font-medium text-ink">Image</span>
           <div className="flex items-start gap-4">
-            <div className="flex size-24 shrink-0 items-center justify-center overflow-hidden rounded-card bg-cream-deep">
+            <div className="flex size-24 shrink-0 items-center justify-center overflow-hidden rounded-card bg-canvas-alt">
               {shownImage ? <img src={shownImage} alt="" className="size-full object-cover" /> : <ImageOff className="size-6 text-muted" aria-hidden="true" />}
             </div>
             <div className="min-w-0 flex-1 space-y-2">
@@ -142,7 +142,7 @@ export const CategoryModal = ({ open, onClose, category }: CategoryModalProps) =
 
         <div className="flex items-center justify-between rounded-control border border-line px-4 py-3">
           <div>
-            <p className="text-sm font-medium text-indigo">Active</p>
+            <p className="text-sm font-medium text-ink">Active</p>
             <p className="text-xs text-muted">Inactive categories are hidden from the public filters. Their trips stay visible.</p>
           </div>
           <Controller control={control} name="isActive" render={({ field }) => <Switch label="Active" checked={field.value} onChange={field.onChange} />} />

@@ -74,7 +74,7 @@ export const ReviewForm = ({ slug, existing, onDone }: ReviewFormProps) => {
   return (
     <form noValidate onSubmit={submit} className="space-y-4">
       <div>
-        <span className="mb-1.5 block text-sm font-medium text-indigo">Your rating</span>
+        <span className="mb-1.5 block text-sm font-medium text-ink">Your rating</span>
         <Controller
           control={control}
           name="rating"

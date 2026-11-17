@@ -4,19 +4,9 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#FBF8F4" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#003B95" />
     <title>VaranasiTrails | Guided trips in Varanasi and Uttar Pradesh</title>
-    <script>
-      // Apply the saved (or system) theme before the first paint, so there is no flash.
-      ;(function () {
-        try {
-          var t = localStorage.getItem('vt_theme')
-          if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-          document.documentElement.dataset.theme = t
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', t === 'dark' ? '#100D20' : '#FBF8F4')
-        } catch (e) {}
-      })()
-    </script>
   </head>
   <body>
     <div id="root"></div>

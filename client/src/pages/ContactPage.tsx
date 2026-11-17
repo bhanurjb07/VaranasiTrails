@@ -15,12 +15,12 @@ import { useGeneralWhatsAppUrl } from '@/features/enquiry/hooks/useWhatsAppUrl'
 
 const Row = ({ icon, label, children }: { icon: ReactNode; label: string; children: ReactNode }) => (
   <li className="flex gap-4">
-    <span className="flex size-11 shrink-0 items-center justify-center rounded-control bg-saffron-soft text-saffron-dark">
+    <span className="flex size-11 shrink-0 items-center justify-center rounded-control bg-canvas-alt text-brand-text">
       {icon}
     </span>
     <div>
-      <p className="text-xs font-semibold tracking-wide text-muted uppercase">{label}</p>
-      <div className="font-medium text-indigo">{children}</div>
+      <p className="text-sm font-medium text-muted">{label}</p>
+      <div className="font-medium text-ink">{children}</div>
     </div>
   </li>
 )
@@ -76,7 +76,7 @@ export const ContactPage = () => {
 
           {activeSocialLinks.length > 0 && (
           <div>
-            <h2 className="mb-3 font-sans text-sm font-semibold tracking-wide text-muted uppercase">Follow us</h2>
+            <h2 className="mb-3 font-sans text-sm font-medium text-muted">Follow us</h2>
             <ul className="flex gap-3">
               {activeSocialLinks.map((link) => (
                 <li key={link.platform}>
@@ -85,7 +85,7 @@ export const ContactPage = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${link.label}: ${link.handle}`}
-                    className="flex size-11 items-center justify-center rounded-full bg-night text-white transition-colors hover:bg-saffron"
+                    className="flex size-11 items-center justify-center rounded-control border border-line text-ink transition-colors duration-500 hover:border-ink"
                   >
                     <SocialIcon platform={link.platform} className="size-5" />
                   </a>

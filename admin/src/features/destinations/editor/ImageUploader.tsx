@@ -35,7 +35,7 @@ export const ImageUploader = ({ items, onFiles, onDismiss, count }: ImageUploade
     {items.length > 0 && (
       <ul className="space-y-2" aria-label="Upload progress">
         {items.map((item) => (
-          <li key={item.id} className="rounded-control border border-line bg-surface px-3 py-2.5">
+          <li key={item.id} className="rounded-control border border-line bg-paper px-3 py-2.5">
             <div className="flex items-center gap-3">
               {item.status === 'done' ? (
                 <CircleCheck className="size-5 shrink-0 text-success" aria-hidden="true" />
@@ -44,12 +44,12 @@ export const ImageUploader = ({ items, onFiles, onDismiss, count }: ImageUploade
               ) : item.status === 'queued' ? (
                 <ImageIcon className="size-5 shrink-0 text-muted" aria-hidden="true" />
               ) : (
-                <Spinner className="size-5 shrink-0 text-saffron" />
+                <Spinner className="size-5 shrink-0 text-navy" />
               )}
-              <span className="min-w-0 flex-1 truncate text-sm font-medium text-indigo">{item.name}</span>
+              <span className="min-w-0 flex-1 truncate text-sm font-medium text-ink">{item.name}</span>
               <span className={cn('text-xs font-semibold', item.status === 'error' ? 'text-danger' : 'text-muted')}>{statusText[item.status]}</span>
               {(item.status === 'error' || item.status === 'queued') && (
-                <button type="button" onClick={() => onDismiss(item.id)} aria-label={`Dismiss ${item.name}`} className="rounded p-1 text-muted hover:text-indigo">
+                <button type="button" onClick={() => onDismiss(item.id)} aria-label={`Dismiss ${item.name}`} className="rounded p-1 text-muted hover:text-ink">
                   <X className="size-4" aria-hidden="true" />
                 </button>
               )}
@@ -62,9 +62,9 @@ export const ImageUploader = ({ items, onFiles, onDismiss, count }: ImageUploade
                 aria-valuemin={0}
                 aria-valuemax={100}
                 aria-valuenow={Math.round(item.progress * 100)}
-                className="mt-2 h-1.5 overflow-hidden rounded-full bg-cream-deep"
+                className="mt-2 h-1 overflow-hidden bg-canvas-alt"
               >
-                <div className="h-full rounded-full bg-saffron transition-[width]" style={{ width: `${Math.round(item.progress * 100)}%` }} />
+                <div className="h-full bg-navy transition-[width]" style={{ width: `${Math.round(item.progress * 100)}%` }} />
               </div>
             )}
             {item.error && <p role="alert" className="mt-1.5 text-xs text-danger">{item.error}</p>}

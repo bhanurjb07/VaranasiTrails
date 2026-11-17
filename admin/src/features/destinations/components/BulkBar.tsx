@@ -16,7 +16,7 @@ export const BulkBar = ({ count, onAction, onClear, busy }: BulkBarProps) => (
   <div
     role="region"
     aria-label="Bulk actions"
-    className="mb-4 flex flex-wrap items-center gap-2 animate-enter rounded-card bg-night px-4 py-3 text-white shadow-lift ring-1 ring-white/10"
+    className="mb-4 flex flex-wrap items-center gap-2 animate-enter rounded-card bg-navy px-4 py-3 text-ivory ring-1 ring-ivory/10"
   >
     <span className="mr-2 text-sm font-semibold">{count} selected</span>
     <Button size="sm" variant="primary" disabled={busy} onClick={() => onAction('publish')}>
@@ -34,7 +34,7 @@ export const BulkBar = ({ count, onAction, onClear, busy }: BulkBarProps) => (
     <Button size="sm" variant="danger" disabled={busy} onClick={() => onAction('archive')}>
       <Archive className="size-4" aria-hidden="true" /> Archive
     </Button>
-    <button type="button" onClick={onClear} aria-label="Clear selection" className="ml-auto rounded-control p-1.5 text-white/70 hover:bg-white/10 hover:text-white">
+    <button type="button" onClick={onClear} aria-label="Clear selection" className="ml-auto rounded-control p-1.5 text-ivory/70 hover:bg-ivory/10 hover:text-ivory">
       <X className="size-5" aria-hidden="true" />
     </button>
   </div>

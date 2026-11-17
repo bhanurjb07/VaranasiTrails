@@ -55,11 +55,11 @@ export const VideoSection = ({ destinationId, video, saving, onSaveYouTube, onSa
 
   return (
     <div className="space-y-4">
-      <h3 className="font-sans text-base font-semibold text-indigo">Video (optional)</h3>
+      <h3 className="font-sans text-base font-semibold text-ink">Video (optional)</h3>
 
       {video && (
         <div className="space-y-3">
-          <div className="aspect-video overflow-hidden rounded-card bg-night">
+          <div className="aspect-video overflow-hidden rounded-card bg-navy">
             {video.type === 'YOUTUBE' ? (
               <iframe src={video.url} title="Trip video" loading="lazy" allowFullScreen className="size-full" />
             ) : (
@@ -83,7 +83,7 @@ export const VideoSection = ({ destinationId, video, saving, onSaveYouTube, onSa
             )}
           </Field>
           {embed && (
-            <div className="aspect-video overflow-hidden rounded-card bg-night">
+            <div className="aspect-video overflow-hidden rounded-card bg-navy">
               <iframe src={embed} title="YouTube preview" loading="lazy" allowFullScreen className="size-full" />
             </div>
           )}
@@ -104,14 +104,14 @@ export const VideoSection = ({ destinationId, video, saving, onSaveYouTube, onSa
         </div>
 
         <div>
-          <p className="mb-1.5 text-sm font-medium text-indigo">Or upload a file</p>
+          <p className="mb-1.5 text-sm font-medium text-ink">Or upload a file</p>
           {progress !== null ? (
             <div className="flex items-center gap-3 rounded-card border border-line p-4" role="status">
-              <Spinner className="size-5 text-saffron" />
+              <Spinner className="size-5 text-navy" />
               <div className="flex-1">
-                <p className="text-sm font-medium text-indigo">Uploading video... {Math.round(progress * 100)}%</p>
-                <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-cream-deep">
-                  <div className="h-full rounded-full bg-saffron" style={{ width: `${Math.round(progress * 100)}%` }} />
+                <p className="text-sm font-medium text-ink">Uploading video... {Math.round(progress * 100)}%</p>
+                <div className="mt-2 h-1 overflow-hidden bg-canvas-alt">
+                  <div className="h-full bg-navy" style={{ width: `${Math.round(progress * 100)}%` }} />
                 </div>
               </div>
             </div>

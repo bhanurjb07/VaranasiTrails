@@ -32,7 +32,7 @@ export const UserMenu = ({ onDark }: UserMenuProps) => {
 
   if (!user) return null
 
-  const itemClass = 'flex items-center gap-3 px-4 py-2.5 text-sm text-indigo transition-colors hover:bg-cream-deep'
+  const itemClass = 'flex items-center gap-3 px-4 py-3 text-base font-medium text-ink transition-colors duration-200 hover:bg-brand/5 hover:text-brand-text'
 
   return (
     <div ref={ref} className="relative">
@@ -42,11 +42,11 @@ export const UserMenu = ({ onDark }: UserMenuProps) => {
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
         className={cn(
-          'flex items-center gap-2 rounded-full py-1 pr-2.5 pl-1 transition-colors',
-          onDark ? 'text-white hover:bg-white/15' : 'text-indigo hover:bg-indigo/5',
+          'flex items-center gap-2 rounded-lg py-1 pr-2.5 pl-1 transition-colors duration-500',
+          onDark ? "text-ivory hover:bg-ivory/10" : "text-ink hover:bg-ink/5",
         )}
       >
-        <span className="flex size-9 items-center justify-center rounded-full bg-saffron font-semibold text-white">
+        <span className="flex size-9 items-center justify-center rounded-full bg-brand font-semibold text-ivory">
           {user.name.charAt(0).toUpperCase()}
         </span>
         <span className="hidden max-w-28 truncate text-sm font-medium lg:inline">{user.name.split(' ')[0]}</span>
@@ -56,14 +56,14 @@ export const UserMenu = ({ onDark }: UserMenuProps) => {
       {open && (
         <div
           role="menu"
-          className="animate-enter absolute right-0 mt-2 w-56 origin-top-right overflow-hidden rounded-card border border-line bg-surface py-1 shadow-lift"
+          className="animate-enter absolute right-0 mt-3 w-64 origin-top-right overflow-hidden rounded-lg border border-line bg-white py-1 shadow-lg"
         >
-          <p className="truncate border-b border-line px-4 py-3 text-xs text-muted">{user.email}</p>
+          <p className="truncate border-b border-line px-4 py-3 text-sm text-muted">{user.email}</p>
           <Link role="menuitem" to="/profile" className={itemClass} onClick={() => setOpen(false)}>
-            <User className="size-4" aria-hidden="true" /> Profile
+            <User className="size-5 text-brand" aria-hidden="true" /> Profile
           </Link>
           <Link role="menuitem" to="/wishlist" className={itemClass} onClick={() => setOpen(false)}>
-            <Heart className="size-4" aria-hidden="true" /> Wishlist
+            <Heart className="size-5 text-brand" aria-hidden="true" /> Wishlist
           </Link>
           <button
             role="menuitem"
@@ -75,7 +75,7 @@ export const UserMenu = ({ onDark }: UserMenuProps) => {
               navigate('/login')
             }}
           >
-            <Repeat className="size-4" aria-hidden="true" /> Switch account
+            <Repeat className="size-5 text-brand" aria-hidden="true" /> Switch account
           </button>
           <button
             role="menuitem"
@@ -88,7 +88,7 @@ export const UserMenu = ({ onDark }: UserMenuProps) => {
               navigate('/')
             }}
           >
-            <LogOut className="size-4" aria-hidden="true" /> Sign out
+            <LogOut className="size-5 text-brand" aria-hidden="true" /> Sign out
           </button>
         </div>
       )}

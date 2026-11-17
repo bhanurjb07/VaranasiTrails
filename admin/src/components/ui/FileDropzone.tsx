@@ -39,17 +39,17 @@ export const FileDropzone = ({ onFiles, accept, multiple = false, disabled = fal
       onDrop={onDrop}
       className={cn(
         'rounded-card border-2 border-dashed px-6 py-8 text-center transition-colors',
-        over ? 'border-saffron bg-saffron-soft/60' : 'border-line bg-cream/40',
+        over ? 'border-navy bg-canvas-alt/60' : 'border-line bg-canvas/40',
         disabled && 'opacity-50',
       )}
     >
-      <UploadCloud className="mx-auto size-8 text-saffron-dark" aria-hidden="true" />
+      <UploadCloud className="mx-auto size-8 text-brand-text" aria-hidden="true" />
       <button
         type="button"
         disabled={disabled}
         aria-describedby={hintId}
         onClick={() => inputRef.current?.click()}
-        className="mt-2 font-semibold text-indigo hover:underline disabled:no-underline"
+        className="mt-2 font-semibold text-ink hover:underline disabled:no-underline"
       >
         {title}
       </button>

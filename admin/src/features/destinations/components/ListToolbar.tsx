@@ -90,7 +90,7 @@ export const ListToolbar = ({ query, onChange }: ListToolbarProps) => {
           </Select>
         </div>
 
-        <label className="flex cursor-pointer items-center gap-2 text-sm font-medium text-indigo">
+        <label className="flex cursor-pointer items-center gap-2 text-sm font-medium text-ink">
           <Checkbox label="Featured only" checked={query.featured === true} onChange={(event) => onChange({ featured: event.target.checked ? 'true' : undefined })} />
           Featured only
         </label>

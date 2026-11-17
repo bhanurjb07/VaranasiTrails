@@ -2,7 +2,7 @@
 
 The public website: browse trips, read a product-style detail page, sign up with an email OTP, keep a wishlist, leave reviews and start a WhatsApp chat to book. There is **no booking or payment system**; bookings happen on WhatsApp.
 
-**Stack:** React 19 · Vite · TypeScript (strict) · React Router (lazy routes) · TanStack Query · Tailwind CSS v4 · react-hook-form + zod · Framer Motion · lucide-react · sonner (toasts) · react-helmet-async (SEO) · three.js (home page 3D background). Fonts: Fraunces (headings) and Inter (body) via `@fontsource-variable`. Light and dark mode with a small toggle in the header.
+**Stack:** React 19 · Vite · TypeScript (strict) · React Router (lazy routes) · TanStack Query · Tailwind CSS v4 · react-hook-form + zod · Framer Motion · lucide-react · sonner (toasts) · react-helmet-async (SEO) · GSAP (hover details). Fonts: Cormorant Garamond (headlines) and DM Sans (body) via `@fontsource-variable`. Light and dark mode with a small toggle in the header.
 
 > Full documentation lives in [`../docs/`](../docs/README.md): [Public website guide](../docs/13-client-app.md), [API reference](../docs/06-api-conventions.md#endpoint-index), [Troubleshooting](../docs/17-troubleshooting.md).
 
@@ -86,18 +86,34 @@ All routes live in `src/app/router.tsx` (each page is a lazy chunk) and share th
 
 ## Design system, theme and motion
 
-- **Palette ("Ganga at dusk"):** deep twilight violet (`night`), a sindoor/saffron primary (`saffron`), diya gold (`gold`) and a Ganga teal accent (`river`), on warm off-white surfaces. Tokens live in `src/styles/index.css` (`@theme`) and are mirrored in `admin/src/styles/index.css`, so both apps look the same. Components use the token utilities (`bg-saffron`, `text-indigo` ...), never raw hex values.
-- **Light / dark mode:** every colour token is redefined under `:root[data-theme="dark"]`. `indigo` is the strong foreground and flips between modes; `night` is always dark, so `bg-night text-white` (and the `bg-dusk` gradient utility) read correctly in both. The small sun/moon button (`ThemeToggle`) switches mode; the choice is stored in `localStorage` (`vt_theme`) and, until the visitor picks one, the operating-system setting is followed. A tiny inline script in `index.html` applies the theme before the first paint, so there is no flash. `dark:` utilities are available through a `@custom-variant`.
-- **Fonts:** Fraunces (headings) and Inter (body), through `@fontsource-variable`.
-- **Motion:** short, soft and purposeful. `animate-enter` (fade-up on mount), `animate-page` (opacity-only fade on route change, so fixed bars never shift), `.reveal` (scroll-driven reveal with no JavaScript; browsers without support simply show the content), hover lifts on cards and buttons, and a cross-fade when the theme changes. Everything is switched off for visitors who prefer reduced motion.
+Quiet luxury, like a private-estate or safari-lodge brand: ivory, deep navy green and a little brand, with photography leading.
 
-### 3D home background
+- **Tokens:** one place, `src/styles/index.css` (`@theme`), mirrored in `admin/src/styles/index.css`. Components use the token utilities, never raw hex values:
 
-The home hero renders a "Ganga at dusk" scene with three.js (`src/features/home/scene/`): a violet-to-saffron sky, a ghats-and-temples skyline with lit windows, animated water with a glittering reflection of the glow, floating diyas with reflections, rising embers and twinkling stars.
+  | Token | Light | Use |
+  |---|---|---|
+  | `canvas` | `#F4EFE6` | page background (ivory) |
+  | `canvas-alt` | `#EAE3D6` | alternate sections |
+  | `paper` | `#F9F6EF` | cards and inputs (never pure white) |
+  | `ink` | `#1C1F1A` | headings and body text |
+  | `muted` | `#65645A` | secondary text |
+  | `navy` | `#1F3A2E` | nav, footer, primary buttons, dark feature sections |
+  | `brand` | `#B08D57` | thin rules, small marks, hover states (about 5% of a page) |
+  | `brand-text` | `#7A5E34` | brand for text on ivory |
+  | `line` | `#D8CFBE` | 1px hairlines |
+  | `ivory` | `#F4EFE6` | constant ivory: text on navy and on photographs |
 
-- `HeroBackground.tsx` lazy-loads `heroScene.ts`, so three.js is a separate chunk downloaded only on the home page (about 141 KB gzipped). The dusk gradient behind it shows while it loads or if WebGL is unavailable.
-- Works on phones and laptops: tall screens get a wider lens and tilt down so the river fills the frame; phones render fewer particles at a lower pixel ratio and sway gently on their own (a finger drag nudges the view); laptops follow the mouse slightly. Scrolling lifts the camera a little.
-- The animation pauses when the hero is off-screen or the tab is hidden, and visitors who prefer reduced motion get a single still frame.
+  `muted` and `brand-text` are a shade deeper than the original brief (`#6B6A60`, `#8F6F3F`) so small text passes WCAG AA on both backgrounds (5.2:1 and 5.3:1 on ivory). Ivory on navy is 10.8:1.
+- **Shape and depth:** 2px corners everywhere (buttons, inputs, cards, images); 1px hairlines instead of shadows (the shadow tokens resolve to `none`); no glass blur, gradient text or glows.
+- **Type:** Cormorant Garamond for headlines (light/regular, large, tight leading) and DM Sans for body and UI; labels are small uppercase DM Sans at 0.14em tracking (`.eyebrow`). Icons are thin-line (lucide at a 1.25px stroke, set globally).
+- **Light / dark mode:** dark mode is "the lodge at night": a navy-black canvas, ivory text and brand details, defined under `:root[data-theme="dark"]`. The small sun/moon button (`ThemeToggle`) switches it; the choice is stored in `localStorage` (`vt_theme`), the system setting is followed until one is chosen, and an inline script in `index.html` applies it before the first paint.
+- **Motion:** slow and quiet. Fades of 400 to 700 ms (`animate-enter`, `animate-page`, the scroll-driven `.reveal`), a very slow scale drift on the hero photograph, and gentle image zoom on card hover. GSAP (`src/lib/hoverMotion.ts`) drives the hover details on the FAQ and accordion rows (a brand rule grows down the left edge and the question eases right), the "How booking works" steps (a brand rule draws across the top and the numeral lifts) and the "What every trip page tells you" columns (the rule draws over the hairline, the icon lifts). Hovers also run on keyboard focus, reverse smoothly, and are switched off for visitors who prefer reduced motion. No bounce, pulse or animated gradients.
+
+### Home page
+
+- **Hero:** a full-bleed photograph of the Ganges with the copy set low on the left, and a booking bar with hairline-separated fields (where, experience, duration) and one navy button. The bar opens the trips list with those filters applied (`q`, `category`, `minDays` / `maxDays`).
+- **Trips:** an editorial grid (one large trip beside two smaller ones on the home page; in lists, every fifth trip is shown wide). Cards are photograph first, then a small uppercase location, a serif title, a muted line and the price in brand.
+- **Sections:** featured trips, categories (photo tiles), "How booking works" (navy band), "What every trip page tells you", FAQ (two columns) and a full-bleed photographic call to action.
 
 ## Phone and tablet layout
 

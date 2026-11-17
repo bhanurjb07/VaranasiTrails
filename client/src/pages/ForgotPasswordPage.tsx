@@ -11,7 +11,7 @@ export const ForgotPasswordPage = () => (
       title="Reset your password"
       subtitle="Enter your email, confirm the code we send, then choose a new password."
       footer={
-        <Link to="/login" className="font-semibold text-saffron-dark hover:underline">
+        <Link to="/login" className="font-semibold text-brand-text hover:underline">
           Back to log in
         </Link>
       }

@@ -1,27 +1,62 @@
-import { BadgeCheck, ChevronDown, KeyRound, LogOut, Pencil, Repeat, TriangleAlert } from 'lucide-react'
-import { useState } from 'react'
+import { BadgeCheck, Heart, LogOut, Repeat, ShieldCheck, TriangleAlert, User } from 'lucide-react'
+import { useState, type ReactNode } from 'react'
 import { Link, useNavigate } from 'react-router'
 
 import { PageHeader } from '@/components/common/PageHeader'
 import { SeoHead } from '@/components/common/SeoHead'
 import { Container } from '@/components/layout/Container'
 import { Badge } from '@/components/ui/Badge'
-import { Button } from '@/components/ui/Button'
-import { Card } from '@/components/ui/Card'
 import { toast } from '@/components/ui/toast'
 import { ChangePasswordForm } from '@/features/auth/components/ChangePasswordForm'
 import { ProfileForm } from '@/features/auth/components/ProfileForm'
 import { useAuth } from '@/features/auth/useAuth'
-import { cn } from '@/lib/cn'
 import { formatDate } from '@/lib/format'
 
 type Panel = 'details' | 'password'
 
-const Row = ({ label, children }: { label: string; children: React.ReactNode }) => (
-  <div className="flex items-start justify-between gap-4 border-b border-line/70 py-3 text-sm last:border-0">
-    <dt className="text-muted">{label}</dt>
-    <dd className="text-right font-medium break-all text-indigo">{children}</dd>
+const sideLink =
+  'flex w-full items-center gap-3 rounded-lg px-3 py-3 text-left text-base font-medium text-ink transition-colors duration-200 hover:bg-brand/5 hover:text-brand-text'
+
+/** One line of a settings list: label, current value, and an Edit link on the right. */
+const Row = ({ label, children, action }: { label: string; children: ReactNode; action?: ReactNode }) => (
+  <div className="grid grid-cols-[1fr_auto] items-start gap-x-4 gap-y-1 border-b border-line py-4 last:border-b-0 sm:grid-cols-[11rem_1fr_auto]">
+    <dt className="col-span-2 text-sm text-muted sm:col-span-1 sm:pt-0.5 sm:text-base">{label}</dt>
+    <dd className="min-w-0 break-words font-medium text-ink">{children}</dd>
+    <div className="text-right">{action}</div>
   </div>
+)
+
+const EditLink = ({
+  open,
+  label,
+  controls,
+  onClick,
+}: {
+  open: boolean
+  label: string
+  controls: string
+  onClick: () => void
+}) => (
+  <button
+    type="button"
+    aria-expanded={open}
+    aria-controls={controls}
+    aria-label={`${open ? 'Cancel editing' : 'Edit'} ${label}`}
+    onClick={onClick}
+    className="rounded-lg px-3 py-1.5 font-medium text-brand-text transition-colors duration-200 hover:bg-brand/5"
+  >
+    {open ? 'Cancel' : 'Edit'}
+  </button>
+)
+
+const Section = ({ id, title, text, children }: { id: string; title: string; text: string; children: ReactNode }) => (
+  <section id={id} aria-labelledby={`${id}-title`} className="scroll-mt-32 rounded-lg border border-line bg-canvas p-5 sm:p-6">
+    <h2 id={`${id}-title`} className="font-sans text-xl font-bold text-ink">
+      {title}
+    </h2>
+    <p className="mt-1 text-base text-muted">{text}</p>
+    <div className="mt-4">{children}</div>
+  </section>
 )
 
 export const ProfilePage = () => {
@@ -32,102 +67,112 @@ export const ProfilePage = () => {
   if (!user) return null
 
   const toggle = (panel: Panel) => setOpen((current) => (current === panel ? null : panel))
+  const close = () => setOpen(null)
 
   return (
     <>
       <SeoHead title="Your profile" noIndex />
       <PageHeader eyebrow="Account" title={`Hello, ${user.name.split(' ')[0]}`}>
-        <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-muted">
+        <div className="mt-4 flex flex-wrap items-center gap-3 text-base text-ivory/90">
           {user.emailVerified ? (
             <Badge variant="success">
-              <BadgeCheck className="size-3.5" aria-hidden="true" /> Email verified
+              <BadgeCheck className="size-4" aria-hidden="true" /> Email verified
             </Badge>
           ) : (
-            <Badge variant="saffron">
-              <TriangleAlert className="size-3.5" aria-hidden="true" /> Email not verified
+            <Badge variant="brand">
+              <TriangleAlert className="size-4" aria-hidden="true" /> Email not verified
             </Badge>
           )}
           <span>Member since {formatDate(user.createdAt)}</span>
-          <Link to="/wishlist" className="font-semibold text-saffron-dark hover:underline">
-            View wishlist
-          </Link>
         </div>
       </PageHeader>
 
-      <Container narrow className="space-y-5 py-6 sm:py-10">
-        <Card className="p-5 sm:p-8">
-          <h2 className="text-2xl">Your details</h2>
-          <dl className="mt-3">
-            <Row label="Name">{user.name}</Row>
-            <Row label="Email">{user.email}</Row>
-            <Row label="Mobile number">{user.phone}</Row>
-          </dl>
+      <Container className="grid gap-6 py-6 sm:py-10 lg:grid-cols-[16rem_1fr] lg:items-start">
+        <nav aria-label="Account" className="rounded-lg border border-line bg-canvas p-2 lg:sticky lg:top-24">
+          <a href="#personal" className={sideLink}>
+            <User className="size-5 text-brand" aria-hidden="true" /> Personal details
+          </a>
+          <a href="#security" className={sideLink}>
+            <ShieldCheck className="size-5 text-brand" aria-hidden="true" /> Security
+          </a>
+          <Link to="/wishlist" className={sideLink}>
+            <Heart className="size-5 text-brand" aria-hidden="true" /> Wishlist
+          </Link>
+          <div className="my-2 border-t border-line" />
+          <button
+            type="button"
+            className={sideLink}
+            onClick={async () => {
+              await logout()
+              navigate('/login')
+            }}
+          >
+            <Repeat className="size-5 text-brand" aria-hidden="true" /> Switch account
+          </button>
+          <button
+            type="button"
+            className={sideLink}
+            onClick={async () => {
+              await logout()
+              toast.success('You have been signed out')
+              navigate('/')
+            }}
+          >
+            <LogOut className="size-5 text-brand" aria-hidden="true" /> Sign out
+          </button>
+        </nav>
 
-          <div className="mt-5 flex flex-wrap gap-3">
-            <Button
-              type="button"
-              variant={open === 'details' ? 'secondary' : 'outline'}
-              aria-expanded={open === 'details'}
-              aria-controls="panel-details"
-              onClick={() => toggle('details')}
-            >
-              <Pencil className="size-4" aria-hidden="true" />
-              Change details
-              <ChevronDown className={cn('size-4 transition-transform', open === 'details' && 'rotate-180')} aria-hidden="true" />
-            </Button>
-            <Button
-              type="button"
-              variant={open === 'password' ? 'secondary' : 'outline'}
-              aria-expanded={open === 'password'}
-              aria-controls="panel-password"
-              onClick={() => toggle('password')}
-            >
-              <KeyRound className="size-4" aria-hidden="true" />
-              Change password
-              <ChevronDown className={cn('size-4 transition-transform', open === 'password' && 'rotate-180')} aria-hidden="true" />
-            </Button>
-          </div>
-        </Card>
+        <div className="min-w-0 space-y-6">
+          <Section id="personal" title="Personal details" text="Update your name and mobile number. Your email is how you log in.">
+            <dl>
+              <Row
+                label="Full name"
+                action={<EditLink open={open === 'details'} label="name" controls="panel-details" onClick={() => toggle('details')} />}
+              >
+                {user.name}
+              </Row>
+              <Row label="Email address">
+                <span className="break-all">{user.email}</span>
+                <span className="mt-1 block text-sm font-normal text-muted">
+                  {user.emailVerified ? 'Verified' : 'Not verified yet'}
+                </span>
+              </Row>
+              <Row
+                label="Mobile number"
+                action={
+                  <EditLink open={open === 'details'} label="mobile number" controls="panel-details" onClick={() => toggle('details')} />
+                }
+              >
+                {user.phone}
+              </Row>
+            </dl>
 
-        {open === 'details' && (
-          <Card id="panel-details" className="p-5 sm:p-8">
-            <h2 className="mb-6 text-2xl">Change details</h2>
-            <ProfileForm />
-          </Card>
-        )}
+            {open === 'details' && (
+              <div id="panel-details" className="mt-4 rounded-lg bg-canvas-alt p-5">
+                <h3 className="mb-4 font-sans text-lg font-bold text-ink">Edit personal details</h3>
+                <ProfileForm onDone={close} />
+              </div>
+            )}
+          </Section>
 
-        {open === 'password' && (
-          <Card id="panel-password" className="p-5 sm:p-8">
-            <h2 className="mb-6 text-2xl">Change password</h2>
-            <ChangePasswordForm />
-          </Card>
-        )}
+          <Section id="security" title="Security" text="Choose a strong password you don't use anywhere else.">
+            <dl>
+              <Row
+                label="Password"
+                action={<EditLink open={open === 'password'} label="password" controls="panel-password" onClick={() => toggle('password')} />}
+              >
+                ••••••••••
+              </Row>
+            </dl>
 
-        <Card className="p-5 sm:p-8">
-          <div className="flex flex-wrap gap-3">
-            <Button
-              variant="outline"
-              onClick={async () => {
-                await logout()
-                navigate('/login')
-              }}
-            >
-              <Repeat className="size-4" aria-hidden="true" />
-              Switch account
-            </Button>
-            <Button
-              variant="outline"
-              onClick={async () => {
-                await logout()
-                toast.success('You have been signed out')
-                navigate('/')
-              }}
-            >
-              <LogOut className="size-4" aria-hidden="true" />
-              Sign out
-            </Button>
-          </div>
-        </Card>
+            {open === 'password' && (
+              <div id="panel-password" className="mt-4 rounded-lg bg-canvas-alt p-5">
+                <h3 className="mb-4 font-sans text-lg font-bold text-ink">Change password</h3>
+                <ChangePasswordForm onDone={close} />
+              </div>
+            )}
+          </Section>
+        </div>
       </Container>
     </>
   )

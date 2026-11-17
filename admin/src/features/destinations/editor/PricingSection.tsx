@@ -55,9 +55,9 @@ export const PricingSection = ({ form, disabled }: PricingSectionProps) => {
         </div>
 
         {typeof price === 'number' && price > 0 && (
-          <p className="flex flex-wrap items-center gap-3 rounded-control bg-cream px-4 py-3 text-sm" aria-live="polite">
+          <p className="flex flex-wrap items-center gap-3 rounded-control bg-canvas px-4 py-3 text-sm" aria-live="polite">
             <span className="text-muted">Visitors will see</span>
-            <span className="font-heading text-2xl font-semibold text-indigo">{formatPrice(price)}</span>
+            <span className="font-sans text-2xl font-bold text-ink">{formatPrice(price)}</span>
             {original !== null && original > price && (
               <>
                 <span className="text-muted line-through">{formatPrice(original)}</span>

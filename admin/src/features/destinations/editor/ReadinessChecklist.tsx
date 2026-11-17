@@ -23,9 +23,9 @@ export const ReadinessChecklist = ({ items }: { items: readonly ReadinessItem[] 
         aria-valuemin={0}
         aria-valuemax={items.length}
         aria-valuenow={done}
-        className="mb-4 h-1.5 overflow-hidden rounded-full bg-cream-deep"
+        className="mb-4 h-1 overflow-hidden bg-canvas-alt"
       >
-        <div className={cn('h-full rounded-full transition-[width]', ready ? 'bg-success' : 'bg-saffron')} style={{ width: `${(done / items.length) * 100}%` }} />
+        <div className={cn('h-full transition-[width]', ready ? 'bg-success' : 'bg-navy')} style={{ width: `${(done / items.length) * 100}%` }} />
       </div>
 
       <ul className="space-y-1.5">
@@ -33,12 +33,12 @@ export const ReadinessChecklist = ({ items }: { items: readonly ReadinessItem[] 
           <li key={item.id}>
             <a
               href={`#${item.section}`}
-              className={cn('flex items-center gap-2.5 rounded-control px-1.5 py-1 text-sm hover:bg-cream', item.ok ? 'text-muted' : 'font-medium text-indigo')}
+              className={cn('flex items-center gap-2.5 rounded-control px-1.5 py-1 text-sm hover:bg-canvas', item.ok ? 'text-muted' : 'font-medium text-ink')}
             >
               {item.ok ? (
                 <Check className="size-4 shrink-0 text-success" aria-hidden="true" />
               ) : (
-                <Circle className="size-4 shrink-0 text-saffron-dark" aria-hidden="true" />
+                <Circle className="size-4 shrink-0 text-brand-text" aria-hidden="true" />
               )}
               <span className={cn(item.ok && 'line-through decoration-line')}>{item.label}</span>
               <span className="sr-only">{item.ok ? '(done)' : '(missing)'}</span>

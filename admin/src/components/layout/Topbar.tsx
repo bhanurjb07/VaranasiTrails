@@ -2,7 +2,6 @@ import { ChevronDown, ExternalLink, LogOut, Menu, UserRound } from 'lucide-react
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 
-import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { useAuth } from '@/features/auth/useAuth'
 import { env } from '@/lib/env'
 import { Breadcrumbs } from './Breadcrumbs'
@@ -27,16 +26,16 @@ export const Topbar = ({ onOpenMenu }: { onOpenMenu: () => void }) => {
     }
   }, [open])
 
-  const item = 'flex w-full items-center gap-3 px-4 py-2.5 text-sm text-indigo transition-colors hover:bg-cream-deep'
+  const item = 'flex w-full items-center gap-3 px-4 py-2.5 text-sm text-ink transition-colors hover:bg-canvas-alt'
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center justify-between gap-4 border-b border-line/70 bg-cream/80 px-4 backdrop-blur-xl sm:px-6">
+    <header className="sticky top-0 z-30 flex h-16 items-center justify-between gap-4 border-b border-line/70 bg-canvas/80 px-4 sm:px-6">
       <div className="flex items-center gap-3">
         <button
           type="button"
           onClick={onOpenMenu}
           aria-label="Open menu"
-          className="rounded-control p-2 text-indigo hover:bg-cream-deep lg:hidden"
+          className="rounded-control p-2 text-ink hover:bg-canvas-alt lg:hidden"
         >
           <Menu className="size-6" aria-hidden="true" />
         </button>
@@ -44,12 +43,11 @@ export const Topbar = ({ onOpenMenu }: { onOpenMenu: () => void }) => {
       </div>
 
       <div className="flex items-center gap-1.5 sm:gap-2">
-        <ThemeToggle />
         <a
           href={env.publicSiteUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden items-center gap-1.5 rounded-control px-3 py-2 text-sm font-semibold text-indigo transition-colors hover:bg-cream-deep sm:flex"
+          className="hidden items-center gap-1.5 rounded-control px-3 py-2 text-sm font-semibold text-ink transition-colors hover:bg-canvas-alt sm:flex"
         >
           Open public site <ExternalLink className="size-4" aria-hidden="true" />
         </a>
@@ -60,17 +58,17 @@ export const Topbar = ({ onOpenMenu }: { onOpenMenu: () => void }) => {
             aria-haspopup="menu"
             aria-expanded={open}
             onClick={() => setOpen((value) => !value)}
-            className="flex items-center gap-2 rounded-control py-1 pr-2 pl-1 hover:bg-cream-deep"
+            className="flex items-center gap-2 rounded-control py-1 pr-2 pl-1 hover:bg-canvas-alt"
           >
-            <span className="flex size-8 items-center justify-center rounded-full bg-saffron text-sm font-semibold text-white">
+            <span className="flex size-8 items-center justify-center rounded-full bg-navy text-sm font-semibold text-ivory">
               {user?.name.charAt(0).toUpperCase()}
             </span>
-            <span className="hidden max-w-32 truncate text-sm font-medium text-indigo md:inline">{user?.name}</span>
+            <span className="hidden max-w-32 truncate text-sm font-medium text-ink md:inline">{user?.name}</span>
             <ChevronDown className="size-4 text-muted" aria-hidden="true" />
           </button>
 
           {open && (
-            <div role="menu" className="animate-enter absolute right-0 mt-2 w-60 origin-top-right overflow-hidden rounded-card border border-line bg-surface py-1 shadow-lift">
+            <div role="menu" className="animate-enter absolute right-0 mt-2 w-60 origin-top-right overflow-hidden rounded-card border border-line bg-paper py-1 ">
               <p className="truncate border-b border-line px-4 py-3 text-xs text-muted">{user?.email}</p>
               <Link role="menuitem" to="/account" className={item} onClick={() => setOpen(false)}>
                 <UserRound className="size-4" aria-hidden="true" /> Account

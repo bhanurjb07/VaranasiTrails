@@ -37,7 +37,7 @@ export const AppShell = () => {
     <div className="flex min-h-dvh">
       <a
         href="#main"
-        className="sr-only z-[60] rounded-control bg-saffron px-4 py-2 font-semibold text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+        className="sr-only z-[60] rounded-control bg-navy px-4 py-2 font-semibold text-ivory focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
       >
         Skip to content
       </a>
@@ -51,7 +51,7 @@ export const AppShell = () => {
             <Suspense
               fallback={
                 <div className="flex justify-center py-24" role="status" aria-label="Loading">
-                  <Spinner className="size-7 text-saffron" />
+                  <Spinner className="size-7 text-navy" />
                 </div>
               }
             >

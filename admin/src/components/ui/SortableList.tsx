@@ -68,7 +68,7 @@ export const SortableItem = ({ id, handleLabel, className, children }: SortableI
     <button
       type="button"
       aria-label={handleLabel}
-      className="flex size-8 shrink-0 cursor-grab touch-none items-center justify-center rounded-control text-muted hover:bg-cream-deep hover:text-indigo active:cursor-grabbing"
+      className="flex size-8 shrink-0 cursor-grab touch-none items-center justify-center rounded-control text-muted hover:bg-canvas-alt hover:text-ink active:cursor-grabbing"
       {...attributes}
       {...listeners}
     >
@@ -80,7 +80,7 @@ export const SortableItem = ({ id, handleLabel, className, children }: SortableI
     <div
       ref={setNodeRef}
       style={{ transform: CSS.Transform.toString(transform), transition }}
-      className={cn(isDragging && 'relative z-10 opacity-80 shadow-lift', className)}
+      className={cn(isDragging && 'relative z-10 opacity-80 ', className)}
     >
       {children(handle)}
     </div>

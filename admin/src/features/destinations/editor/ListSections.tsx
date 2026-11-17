@@ -27,7 +27,7 @@ export const InclusionsSection = ({ form, disabled }: SectionProps) => (
   <SectionCard id="inclusions" title="Included and not included" description="Be specific, it avoids surprises later.">
     <div className="grid gap-8 lg:grid-cols-2">
       <div>
-        <h3 className="mb-3 font-sans text-sm font-semibold tracking-wide text-success uppercase">Included</h3>
+        <h3 className="mb-3 font-sans text-sm font-semibold text-success">Included</h3>
         <StringListEditor
           name="inclusions"
           control={form.control}
@@ -39,7 +39,7 @@ export const InclusionsSection = ({ form, disabled }: SectionProps) => (
         />
       </div>
       <div>
-        <h3 className="mb-3 font-sans text-sm font-semibold tracking-wide text-maroon uppercase">Not included</h3>
+        <h3 className="mb-3 font-sans text-sm font-semibold text-danger">Not included</h3>
         <StringListEditor
           name="exclusions"
           control={form.control}

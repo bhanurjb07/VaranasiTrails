@@ -32,7 +32,7 @@ export const RatingInput = ({ value, onChange, label = 'Your rating' }: RatingIn
             if (event.key === 'ArrowRight' || event.key === 'ArrowUp') onChange(Math.min(5, (value || 0) + 1))
             if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') onChange(Math.max(1, (value || 2) - 1))
           }}
-          className="rounded p-0.5 transition-transform hover:scale-110"
+          className="rounded p-0.5 transition-transform "
         >
           <Star
             className={cn('size-8 transition-colors', star <= shown ? 'text-gold' : 'text-line')}

@@ -18,7 +18,7 @@ export const VerifyEmailPage = () => {
         title="Check your email"
         subtitle={
           <>
-            We sent a 6-digit code to <strong className="text-indigo">{email}</strong>. It expires in 10 minutes.
+            We sent a 6-digit code to <strong className="text-ink">{email}</strong>. It expires in 10 minutes.
           </>
         }
       >

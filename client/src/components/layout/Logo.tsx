@@ -1,55 +1,45 @@
-import { useId } from 'react'
 import { Link } from 'react-router'
 
 import { site } from '@/data/site'
 import { cn } from '@/lib/cn'
 
 interface LogoProps {
-  /** White wordmark for dark backgrounds. */
+  /** Ivory wordmark for photographs and navy backgrounds. */
   invert?: boolean
   className?: string
 }
 
-/** Mark: a diya flame above the river at dusk. Colours come from the theme tokens. */
-export const LogoMark = ({ className }: { className?: string }) => {
-  const id = useId()
-  return (
-    <svg viewBox="0 0 40 40" className={cn('size-9 shrink-0', className)} aria-hidden="true">
-      <defs>
-        <linearGradient id={`${id}-sky`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="var(--color-night-soft)" />
-          <stop offset="1" stopColor="var(--color-night-deep)" />
-        </linearGradient>
-        <linearGradient id={`${id}-flame`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="var(--color-gold)" />
-          <stop offset="1" stopColor="var(--color-saffron-bright)" />
-        </linearGradient>
-      </defs>
-      <rect width="40" height="40" rx="11" fill={`url(#${id}-sky)`} />
-      <path d="M20 8.5c3.2 3.6 4.6 6.3 4.6 8.6a4.6 4.6 0 0 1-9.2 0c0-2.3 1.4-5 4.6-8.6Z" fill={`url(#${id}-flame)`} />
-      <path d="M11 26.5c3 2.8 15 2.8 18 0" stroke="var(--color-saffron-bright)" strokeWidth="2.4" strokeLinecap="round" fill="none" />
-      <path
-        d="M9 31.5c3.6 1.6 7.3 1.6 11 0s7.4-1.6 11 0"
-        stroke="var(--color-river)"
-        strokeOpacity="0.85"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        fill="none"
-      />
-    </svg>
-  )
-}
+/** A thin-line diya above the river, drawn in the current text colour. */
+export const LogoMark = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 32 32"
+    className={cn('size-7 shrink-0', className)}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.25"
+    strokeLinecap="round"
+    aria-hidden="true"
+  >
+    <path d="M16 6c2.4 2.7 3.5 4.7 3.5 6.4a3.5 3.5 0 0 1-7 0c0-1.7 1.1-3.7 3.5-6.4Z" />
+    <path d="M9 19.5c2.6 2.2 11.4 2.2 14 0" />
+    <path d="M6 24.5c3.3 1.4 6.7 1.4 10 0s6.7-1.4 10 0" />
+  </svg>
+)
 
 export const Logo = ({ invert = false, className }: LogoProps) => (
   <Link
     to="/"
     aria-label={`${site.name} home`}
-    className={cn('inline-flex items-center gap-2.5 font-heading text-2xl font-semibold tracking-tight', className)}
+    className={cn(
+      'inline-flex items-center gap-2.5 transition-colors duration-500',
+      invert ? 'text-ivory' : 'text-ink',
+      className,
+    )}
   >
-    <LogoMark />
-    <span className={cn('transition-colors duration-500', invert ? 'text-white' : 'text-indigo')}>
+    <LogoMark className={invert ? 'text-ivory' : 'text-brand'} />
+    <span className="font-sans text-[1.6rem] leading-none font-bold tracking-tight">
       {site.logoText}
-      <span className={invert ? 'text-glow' : 'text-saffron'}>{site.logoAccent}</span>
+      {site.logoAccent}
     </span>
   </Link>
 )

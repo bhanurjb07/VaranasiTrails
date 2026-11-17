@@ -126,7 +126,7 @@ export const EnquiriesPage = () => {
                 <Tr key={enquiry.id} className="cursor-pointer" onClick={() => setSelected(enquiry)}>
                   <Td>
                     <button type="button" onClick={() => setSelected(enquiry)} className="text-left">
-                      <span className="block font-semibold text-indigo hover:underline">{enquiry.name}</span>
+                      <span className="block font-semibold text-ink hover:underline">{enquiry.name}</span>
                       <span className="block text-xs text-muted">{enquiry.phone}</span>
                     </button>
                   </Td>

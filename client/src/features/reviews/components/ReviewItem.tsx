@@ -21,24 +21,24 @@ export const ReviewItem = ({ review, slug, mine }: ReviewItemProps) => {
 
   if (editing) {
     return (
-      <li className="rounded-card border border-line bg-surface p-5">
+      <li className="rounded-card border border-line bg-paper p-5">
         <ReviewForm slug={slug} existing={review} onDone={() => setEditing(false)} />
       </li>
     )
   }
 
   return (
-    <li className="rounded-card border border-line/70 bg-surface p-5">
+    <li className="rounded-card border border-line/70 bg-paper p-5">
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
           <span
-            className="flex size-11 items-center justify-center rounded-full bg-saffron-soft font-semibold text-saffron-dark"
+            className="flex size-11 items-center justify-center rounded-full bg-canvas-alt font-semibold text-brand-text"
             aria-hidden="true"
           >
             {review.user.name.charAt(0).toUpperCase()}
           </span>
           <div>
-            <p className="font-semibold text-indigo">{review.user.name}</p>
+            <p className="font-semibold text-ink">{review.user.name}</p>
             <p className="text-xs text-muted">
               {formatDate(review.createdAt)}
               {review.updatedAt !== review.createdAt && ' (edited)'}
@@ -47,7 +47,7 @@ export const ReviewItem = ({ review, slug, mine }: ReviewItemProps) => {
         </div>
         <Rating value={review.rating} size="sm" />
       </div>
-      <h4 className="mt-4 font-sans text-base font-semibold text-indigo">{review.title}</h4>
+      <h4 className="mt-4 font-sans text-base font-semibold text-ink">{review.title}</h4>
       <p className="mt-1.5 whitespace-pre-line text-muted">{review.comment}</p>
 
       {mine && (

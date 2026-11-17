@@ -1,4 +1,4 @@
-import { ChevronDown } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import { useId, useState, type ReactNode } from 'react'
 
 import { cn } from '@/lib/cn'
@@ -17,6 +17,7 @@ interface AccordionProps {
   className?: string
 }
 
+/** Separate bordered rows with a bold question and a blue plus that turns into a cross when open. */
 export const Accordion = ({ items, defaultOpen = [], multiple = false, className }: AccordionProps) => {
   const [open, setOpen] = useState<readonly string[]>(defaultOpen)
   const base = useId()
@@ -31,14 +32,14 @@ export const Accordion = ({ items, defaultOpen = [], multiple = false, className
     )
 
   return (
-    <div className={cn('divide-y divide-line overflow-hidden rounded-card border border-line bg-surface', className)}>
+    <div className={cn('flex flex-col gap-3', className)}>
       {items.map((item) => {
         const isOpen = open.includes(item.id)
         const panelId = `${base}-${item.id}-panel`
         const buttonId = `${base}-${item.id}-button`
 
         return (
-          <div key={item.id}>
+          <div key={item.id} className="rounded-lg border border-line bg-canvas">
             <h3 className="font-sans text-base">
               <button
                 id={buttonId}
@@ -46,11 +47,16 @@ export const Accordion = ({ items, defaultOpen = [], multiple = false, className
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => toggle(item.id)}
-                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-indigo transition-colors hover:bg-cream-deep/60"
+                className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left sm:gap-6 sm:px-5"
               >
-                <span>{item.title}</span>
-                <ChevronDown
-                  className={cn('size-5 shrink-0 text-saffron-dark transition-transform duration-300', isOpen && 'rotate-180')}
+                <span className="font-sans text-base leading-snug font-bold text-ink sm:text-lg">
+                  {item.title}
+                </span>
+                <Plus
+                  className={cn(
+                    'size-5 shrink-0 text-brand transition-transform duration-300 ease-out',
+                    isOpen && 'rotate-45',
+                  )}
                   aria-hidden="true"
                 />
               </button>
@@ -60,12 +66,19 @@ export const Accordion = ({ items, defaultOpen = [], multiple = false, className
               role="region"
               aria-labelledby={buttonId}
               className={cn(
-                'grid transition-[grid-template-rows] duration-400 ease-[var(--ease-out-soft)]',
+                'grid transition-[grid-template-rows] duration-300 ease-out',
                 isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
               )}
             >
               <div className="overflow-hidden">
-                <div className="px-5 pb-5 text-muted">{item.content}</div>
+                <div
+                  className={cn(
+                    'max-w-3xl px-4 pb-4 text-base leading-relaxed text-ink-soft transition-opacity duration-300 ease-out sm:px-5 sm:pb-5',
+                    isOpen ? 'opacity-100' : 'opacity-0',
+                  )}
+                >
+                  {item.content}
+                </div>
               </div>
             </div>
           </div>

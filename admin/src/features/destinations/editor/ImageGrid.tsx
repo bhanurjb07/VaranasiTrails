@@ -48,14 +48,14 @@ export const ImageGrid = ({ images, onMove, onMakeCover, onAlt, onDelete, deleti
         <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {images.map((image, index) => (
             <li key={image.id}>
-              <SortableItem id={image.id} handleLabel={`Reorder photo ${index + 1}`} className="overflow-hidden rounded-card border border-line bg-surface">
+              <SortableItem id={image.id} handleLabel={`Reorder photo ${index + 1}`} className="overflow-hidden rounded-card border border-line bg-paper">
                 {(handle) => (
                   <div>
-                    <div className="relative aspect-[4/3] bg-cream-deep">
+                    <div className="relative aspect-[4/3] bg-canvas-alt">
                       <img src={image.url} alt={image.alt || `Photo ${index + 1}`} loading="lazy" className="size-full object-cover" />
-                      <div className="absolute top-2 left-2 rounded-control bg-surface/90 shadow-card backdrop-blur-sm">{handle}</div>
+                      <div className="absolute top-2 left-2 rounded-control bg-paper/90 ">{handle}</div>
                       {image.isCover && (
-                        <Badge variant="warning" className="absolute top-2 right-2 bg-saffron text-white">
+                        <Badge variant="warning" className="absolute top-2 right-2 bg-navy text-ivory">
                           <Star className="size-3 fill-current" aria-hidden="true" /> Cover
                         </Badge>
                       )}

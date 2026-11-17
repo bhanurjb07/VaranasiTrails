@@ -37,7 +37,7 @@ export const Lightbox = ({ images, index, open, onClose, onIndexChange }: Lightb
         if (event.key === 'ArrowRight') go(1)
         if (event.key === 'ArrowLeft') go(-1)
       }}
-      className="m-0 h-dvh max-h-none w-screen max-w-none bg-transparent p-0 backdrop:bg-black/90"
+      className="m-0 h-dvh max-h-none w-screen max-w-none bg-transparent p-0 backdrop:bg-navy-deep/90"
     >
       {open && image && (
         <div className="relative flex h-full flex-col items-center justify-center p-4 sm:p-10">
@@ -45,7 +45,7 @@ export const Lightbox = ({ images, index, open, onClose, onIndexChange }: Lightb
             type="button"
             onClick={onClose}
             aria-label="Close viewer"
-            className="absolute top-4 right-4 z-10 flex size-11 items-center justify-center rounded-control bg-white/15 text-white hover:bg-white/30"
+            className="absolute top-4 right-4 z-10 flex size-11 items-center justify-center rounded-control bg-ivory/15 text-ivory hover:bg-ivory/30"
           >
             <X className="size-6" aria-hidden="true" />
           </button>
@@ -57,7 +57,7 @@ export const Lightbox = ({ images, index, open, onClose, onIndexChange }: Lightb
             sizes="100vw"
             className="max-h-[80vh] w-auto max-w-full rounded-control object-contain"
           />
-          <p className="mt-4 text-sm text-white/80" aria-live="polite">
+          <p className="mt-4 text-sm text-ivory/80" aria-live="polite">
             {image.alt} ({index + 1} of {count})
           </p>
 
@@ -67,7 +67,7 @@ export const Lightbox = ({ images, index, open, onClose, onIndexChange }: Lightb
                 type="button"
                 onClick={() => go(-1)}
                 aria-label="Previous photo"
-                className="absolute top-1/2 left-3 flex size-12 -translate-y-1/2 items-center justify-center rounded-control bg-white/15 text-white hover:bg-white/30 sm:left-6"
+                className="absolute top-1/2 left-3 flex size-12 -translate-y-1/2 items-center justify-center rounded-control bg-ivory/15 text-ivory hover:bg-ivory/30 sm:left-6"
               >
                 <ChevronLeft className="size-7" aria-hidden="true" />
               </button>
@@ -75,7 +75,7 @@ export const Lightbox = ({ images, index, open, onClose, onIndexChange }: Lightb
                 type="button"
                 onClick={() => go(1)}
                 aria-label="Next photo"
-                className="absolute top-1/2 right-3 flex size-12 -translate-y-1/2 items-center justify-center rounded-control bg-white/15 text-white hover:bg-white/30 sm:right-6"
+                className="absolute top-1/2 right-3 flex size-12 -translate-y-1/2 items-center justify-center rounded-control bg-ivory/15 text-ivory hover:bg-ivory/30 sm:right-6"
               >
                 <ChevronRight className="size-7" aria-hidden="true" />
               </button>

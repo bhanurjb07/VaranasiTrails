@@ -26,7 +26,7 @@ interface DestinationFiltersProps {
 }
 
 const Legend = ({ children }: { children: string }) => (
-  <legend className="mb-3 font-sans text-sm font-semibold tracking-wide text-indigo uppercase">{children}</legend>
+  <legend className="mb-3 font-sans text-base font-bold text-ink">{children}</legend>
 )
 
 const RangeGroup = ({
@@ -48,14 +48,14 @@ const RangeGroup = ({
       {options.map((option) => (
         <label
           key={option.id}
-          className="flex cursor-pointer items-center gap-3 rounded-control px-2 py-1.5 text-[0.95rem] hover:bg-cream-deep"
+          className="flex cursor-pointer items-center gap-3 rounded-lg px-2 py-1.5 text-base hover:bg-canvas-alt"
         >
           <input
             type="radio"
             name={name}
             checked={value === option.id}
             onChange={() => onSelect(option)}
-            className="size-4 accent-saffron"
+            className="size-4 accent-brand"
           />
           {option.label}
         </label>
@@ -120,10 +120,10 @@ export const DestinationFilters = ({ filters, categories, update, onReset, activ
                 type="button"
                 aria-pressed={selected}
                 onClick={() => update({ category: category.slug || undefined })}
-                className={`rounded-md border px-3.5 py-1.5 text-sm font-medium transition-colors ${
+                className={`rounded-lg border px-3.5 py-1.5 text-sm font-medium transition-colors ${
                   selected
-                    ? 'border-indigo bg-indigo text-cream'
-                    : 'border-line bg-surface text-indigo hover:border-indigo/40'
+                    ? 'border-brand bg-brand text-ivory'
+                    : 'border-line bg-white text-ink hover:border-brand'
                 }`}
               >
                 {category.name}

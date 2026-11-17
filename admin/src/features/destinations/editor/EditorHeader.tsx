@@ -49,17 +49,17 @@ export const EditorHeader = ({
   ]
 
   return (
-    <div className="sticky top-16 z-20 -mx-4 mb-6 border-b border-line bg-cream/95 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6">
+    <div className="sticky top-16 z-20 -mx-4 mb-6 border-b border-line bg-canvas/95 px-4 py-3 sm:-mx-6 sm:px-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-3">
-          <Link to="/destinations" className="text-sm font-semibold text-saffron-dark hover:underline">
+          <Link to="/destinations" className="text-sm font-semibold text-brand-text hover:underline">
             Destinations
           </Link>
           <span className="text-muted" aria-hidden="true">/</span>
           <h1 className="max-w-[18rem] truncate font-sans text-lg font-semibold sm:max-w-md">{title || (isNew ? 'New destination' : 'Untitled')}</h1>
           {status && <StatusBadge status={status} />}
           {dirty && (
-            <span className="rounded-md bg-saffron-soft px-2.5 py-0.5 text-xs font-semibold text-saffron-dark" role="status">
+            <span className="rounded-control bg-canvas-alt px-2.5 py-0.5 text-xs font-semibold text-brand-text" role="status">
               Unsaved changes
             </span>
           )}

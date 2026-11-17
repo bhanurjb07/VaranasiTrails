@@ -16,7 +16,7 @@ const ListSection = ({ title, items }: { title: string; items: readonly string[]
   items.length === 0 ? null : (
     <section className="mt-8">
       <h2 className="mb-3 text-2xl">{title}</h2>
-      <ul className="list-disc space-y-2 pl-6 text-lg text-ink/90 marker:text-saffron">
+      <ul className="list-disc space-y-2 pl-6 text-lg text-ink/90 marker:text-navy">
         {items.map((item) => (
           <li key={item}>{item}</li>
         ))}
@@ -59,11 +59,11 @@ export const CareerDetailPage = () => {
       />
 
       <Container narrow className="py-6 sm:py-12">
-        <Link to="/careers" className="inline-flex items-center gap-1.5 text-sm font-semibold text-saffron-dark hover:underline">
+        <Link to="/careers" className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-text hover:underline">
           <ArrowLeft className="size-4" aria-hidden="true" /> All open positions
         </Link>
 
-        <p className="mt-6 text-xs font-semibold tracking-[0.18em] text-saffron-dark uppercase">{career.department}</p>
+        <p className="mt-6 eyebrow">{career.department}</p>
         <h1 className="mt-2 text-balance text-3xl sm:text-5xl">{career.title}</h1>
         <div className="mt-4">
           <CareerMeta career={career} />

@@ -102,7 +102,7 @@ export const LoginForm = () => {
               onClick={() => setVisible((value) => !value)}
               aria-label={visible ? 'Hide password' : 'Show password'}
               aria-pressed={visible}
-              className="absolute top-1/2 right-2 flex size-8 -translate-y-1/2 items-center justify-center rounded-control text-muted hover:text-indigo"
+              className="absolute top-1/2 right-2 flex size-8 -translate-y-1/2 items-center justify-center rounded-control text-muted hover:text-ink"
             >
               {visible ? <EyeOff className="size-4.5" aria-hidden="true" /> : <Eye className="size-4.5" aria-hidden="true" />}
             </button>

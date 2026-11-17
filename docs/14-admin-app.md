@@ -2,7 +2,7 @@
 
 A separate single-page app for running the site: trips, photos, categories, enquiries, users, reviews and an audit log. It only talks to `/api/admin/*` and `/api/auth/*` + `/api/users/me/change-password` of the API. **It has no mock mode**; it always needs the real server and an admin account.
 
-Libraries: React 19, Vite, TypeScript (strict), React Router (lazy routes), TanStack Query, **TanStack Table v8** (pinned; v9 has a different API), react-hook-form + zod, Tailwind CSS v4, `@dnd-kit` (drag to reorder), Recharts (dashboard chart), lucide-react, sonner. Fonts: Fraunces and Inter. The dev server runs on **port 5174**.
+Libraries: React 19, Vite, TypeScript (strict), React Router (lazy routes), TanStack Query, **TanStack Table v8** (pinned; v9 has a different API), react-hook-form + zod, Tailwind CSS v4, `@dnd-kit` (drag to reorder), Recharts (dashboard chart), lucide-react, sonner. Fonts: Cormorant Garamond and DM Sans. The dev server runs on **port 5174**.
 
 ## Access control
 
@@ -172,7 +172,8 @@ Test files: `lib/apiClient.test.ts` (refresh logic), `lib/csv.test.ts` (formula-
 
 ## Design and theme
 
-The admin panel uses the same "Ganga at dusk" palette, fonts (Fraunces and Inter), logo mark and motion as the public site; the tokens in `src/styles/index.css` mirror `client/src/styles/index.css`, plus admin-only status colours. Light and dark mode are switched with the small sun/moon button in the top bar (and on the login page); the choice is stored in `localStorage` (`vt_theme`) and the system setting is followed until one is chosen. The sidebar and login panel use the always-dark `bg-dusk` brand gradient. The dashboard chart reads its colours from the same tokens, so it follows the theme too.
+The admin panel uses the same quiet-luxury system as the public site: ivory canvas, forest-green sidebar and primary buttons, small brass details, Cormorant Garamond and DM Sans, 2px corners, 1px hairlines instead of shadows, and thin-line icons. The tokens in `src/styles/index.css` mirror `client/src/styles/index.css`, plus admin-only status colours. Dark mode is the forest-black "lodge at night" palette, switched with the small sun/moon button in the top bar (and on the login page); the choice is stored in `localStorage` (`vt_theme`). The login page leads with a photograph of the Ganges. The dashboard chart reads its colours from the same tokens, so it follows the theme too.
+
 
 ## Notes
 

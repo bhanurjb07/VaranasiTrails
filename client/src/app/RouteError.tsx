@@ -8,7 +8,7 @@ export const RouteError = () => {
   console.error('Route error', error)
 
   return (
-    <div role="alert" className="flex min-h-screen flex-col items-center justify-center bg-cream px-6 text-center">
+    <div role="alert" className="flex min-h-screen flex-col items-center justify-center bg-canvas px-6 text-center">
       <h1 className="text-3xl">We hit a snag loading this page</h1>
       <p className="mt-3 max-w-md text-muted">
         Check your connection and try again. If the problem continues, please let us know.

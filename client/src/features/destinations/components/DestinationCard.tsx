@@ -1,8 +1,7 @@
-import { Clock, MapPin, Star } from 'lucide-react'
+import { Star } from 'lucide-react'
 import { Link } from 'react-router'
 
 import { ImageWithFallback } from '@/components/common/ImageWithFallback'
-import { Badge } from '@/components/ui/Badge'
 import { cn } from '@/lib/cn'
 import { formatDurationShort, formatPrice, formatRating } from '@/lib/format'
 import type { DestinationCard as DestinationCardData } from '@/types/api'
@@ -12,72 +11,66 @@ interface DestinationCardProps {
   destination: DestinationCardData
   className?: string
   priority?: boolean
+  /** Kept for older callers; every card now has the same shape. */
+  feature?: boolean
 }
 
-/** A list row (photo left, details right) on phones; a vertical card from sm up. */
-export const DestinationCard = ({ destination, className, priority = false }: DestinationCardProps) => (
-  <article
-    className={cn(
-      'group relative flex h-full overflow-hidden rounded-card border border-line/80 bg-surface shadow-card sm:flex-col',
-      'transition-[transform,box-shadow] duration-500 ease-[var(--ease-out-soft)] sm:hover:-translate-y-1 sm:hover:shadow-lift',
-      className,
-    )}
-  >
-    <div className="relative w-[38%] shrink-0 overflow-hidden bg-cream-deep max-sm:min-h-36 sm:aspect-[4/3] sm:w-auto">
-      <ImageWithFallback
-        src={destination.coverImage}
-        alt={`${destination.title}, ${destination.city}`}
-        width={800}
-        height={600}
-        priority={priority}
-        sizes="(min-width: 1280px) 25vw, (min-width: 640px) 45vw, 38vw"
-        className="size-full transition-transform duration-700 ease-[var(--ease-out-soft)] group-hover:scale-[1.05]"
-      />
-      {destination.discountPercent > 0 && (
-        <Badge className="absolute top-2 left-2 bg-saffron text-white shadow-glow sm:top-3 sm:left-3">
-          {destination.discountPercent}% off
-        </Badge>
-      )}
-      <WishlistButton destination={destination} className="absolute top-2 right-2 z-10 sm:top-3 sm:right-3" />
-    </div>
+/** A bordered trip card: photo on top, then city, title, a line of text, rating and price. */
+export const DestinationCard = ({ destination, className, priority = false }: DestinationCardProps) => {
+  const hasOriginal = Boolean(destination.originalPriceInr && destination.originalPriceInr > destination.priceInr)
 
-    <div className="flex min-w-0 flex-1 flex-col p-3 sm:p-5">
-      <p className="flex items-center gap-1 text-[0.7rem] font-semibold tracking-wide text-saffron-dark uppercase sm:gap-1.5 sm:text-xs">
-        <MapPin className="size-3.5" aria-hidden="true" />
-        {destination.city}
-      </p>
-      <h3 className="mt-1 line-clamp-2 text-base leading-snug sm:mt-1.5 sm:text-xl">
-        {/* The stretched link makes the whole card clickable without nesting interactive elements. */}
-        <Link
-          to={`/destinations/${destination.slug}`}
-          className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
-        >
-          {destination.title}
-        </Link>
-      </h3>
-      <p className="mt-2 line-clamp-2 text-sm text-muted max-sm:hidden">{destination.tagline}</p>
-
-      <div className="mt-1.5 flex items-center gap-3 text-xs text-muted sm:mt-4 sm:gap-4 sm:text-sm">
-        <span className="flex items-center gap-1 sm:gap-1.5">
-          <Clock className="size-3.5 sm:size-4" aria-hidden="true" />
-          {formatDurationShort(destination.duration)}
-        </span>
-        <span className="flex items-center gap-1 sm:gap-1.5">
-          <Star className="size-3.5 fill-gold text-gold sm:size-4" aria-hidden="true" />
-          <span className="font-semibold text-indigo">{formatRating(destination.ratingAvg)}</span>
-          {destination.ratingCount > 0 && <span>({destination.ratingCount})</span>}
-        </span>
-      </div>
-
-      <div className="mt-auto flex flex-wrap items-baseline gap-x-2 pt-2 sm:border-t sm:border-line/70 sm:pt-4">
-        <span className="text-xs text-muted">From</span>
-        <span className="font-heading text-xl font-semibold text-indigo sm:text-2xl">
-          {formatPrice(destination.priceInr)}
-        </span>
-        {destination.originalPriceInr && destination.originalPriceInr > destination.priceInr && (
-          <span className="text-xs text-muted line-through sm:text-sm">{formatPrice(destination.originalPriceInr)}</span>
+  return (
+    <article className={cn('group relative flex h-full flex-col overflow-hidden rounded-lg border border-line bg-canvas', className)}>
+      <div className="relative aspect-[4/3] shrink-0 overflow-hidden bg-canvas-alt">
+        <ImageWithFallback
+          src={destination.coverImage}
+          alt={`${destination.title}, ${destination.city}`}
+          width={1200}
+          height={900}
+          priority={priority}
+          sizes="(min-width: 1280px) 30vw, (min-width: 640px) 45vw, 100vw"
+          className="absolute inset-0 size-full transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+        />
+        {destination.discountPercent > 0 && (
+          <span className="absolute bottom-3 left-3 rounded-lg bg-gold px-2.5 py-1 text-sm font-bold text-navy-deep">
+            {destination.discountPercent}% off
+          </span>
         )}
+        <WishlistButton destination={destination} className="absolute top-3 right-3 z-10" />
       </div>
-    </div>
-  </article>
-)
+
+      <div className="flex min-w-0 flex-1 flex-col p-4">
+        <p className="text-sm text-muted">
+          {destination.city}
+          <span className="mx-1.5" aria-hidden="true">
+            ·
+          </span>
+          {formatDurationShort(destination.duration)}
+        </p>
+        <h3 className="mt-1 line-clamp-2 font-sans text-lg leading-snug font-bold text-ink">
+          {/* The stretched link makes the whole card clickable without nesting interactive elements. */}
+          <Link
+            to={`/destinations/${destination.slug}`}
+            className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none group-hover:underline"
+          >
+            {destination.title}
+          </Link>
+        </h3>
+        <p className="mt-1 line-clamp-2 text-base leading-snug text-ink-soft">{destination.tagline}</p>
+
+        <div className="mt-auto flex items-end justify-between gap-3 pt-4">
+          <p className="flex flex-wrap items-baseline gap-x-1.5">
+            <span className="text-sm text-muted">From</span>
+            <span className="font-sans text-xl leading-none font-bold text-ink">{formatPrice(destination.priceInr)}</span>
+            {hasOriginal && <span className="text-sm text-muted line-through">{formatPrice(destination.originalPriceInr!)}</span>}
+          </p>
+          <p className="flex items-center gap-1 text-sm text-muted">
+            <Star className="size-4 fill-gold text-gold" aria-hidden="true" />
+            <span className="font-bold text-ink">{formatRating(destination.ratingAvg)}</span>
+            {destination.ratingCount > 0 && <span>({destination.ratingCount})</span>}
+          </p>
+        </div>
+      </div>
+    </article>
+  )
+}

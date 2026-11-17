@@ -33,8 +33,8 @@ export const Modal = ({ open, onClose, title, description, children, className }
         if (event.target === ref.current) onClose()
       }}
       className={cn(
-        'm-auto w-[calc(100%-2rem)] max-w-lg rounded-card border border-line/60 bg-surface p-0 text-ink shadow-lift',
-        'open:animate-enter backdrop:bg-night-deep/65 backdrop:backdrop-blur-sm',
+        'm-auto w-[calc(100%-2rem)] max-w-lg rounded-card border border-line/60 bg-paper p-0 text-ink ',
+        'open:animate-enter backdrop:bg-navy-deep/65 ',
         className,
       )}
     >
@@ -51,7 +51,7 @@ export const Modal = ({ open, onClose, title, description, children, className }
               type="button"
               onClick={onClose}
               aria-label="Close dialog"
-              className="rounded-full p-2 text-muted transition-colors hover:bg-cream-deep hover:text-indigo"
+              className="rounded-control p-2 text-muted transition-colors hover:bg-canvas-alt hover:text-ink"
             >
               <X className="size-5" aria-hidden="true" />
             </button>

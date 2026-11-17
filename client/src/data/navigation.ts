@@ -10,7 +10,6 @@ export interface NavGroup {
 
 export const headerLinks: readonly NavLink[] = [
   { label: 'Trips', to: '/destinations' },
-  { label: 'About', to: '/about' },
   { label: 'Contact', to: '/contact' },
 ]
 
@@ -31,8 +30,6 @@ export const footerGroups: readonly NavGroup[] = [
       { label: 'Founders', to: '/founders' },
       { label: 'Careers', to: '/careers' },
       { label: 'Contact', to: '/contact' },
-      { label: 'Privacy policy', to: '/privacy' },
-      { label: 'Terms of service', to: '/terms' },
     ],
   },
   {
@@ -42,6 +39,13 @@ export const footerGroups: readonly NavGroup[] = [
       { label: 'Create an account', to: '/signup' },
       { label: 'Wishlist', to: '/wishlist' },
       { label: 'Profile', to: '/profile' },
+    ],
+  },
+  {
+    title: 'Terms and settings',
+    links: [
+      { label: 'Privacy policy', to: '/privacy' },
+      { label: 'Terms of service', to: '/terms' },
     ],
   },
 ]

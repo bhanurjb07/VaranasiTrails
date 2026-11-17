@@ -48,17 +48,17 @@ export const DestinationsPage = () => {
 
       <Container className="grid gap-10 py-4 sm:py-10 lg:grid-cols-[18rem_1fr]">
         <aside className="hidden lg:block" aria-label="Filters">
-          <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-card border border-line/70 bg-surface p-6 shadow-card">
+          <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-lg border border-line bg-canvas p-5">
             {panel}
           </div>
         </aside>
 
         <section aria-label="Results" aria-busy={isPlaceholderData} className="min-w-0">
-          <div className="sticky top-[7.25rem] z-20 -mx-5 mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-line/70 bg-cream px-5 py-2 sm:static sm:mx-0 sm:mb-6 sm:gap-3 sm:border-0 sm:bg-transparent sm:p-0">
+          <div className="sticky top-[7.25rem] z-20 -mx-5 mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-line/70 bg-canvas px-5 py-2 sm:static sm:mx-0 sm:mb-6 sm:gap-3 sm:border-0 sm:bg-transparent sm:p-0">
             <p className="text-muted" aria-live="polite">
               {data ? (
                 <>
-                  <strong className="text-indigo">{data.meta.total}</strong> trip{data.meta.total === 1 ? '' : 's'} found
+                  <strong className="text-ink">{data.meta.total}</strong> trip{data.meta.total === 1 ? '' : 's'} found
                 </>
               ) : (
                 'Loading trips...'

@@ -115,11 +115,11 @@ export const AuditLogPage = () => {
           <div className="space-y-8">
             {days.map(([day, entries]) => (
               <section key={day} aria-label={day}>
-                <h2 className="mb-3 font-sans text-sm font-semibold tracking-wide text-muted uppercase">{day}</h2>
+                <h2 className="mb-3 font-sans text-sm font-semibold text-muted">{day}</h2>
                 <ol className="relative space-y-3 border-l-2 border-line pl-6">
                   {entries.map((entry) => (
-                    <li key={entry.id} className="relative rounded-card border border-line/70 bg-surface p-4 shadow-card">
-                      <span className="absolute top-5 -left-[1.9rem] size-3 rounded-full border-2 border-cream bg-saffron" aria-hidden="true" />
+                    <li key={entry.id} className="relative rounded-card border border-line/70 bg-paper p-4 ">
+                      <span className="absolute top-5 -left-[1.9rem] size-3 rounded-full border-2 border-canvas bg-navy" aria-hidden="true" />
                       <div className="flex flex-wrap items-center gap-2">
                         <Badge variant={tone(entry.action)}>{entry.action}</Badge>
                         <span className="text-xs text-muted">
