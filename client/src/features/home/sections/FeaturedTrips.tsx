@@ -20,7 +20,7 @@ const tileSpan = (index: number, total: number) => {
 }
 
 const Tile = ({ destination, index, total }: { destination: DestinationCard; index: number; total: number }) => (
-  <li className={cn('group relative h-56 overflow-hidden rounded-lg bg-canvas-alt sm:h-64 lg:h-[21rem]', tileSpan(index, total))}>
+  <li className={cn('lift group relative h-56 overflow-hidden rounded-lg bg-canvas-alt sm:h-64 lg:h-[21rem]', tileSpan(index, total))}>
     <ImageWithFallback
       src={destination.coverImage}
       alt={`${destination.title}, ${destination.city}`}

@@ -12,7 +12,7 @@ export const HowItWorks = () => (
 
       <ol className="mt-5 grid gap-4 sm:grid-cols-3">
         {howItWorks.steps.map((step, index) => (
-          <li key={step.title} className="flex items-start gap-4 rounded-lg border border-line bg-canvas-alt p-5">
+          <li key={step.title} className="lift flex items-start gap-4 rounded-lg border border-line bg-canvas-alt p-5">
             <span
               className="flex size-10 shrink-0 items-center justify-center rounded-full bg-gold font-sans text-lg font-bold text-navy-deep"
               aria-hidden="true"

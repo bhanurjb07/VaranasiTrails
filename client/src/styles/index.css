@@ -158,6 +158,44 @@
     display: none;
   }
 
+  /* A soft ring that grows and fades, repeated, behind the floating WhatsApp button. */
+  .animate-wa-ring {
+    animation: wa-ring 2.6s ease-out infinite;
+  }
+  /* The button itself glows green, brighter and softer in turn. */
+  .animate-wa-glow {
+    box-shadow:
+      0 0 16px 2px rgb(37 211 102 / 0.5),
+      0 8px 20px -6px rgb(37 211 102 / 0.6);
+    animation: wa-glow 2.6s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-wa-ring {
+      display: none;
+    }
+    .animate-wa-glow {
+      animation: none;
+    }
+  }
+
+  /*
+   * Gentle hover feedback. .lift raises a card or tile a few pixels with a soft shadow;
+   * it only applies where a real hover exists, so touch screens never get a stuck state.
+   */
+  .lift {
+    transition:
+      transform 0.28s var(--ease-out-soft),
+      box-shadow 0.28s var(--ease-out-soft),
+      border-color 0.28s ease-out;
+  }
+  @media (hover: hover) {
+    .lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 28px -12px rgb(0 59 149 / 0.28);
+      border-color: color-mix(in srgb, var(--color-brand) 45%, var(--color-line));
+    }
+  }
+
   /* Content entrance: a slow, plain fade. */
   .animate-enter {
     animation: fade-in 0.6s ease-out both;
@@ -212,6 +250,31 @@
   }
   to {
     transform: scale(1);
+  }
+}
+
+@keyframes wa-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 14px 1px rgb(37 211 102 / 0.4),
+      0 8px 20px -6px rgb(37 211 102 / 0.55);
+  }
+  50% {
+    box-shadow:
+      0 0 34px 10px rgb(37 211 102 / 0.65),
+      0 8px 24px -4px rgb(37 211 102 / 0.75);
+  }
+}
+
+@keyframes wa-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
   }
 }
 

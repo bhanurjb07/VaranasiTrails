@@ -121,6 +121,24 @@
     display: none;
   }
 
+  /*
+   * Gentle hover feedback. .lift raises a card or tile a few pixels with a soft shadow;
+   * it only applies where a real hover exists, so touch screens never get a stuck state.
+   */
+  .lift {
+    transition:
+      transform 0.28s var(--ease-out-soft),
+      box-shadow 0.28s var(--ease-out-soft),
+      border-color 0.28s ease-out;
+  }
+  @media (hover: hover) {
+    .lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 28px -12px rgb(0 59 149 / 0.28);
+      border-color: color-mix(in srgb, var(--color-brand) 45%, var(--color-line));
+    }
+  }
+
   .animate-enter {
     animation: fade-in 0.5s ease-out both;
   }

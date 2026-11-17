@@ -39,7 +39,7 @@ export const Accordion = ({ items, defaultOpen = [], multiple = false, className
         const buttonId = `${base}-${item.id}-button`
 
         return (
-          <div key={item.id} className="rounded-lg border border-line bg-canvas">
+          <div key={item.id} className="rounded-lg border border-line bg-canvas transition-[border-color,box-shadow] duration-200 hover:border-brand/50 hover:shadow-sm">
             <h3 className="font-sans text-base">
               <button
                 id={buttonId}

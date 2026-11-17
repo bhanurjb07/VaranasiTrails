@@ -23,7 +23,7 @@ export const Offers = () => (
             <li
               key={offer.title}
               className={cn(
-                'flex min-h-[13.5rem] items-start justify-between gap-5 rounded-lg p-5',
+                'lift flex min-h-[13.5rem] items-start justify-between gap-5 rounded-lg p-5',
                 dark ? 'bg-navy text-ivory' : 'border border-line bg-canvas text-ink',
               )}
             >

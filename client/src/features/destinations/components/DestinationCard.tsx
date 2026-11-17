@@ -20,7 +20,7 @@ export const DestinationCard = ({ destination, className, priority = false }: De
   const hasOriginal = Boolean(destination.originalPriceInr && destination.originalPriceInr > destination.priceInr)
 
   return (
-    <article className={cn('group relative flex h-full flex-col overflow-hidden rounded-lg border border-line bg-canvas', className)}>
+    <article className={cn('lift group relative flex h-full flex-col overflow-hidden rounded-lg border border-line bg-canvas', className)}>
       <div className="relative aspect-[4/3] shrink-0 overflow-hidden bg-canvas-alt">
         <ImageWithFallback
           src={destination.coverImage}

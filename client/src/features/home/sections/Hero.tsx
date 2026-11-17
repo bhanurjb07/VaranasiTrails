@@ -104,7 +104,7 @@ export const Hero = () => {
           </label>
           <button
             type="submit"
-            className="flex h-14 items-center justify-center gap-3 self-end rounded-lg bg-brand px-10 text-lg font-medium text-ivory transition-colors duration-300 ease-out hover:bg-brand-deep sm:col-span-2 lg:col-span-1"
+            className="flex h-14 items-center justify-center gap-3 self-end rounded-lg bg-brand px-10 text-lg font-medium text-ivory transition-[transform,box-shadow,background-color] duration-200 ease-out hover:-translate-y-0.5 hover:bg-brand-deep hover:shadow-lg active:translate-y-0 active:scale-[0.98] sm:col-span-2 lg:col-span-1"
           >
             {hero.primaryCta}
             <ArrowRight className="size-4" aria-hidden="true" />

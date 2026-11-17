@@ -14,12 +14,12 @@ import { UserMenu } from './UserMenu'
 // Booking-style bar: solid deep blue, white text, white outlined buttons.
 const linkClass = (active: boolean) =>
   cn(
-    'rounded-lg px-3 py-2 text-base font-medium text-ivory transition-colors duration-300 hover:bg-ivory/10',
+    'rounded-lg px-3 py-2 text-base font-medium text-ivory transition-[background-color,transform] duration-200 hover:bg-ivory/10 active:scale-[0.97]',
     active && 'bg-ivory/10',
   )
 
 const buttonClass =
-  'inline-flex h-10 items-center rounded-lg border border-ivory bg-ivory px-4 text-base font-medium text-navy transition-colors duration-300 hover:bg-canvas-alt'
+  'inline-flex h-10 items-center rounded-lg border border-ivory bg-ivory px-4 text-base font-medium text-navy transition-[transform,box-shadow,background-color] duration-200 hover:-translate-y-0.5 hover:bg-canvas-alt hover:shadow-md active:translate-y-0 active:scale-[0.97]'
 
 export const Header = () => {
   const { status } = useAuth()
@@ -58,7 +58,7 @@ export const Header = () => {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden h-10 items-center rounded-lg bg-[#25d366] px-4 text-base font-bold text-[#06291a] transition-colors duration-300 hover:bg-[#1ebe5a] md:inline-flex"
+              className="hidden h-10 items-center rounded-lg bg-[#25d366] px-4 text-base font-bold text-[#06291a] transition-[transform,box-shadow,background-color] duration-200 hover:-translate-y-0.5 hover:bg-[#1ebe5a] hover:shadow-md active:translate-y-0 active:scale-[0.97] md:inline-flex"
             >
               WhatsApp
             </a>

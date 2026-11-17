@@ -16,7 +16,7 @@ export const CtaBanner = () => {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-lg bg-[#25d366] px-6 text-base font-bold text-[#06291a] transition-colors duration-300 hover:bg-[#1ebe5a] sm:w-auto"
+            className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-lg bg-[#25d366] px-6 text-base font-bold text-[#06291a] transition-[transform,box-shadow,background-color] duration-200 hover:-translate-y-0.5 hover:bg-[#1ebe5a] hover:shadow-lg active:translate-y-0 active:scale-[0.98] sm:w-auto"
           >
             {ctaBanner.button}
           </a>

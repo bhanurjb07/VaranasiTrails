@@ -92,7 +92,7 @@ export const AboutExperiences = () => {
               <li key={item.category}>
                 <Link
                   to={`/destinations?category=${item.category}`}
-                  className="group block h-full overflow-hidden rounded-lg border border-line bg-canvas-alt"
+                  className="lift group block h-full overflow-hidden rounded-lg border border-line bg-canvas-alt"
                 >
                   <div className="aspect-[4/3] overflow-hidden bg-canvas-alt">
                     <ImageWithFallback
@@ -128,7 +128,7 @@ export const AboutPlaces = () => {
           {places.items.map((place) => {
             const image = placeholderImages[place.image]
             return (
-              <li key={place.name} className="group relative h-56 overflow-hidden rounded-lg bg-canvas-alt sm:h-64">
+              <li key={place.name} className="lift group relative h-56 overflow-hidden rounded-lg bg-canvas-alt sm:h-64">
                 <ImageWithFallback
                   src={image.url}
                   alt=""
@@ -161,7 +161,7 @@ export const AboutPrinciples = () => (
       <Heading id="principles-title" title="What you can expect from us" />
       <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {aboutContent.values.map((value, index) => (
-          <li key={value.title} className="rounded-lg border border-line bg-canvas-alt p-5">
+          <li key={value.title} className="lift rounded-lg border border-line bg-canvas-alt p-5">
             <span
               className="flex size-10 items-center justify-center rounded-full bg-gold font-sans text-lg font-bold text-navy-deep"
               aria-hidden="true"
@@ -186,7 +186,7 @@ export const AboutClosing = ({ whatsappUrl }: { whatsappUrl: string }) => {
       <Container>
         <Link
           to="/founders"
-          className="group flex flex-col gap-4 rounded-lg border border-line bg-canvas-alt p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6"
+          className="lift group flex flex-col gap-4 rounded-lg border border-line bg-canvas-alt p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6"
         >
           <span>
             <span className="block font-sans text-xl font-bold text-ink sm:text-2xl">{people.title}</span>

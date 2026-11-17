@@ -92,7 +92,7 @@ export const MediaPage = () => {
           ) : (
             <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {visible.map((item) => (
-                <li key={item.id} className="overflow-hidden rounded-lg border border-line bg-paper">
+                <li key={item.id} className="lift overflow-hidden rounded-lg border border-line bg-paper">
                   <div className="aspect-[4/3] bg-canvas-alt">
                     <img src={item.url} alt={item.alt || item.title} loading="lazy" className="size-full object-cover" />
                   </div>
